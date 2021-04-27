@@ -28,7 +28,7 @@
             <a class="nav-link" href="Blog">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="assets/dist/MeciliNabil_CDev_CV.pdf">CV</a>
+            <a class="nav-link" href="cv/MeciliNabil_CDev_CV.pdf">CV</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Contact">Contact</a>
