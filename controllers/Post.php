@@ -1,7 +1,6 @@
 <?php
-namespace controllers;
-
-require_once('../models/Post.php');
+namespace Controllers ;
+require_once('../application/autoload.php');
 
 class Post
 {
@@ -9,7 +8,7 @@ class Post
     {
         // Montrer la page index avec 3 Posts
 
-        $model= new \Post();
+        $model= new \Models\Post();
 
         /**
          * Get all posts
@@ -32,7 +31,7 @@ class Post
     {
         // Montrer la page de tous les Posts trier par date
 
-        $model= new \Post();
+        $model= new \Models\Post();
 
         /**
          * Get all posts
@@ -57,7 +56,7 @@ class Post
     {
           // Montrer la page de tous les Posts trier par date
 
-          $model= new \Post();
+          $model= new \Models\Post();
 
           /**
            * Get all posts

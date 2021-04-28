@@ -1,7 +1,7 @@
 <?php
 
-require_once('../controllers/contact.php');
+require_once('../Application/autoload.php');
 
-$controller = new controllers\Contact();
+$controller = new \controllers\Contact();
 
 $controller->verif();

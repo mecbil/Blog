@@ -1,3 +1,4 @@
+
 a{
     color: goldenrod;
 }
@@ -58,15 +59,13 @@ footer{
     padding: 0.5em 0;
 }
 
-.mail{
-    border-radius: 1em;
+.mail {
+    border-radius: 2em;
     padding: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     /* box-shadow: 1px 1px 2px 1em yellow; */
     color: cornsilk;
     background-color: darkgray;
+
 
 }
 h2{
@@ -79,4 +78,10 @@ h2{
     border-radius: 10% 35%;
     position: relative;
     top: 10px; left: 20px;
+}
+
+.conninscri
+{
+    /* display: flex;
+    justify-content: center; */
 }
