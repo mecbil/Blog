@@ -14,6 +14,9 @@ switch ($path) {
         break;
     case '/Contact':
         require 'Contact.php';
+        break; 
+    case '/Connection':
+        require 'user.php';
         break;  
     default:
         require '404.php';

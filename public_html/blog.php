@@ -1,8 +1,8 @@
 <?php
 
-require_once('../controllers/post.php');
+require_once('../Application/autoload.php');
 
-$controller = new controllers\Post();
+$controller = new \controllers\Post();
 
 $controller->showposts();
 

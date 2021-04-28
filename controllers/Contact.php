@@ -1,7 +1,7 @@
 <?php
-namespace controllers;
+namespace Controllers ;
 
-require_once('../models/Post.php');
+require_once('../application/autoload.php');
 
 class Contact
 {
