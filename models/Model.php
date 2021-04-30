@@ -1,5 +1,6 @@
 <?php
 namespace Models;
+require_once('Database.php');
 
 abstract class Model 
 {
@@ -8,7 +9,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->pdo = \Database::dbconnect();
+        $this->pdo = \Models\Database::dbconnect();
     }
 
     public function findAll(?string $order="",?string $limit="")

@@ -1,5 +1,8 @@
 <?php
 namespace Controllers ;
+
+use Renderer;
+
 require_once('../application/autoload.php');
 
 class Post
@@ -21,15 +24,12 @@ class Post
           */
           
         $pageTitle = "Home" ;
-        ob_start();
-        require('../views/index.html.php');
-        $pageContent = ob_get_clean();
-        require('../views/layout.html.php');   
+        \Application\Renderer::render('index',compact('pageTitle','posts'));
 
     }
     public function showposts()
     {
-        // Montrer la page de tous les Posts trier par date
+        // Montrer la page d'e tous les Posts trier par date'
 
         $model= new \Models\Post();
 
@@ -42,38 +42,31 @@ class Post
          /**
           * Affichage (Show)
           */
-          
-        
-        ob_start();
-        $pageTitle = "Blog Posts";
-        require('../views/posts.html.php');
-        $pageContent = ob_get_clean();
-        require('../views/layout.html.php');   
 
+        $pageTitle = "Blog Posts";
+        \Application\Renderer::render('posts/posts',compact('pageTitle','posts'));
     }
 
     public function showonepost()
     {
-          // Montrer la page de tous les Posts trier par date
+          // Montrer la page d'un post identifier par son id'
 
           $model= new \Models\Post();
 
           /**
-           * Get all posts
+           * Get a post with id=??
            */
   
-           $posts = $model->findAll("date DESC");
+          //  $post = $model->find($_GET['id'],"post");
+
+          $post = $model->find(4,"posts");
   
            /**
             * Affichage (Show)
             */
-            
-          
-          ob_start();
+
           $pageTitle = "Blog Posts";
-          require('../views/posts.html.php');
-          $pageContent = ob_get_clean();
-          require('../views/layout.html.php');  
+          \Application\Renderer::render('posts/post',compact('pageTitle','post'));
     }
 
 

@@ -2,6 +2,6 @@
 
 require_once('../Application/autoload.php');
 
-$controller = new controllers\Connection();
+$controller = new \controllers\user();
 
 $controller->showconnect();
