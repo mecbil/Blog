@@ -33,12 +33,29 @@
           <li class="nav-item">
             <a class="nav-link" href="Contact">Contact</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Connection" >Connection</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Administrer</a>
-          </li>
+          <?php
+
+            if (!isset($_SESSION['user']))
+            {
+              ?><li class="nav-item">
+                <a class="nav-link" href="Connexion" >Connect</a>
+              </li>
+            <?php
+            }else
+            {
+              ?>
+              <li class="nav-item">
+                <a class="nav-link" href="<?php session_unset();?>" >Disconnect</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#" tabindex="-1" >Administrer</a>
+              </li>
+          <?php
+            }
+
+          ?>
+          
+         
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

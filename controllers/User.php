@@ -2,21 +2,19 @@
 namespace Controllers ;
 require_once('../application/autoload.php');
 
-class Connection
+class user
 {
     
     public function showconnect()
     {
-           /**
-            * Affichage (Show)
-            */
-            
-          $pageTitle = "Connexion" ;
-          ob_start();
-          require('../views/connection.html.php');
-          $pageContent = ob_get_clean();
-          require('../views/layout.html.php');   
-  
+
+      // Montrer la page d'un User identifier par son id'
+
+      // Montrer la page de connection
+      
+      $pageTitle = "Connexion" ;
+      \Application\Renderer::render('users/connection',compact('pageTitle'));
+
     }
 
     public function valide()
