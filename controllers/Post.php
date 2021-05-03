@@ -29,7 +29,7 @@ class Post
     }
     public function showposts()
     {
-        // Montrer la page d'e tous les Posts trier par date'
+        // Montrer la page de tous les Posts trier par date'
 
         $model= new \Models\Post();
 
@@ -46,7 +46,7 @@ class Post
         $pageTitle = "Blog Posts";
         \Application\Renderer::render('posts/posts',compact('pageTitle','posts'));
     }
-
+      
     public function showonepost()
     {
           // Montrer la page d'un post identifier par son id'
@@ -54,12 +54,10 @@ class Post
           $model= new \Models\Post();
 
           /**
-           * Get a post with id=??
+           * Get a post with id
            */
   
-          //  $post = $model->find($_GET['id'],"post");
-
-          $post = $model->find(4,"posts");
+          $post = $model->find($_GET['UUid'],"posts");
   
            /**
             * Affichage (Show)
@@ -67,10 +65,6 @@ class Post
 
           $pageTitle = "Blog Posts";
           \Application\Renderer::render('posts/post',compact('pageTitle','post'));
-    }
-
-
-
-  
+    }  
 
 }
