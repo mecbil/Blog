@@ -1,30 +1,37 @@
 <?php
+session_start();
 // echo('str_replace('.' '.','.'-'.$url.);
-$path=$_SERVER['REQUEST_URI'];
-$var=explode('/',$path);
+$path = strtolower($_SERVER['REQUEST_URI']);
 
-require '../views/header.html.php';
+// $var = explode('/',$path);
+// var_dump($_SERVER);
+// var_dump($_GET);
+
 switch ($path) {
     case '/':
         require 'home.php';
         break;
-    case '/Blog':
+    case '/blog':
         require 'blog.php';
         break;
-    case "/post":
+
+    case '/contact':
+        require "contact.php";
+        break; 
+    case '/administrer':
+        require "connect.php";
+        break; 
+    case '/connexion':
+        require 'user.php';
+        break;
+    case "/post?UUid=".$_GET['UUid']:
         require 'post.php';
         break;
-    case '/Contact':
-        require "Contact.php";
-        break; 
-    case '/Connexion':
-        require 'user.php';
-        break;  
     default:
         require '404.php';
         break;
 }
-require '../views/footer.html.php';
+
 
 // define ('ROOT', str_replace('\public_html\index.php','',$_SERVER['SCRIPT_FILENAME']));
 
