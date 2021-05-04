@@ -1,3 +1,3 @@
 <?php
 
-var_dump("Page introuvable");
+echo("Page introuvable");

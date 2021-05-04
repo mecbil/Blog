@@ -7,7 +7,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title><?= $pageTitle ?></title>
-      <link rel="shortcut icon" type="image/png" href="images/logo/Reservia@3x.png"> 
+      <link rel="shortcut icon" type="image/png" href="images/mn.png"> 
       
       <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="css/style.css">
