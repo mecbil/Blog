@@ -56,8 +56,8 @@ class Post
           /**
            * Get a post with UUid
            */
-  
-          $post = $model->find($_GET['UUid'],"posts");
+          $get= $_GET['UUid'];
+          $post = $model->find($get,"posts");
   
            /**
             * Affichage (Show)
