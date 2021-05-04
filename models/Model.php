@@ -1,8 +1,6 @@
 <?php
-// namespace Models;
-
+namespace Models;
 require_once('Database.php');
-
 
 abstract class Model 
 {
@@ -11,7 +9,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->pdo = Database::dbconnect();
+        $this->pdo = \Models\Database::dbconnect();
     }
 
     public function findAll(?string $order="",?string $limit="")
@@ -31,18 +29,37 @@ abstract class Model
         return $item;
     }
 
-    public function find(int $id,string $table)
+    public function find(string $UUid)
     {
-        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
-        $query->execute(['id' => $id]);
+        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE UUid = :UUid");
+        $query->execute(['UUid' => $UUid]);
         $item = $query->fetch();
         return $item;
     }
 
-    public function delete(int $id,string $table):void
+    public function search(string $sword, string $word)
     {
-        $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
-        $query->execute(['id' => $id]);
+
+        $sql= "SELECT * FROM {$this->table} WHERE ".' '.$sword.' = '."'$word'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute([$sword => $word]);
+        $item = $query->fetch();
+        
+        return $item;
+    }
+
+    public function delete(int $uuid):void
+    {
+        $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE uuid = :uuid");
+        $query->execute(['uuid' => $uuid]);
+    }
+    public function insert()
+    {
+        $sql="INSERT INTO {$this->table} SET";
+        
+        $query = $this->pdo->prepare();
+
+        $query->execute(compact('val1', 'val2', 'val3'));
     }
 }
 

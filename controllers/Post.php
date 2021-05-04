@@ -1,7 +1,9 @@
 <?php
-namespace controllers;
+namespace Controllers ;
 
-require_once('../models/Post.php');
+use Renderer;
+
+require_once('../application/autoload.php');
 
 class Post
 {
@@ -9,7 +11,7 @@ class Post
     {
         // Montrer la page index avec 3 Posts
 
-        $model= new \Post();
+        $model= new \Models\Post();
 
         /**
          * Get all posts
@@ -22,17 +24,14 @@ class Post
           */
           
         $pageTitle = "Home" ;
-        ob_start();
-        require('../views/index.html.php');
-        $pageContent = ob_get_clean();
-        require('../views/layout.html.php');   
+        \Application\Renderer::render('index',compact('pageTitle','posts'));
 
     }
     public function showposts()
     {
-        // Montrer la page de tous les Posts trier par date
+        // Montrer la page de tous les Posts trier par date'
 
-        $model= new \Post();
+        $model= new \Models\Post();
 
         /**
          * Get all posts
@@ -43,42 +42,29 @@ class Post
          /**
           * Affichage (Show)
           */
-          
-        
-        ob_start();
+
         $pageTitle = "Blog Posts";
-        require('../views/posts.html.php');
-        $pageContent = ob_get_clean();
-        require('../views/layout.html.php');   
-
+        \Application\Renderer::render('posts/posts',compact('pageTitle','posts'));
     }
-
+      
     public function showonepost()
     {
-          // Montrer la page de tous les Posts trier par date
+          // Montrer la page d'un post identifier par son id'
 
-          $model= new \Post();
+          $model= new \Models\Post();
 
           /**
-           * Get all posts
+           * Get a post with UUid
            */
   
-           $posts = $model->findAll("date DESC");
+          $post = $model->find($_GET['UUid'],"posts");
   
            /**
             * Affichage (Show)
             */
-            
-          
-          ob_start();
+
           $pageTitle = "Blog Posts";
-          require('../views/posts.html.php');
-          $pageContent = ob_get_clean();
-          require('../views/layout.html.php');  
-    }
-
-
-
-  
+          \Application\Renderer::render('posts/post',compact('pageTitle','post'));
+    }  
 
 }

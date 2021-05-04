@@ -1,7 +1,7 @@
 <?php
-namespace controllers;
+namespace Controllers ;
 
-require_once('../models/Post.php');
+require_once('../application/autoload.php');
 
 class Contact
 {
@@ -9,7 +9,7 @@ class Contact
     {
         $PageTitle = "Contact Us";
         ob_start();
-        require('../views/contact.html.php');
+        require('../views/users/contact.html.php');
         $pageContent = ob_get_clean();
         require('../views/layout.html.php'); 
     }
@@ -18,7 +18,7 @@ class Contact
     {
         $PageTitle = "Contact Us";
         ob_start();
-        require('../views/contact.html.php');
+        require('../views/users/contact.html.php');
         $pageContent = ob_get_clean();
         require('../views/layout.html.php'); 
     }

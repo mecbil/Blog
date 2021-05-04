@@ -1,1 +1,3 @@
-"cocou erreur fatal"
+<?php
+
+var_dump("Page introuvable");

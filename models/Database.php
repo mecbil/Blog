@@ -1,9 +1,5 @@
 <?php
-// namespace models;
-
-require_once('Model.php');
-
-
+namespace Models;
 class Database
 {
     private static $instance= null;
@@ -20,14 +16,14 @@ class Database
         {
             try
             {
-                self::$instance = new PDO ('mysql:host=localhost;dbname=mnblog;charset=utf8', 'root', '',
+                self::$instance = new \PDO ('mysql:host=localhost;dbname=mnblog;charset=utf8', 'root', '',
             [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO:: FETCH_ASSOC
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO:: FETCH_ASSOC
             ]);
                 
             }
-            catch (Exception $e)
+            catch (\Exception $e)
             {
                 echo'<script language="Javascript"> alert ( "'. $e->getMessage() .'" )</script>';
             }
