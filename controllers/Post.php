@@ -54,7 +54,7 @@ class Post
           $model= new \Models\Post();
 
           /**
-           * Get a post with id
+           * Get a post with UUid
            */
   
           $post = $model->find($_GET['UUid'],"posts");

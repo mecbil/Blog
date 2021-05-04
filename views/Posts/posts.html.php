@@ -17,7 +17,7 @@
                   ?></h5>
                 <p class="text-secondary"><p><?= $article['date'] ?></p></p>
               </div>
-              <div class="card-footer bg-success text-center pb-0"><p><a class="btn btn-outline-light btn-warning " href="/post?UUid=<?= $article['uuid'] ?>">View details &raquo;</a></p></div>
+              <div class="card-footer bg-success text-center pb-0"><p><a class="btn btn-outline-light btn-warning " href="/?controller=post&task=showonepost&UUid=<?= $article['uuid'] ?>">View details &raquo;</a></p></div>
               
             </div>
         </div><!-- /.col-lg-4 -->

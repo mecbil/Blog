@@ -15,7 +15,6 @@ class User
     public function connect()
     {
       
-
       /**
        * 1- connecter un utilisateur
        */
@@ -30,17 +29,15 @@ class User
       */
 
       if ($user)
-      {'<script language="Javascript"> alert ( "Adresse Mail ou Mot de passe incorrect" )</script>';
-      //   header('Location: Connexion');        
-      }
-
+      {
         $pageTitle = $user ["nickname"]." Admin";
         $_SESSION['user'] = $user ["nickname"];
         
         \Application\Renderer::render('users/indexuser',compact('pageTitle','user'));
-
-      // }else
-      // {
-      //   // echo
+        
+      }else {
+        //echo'<script language="Javascript"> alert ( "Adresse Mail ou Mot de passe incorrect" )</script>';
+        header('Location: index.php?controller=User&task=showconnect');
+      }
     }
 }
