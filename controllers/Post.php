@@ -7,7 +7,7 @@ require_once('../application/autoload.php');
 
 class Post
 {
-    public function showindex()
+    public function ShowIndex()
     {
         // Montrer la page index avec 3 Posts
 
@@ -17,17 +17,16 @@ class Post
          * Get all posts
          */
 
-         $posts = $model->findAll("date DESC","3");
+        $posts = $model->FindAll("date DESC", "3");
 
-         /**
-          * Affichage (Show)
-          */
+        /**
+         * Affichage (Show)
+         */
           
         $pageTitle = "Home" ;
-        \Application\Renderer::render('index',compact('pageTitle','posts'));
-
+        \Application\Renderer::Render('index', compact('pageTitle', 'posts'));
     }
-    public function showposts()
+    public function ShowPosts()
     {
         // Montrer la page de tous les Posts trier par date'
 
@@ -37,34 +36,33 @@ class Post
          * Get all posts
          */
 
-         $posts = $model->findAll("date DESC");
+        $posts = $model->FindAll("date DESC");
 
-         /**
-          * Affichage (Show)
-          */
+        /**
+         * Affichage (Show)
+         */
 
         $pageTitle = "Blog Posts";
-        \Application\Renderer::render('posts/posts',compact('pageTitle','posts'));
+        \Application\Renderer::Render('posts/posts', compact('pageTitle', 'posts'));
     }
       
-    public function showonepost()
+    public function ShowOnePost()
     {
-          // Montrer la page d'un post identifier par son id'
+        // Montrer la page d'un post identifier par son id'
 
-          $model= new \Models\Post();
+        $model= new \Models\Post();
 
-          /**
-           * Get a post with UUid
-           */
-          $get= $_GET['UUid'];
-          $post = $model->find($get,"posts");
+        /**
+         * Get a post with UUid
+         */
+        $get= $_GET['UUid'];
+        $post = $model->Find($get, "posts");
   
-           /**
-            * Affichage (Show)
-            */
+        /**
+         * Affichage (Show)
+         */
 
-          $pageTitle = "Blog Posts";
-          \Application\Renderer::render('posts/post',compact('pageTitle','post'));
-    }  
-
+        $pageTitle = "Blog Posts";
+        \Application\Renderer::Render('posts/post', compact('pageTitle', 'post'));
+    }
 }

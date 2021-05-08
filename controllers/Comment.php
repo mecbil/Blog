@@ -3,5 +3,4 @@ namespace Controllers ;
 
 class Comment
 {
-    
 }
