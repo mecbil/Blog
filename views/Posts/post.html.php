@@ -1,4 +1,3 @@
-
 <div class="text-light">
     <div class="container m-2">
         <h1><?= $post['title'] ?></h1>

@@ -1,35 +1,32 @@
 <?php
 namespace Models;
-require_once('Database.php');
 
-abstract class Model 
+abstract class Model
 {
     protected $pdo;
     protected $table;
 
     public function __construct()
     {
-        $this->pdo = \Models\Database::dbconnect();
+        $this->pdo = \Models\Database::DbConnect();
     }
 
-    public function findAll(?string $order="",?string $limit="")
+    public function FindAll(?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM {$this->table}";
         
-        if ($order)
-        {
+        if ($order) {
             $sql .=" ORDER BY ".$order;
         }
-        if ($limit)
-        {
+        if ($limit) {
             $sql .=" LIMIT ".$limit;
         }
-        $resultats = $this->pdo->query( $sql );
+        $resultats = $this->pdo->query($sql);
         $item = $resultats->fetchAll();
         return $item;
     }
 
-    public function find(string $UUid)
+    public function Find(string $UUid)
     {
         $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE UUid = :UUid");
         $query->execute(['UUid' => $UUid]);
@@ -37,9 +34,8 @@ abstract class Model
         return $item;
     }
 
-    public function search(string $sword, string $word)
+    public function Search(string $sword, string $word)
     {
-
         $sql= "SELECT * FROM {$this->table} WHERE ".' '.$sword.' = '."'$word'";
         $query = $this->pdo->prepare($sql);
         $query->execute([$sword => $word]);
@@ -48,12 +44,12 @@ abstract class Model
         return $item;
     }
 
-    public function delete(int $uuid):void
+    public function Delete(int $uuid):void
     {
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE uuid = :uuid");
         $query->execute(['uuid' => $uuid]);
     }
-    public function insert()
+    public function Insert()
     {
         $sql="INSERT INTO {$this->table} SET";
         
@@ -62,5 +58,3 @@ abstract class Model
         $query->execute(compact('val1', 'val2', 'val3'));
     }
 }
-
-

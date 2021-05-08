@@ -5,21 +5,18 @@ require_once('../application/autoload.php');
 
 class Contact
 {
-    public function submit()
+    public function Submit()
     {
         $PageTitle = "Contact Us";
         ob_start();
         require('../views/users/contact.html.php');
         $pageContent = ob_get_clean();
-        require('../views/layout.html.php'); 
+        require('../views/layout.html.php');
     }
 
-    public function verif()
+    public function Verif()
     {
-        $PageTitle = "Contact Us";
-        ob_start();
-        require('../views/users/contact.html.php');
-        $pageContent = ob_get_clean();
-        require('../views/layout.html.php'); 
+        $pageTitle = "Contact Us" ;
+        \Application\Renderer::Render('users/contact', compact('pageTitle'));
     }
 }
