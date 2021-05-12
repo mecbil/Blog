@@ -3,28 +3,28 @@ namespace Application;
 
 class Site
 {
-    public static function FrontControl()
+    public static function frontControl()
     {
-
         //Controller par default Post
-
-        if (empty($_GET['Controller'])) {
-            $controlleruse='Post';
-        } else {
-            $controlleruse = ucfirst($_GET['Controller']);
+        // if (empty($_GET['Controller'])) {
+        //     $controllerUse='Post';
+        // } else {
+        //     $controllerUse = ucfirst($_GET['controller']);
+        // }
+        $controllerUse = 'PostController';
+        if (!empty($_GET['controller'])) {
+            $controllerUse = ucfirst($_GET['controller']);
         }
-        
-        //Tache par default showindex
 
-        if (empty($_GET['task'])) {
-            $task="ShowIndex";
-        } else {
+        //Tache par default showindex
+        $task="showIndex";
+        if (!empty($_GET['task'])) {
             $task = $_GET['task'];
         }
 
-        $controlleruse = "\Controllers\\" . $controlleruse;
+        $controllerUse = "\Controllers\\" . $controllerUse;
 
-        $controller = new $controlleruse();
+        $controller = new $controllerUse();
         $controller->$task();
     }
 }
