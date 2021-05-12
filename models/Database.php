@@ -11,7 +11,7 @@ class Database
      */
     
 
-    public static function DbConnect()
+    public static function dbConnect()
     {
         if (self::$instance===null) {
             try {

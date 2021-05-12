@@ -3,9 +3,9 @@ namespace Controllers ;
 
 require_once('../application/autoload.php');
 
-class Contact
+class ContactController
 {
-    public function Submit()
+    public function submit()
     {
         $PageTitle = "Contact Us";
         ob_start();
@@ -14,9 +14,9 @@ class Contact
         require('../views/layout.html.php');
     }
 
-    public function Verif()
+    public function verif()
     {
         $pageTitle = "Contact Us" ;
-        \Application\Renderer::Render('users/contact', compact('pageTitle'));
+        \Application\Renderer::render('users/contact', compact('pageTitle'));
     }
 }

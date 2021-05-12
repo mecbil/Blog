@@ -1,6 +1,8 @@
 <?php
 namespace Models;
 
+use Models\Database;
+
 abstract class Model
 {
     protected $pdo;
@@ -8,10 +10,10 @@ abstract class Model
 
     public function __construct()
     {
-        $this->pdo = \Models\Database::DbConnect();
+        $this->pdo = Database::dbConnect();
     }
 
-    public function FindAll(?string $order="", ?string $limit="")
+    public function findAll(?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM {$this->table}";
         
@@ -22,11 +24,12 @@ abstract class Model
             $sql .=" LIMIT ".$limit;
         }
         $resultats = $this->pdo->query($sql);
-        $item = $resultats->fetchAll();
-        return $item;
+        $items = $resultats->fetchAll();
+
+        return $items;
     }
 
-    public function Find(string $UUid)
+    public function find(string $UUid)
     {
         $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE UUid = :UUid");
         $query->execute(['UUid' => $UUid]);
@@ -34,7 +37,7 @@ abstract class Model
         return $item;
     }
 
-    public function Search(string $sword, string $word)
+    public function search(string $sword, string $word)
     {
         $sql= "SELECT * FROM {$this->table} WHERE ".' '.$sword.' = '."'$word'";
         $query = $this->pdo->prepare($sql);
@@ -44,12 +47,12 @@ abstract class Model
         return $item;
     }
 
-    public function Delete(int $uuid):void
+    public function delete(int $uuid):void
     {
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE uuid = :uuid");
         $query->execute(['uuid' => $uuid]);
     }
-    public function Insert()
+    public function insert()
     {
         $sql="INSERT INTO {$this->table} SET";
         

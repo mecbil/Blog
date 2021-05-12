@@ -1,6 +1,6 @@
 <?php
 namespace Controllers ;
 
-class Comment
+class CommentController
 {
 }

@@ -3,7 +3,7 @@ namespace Controllers ;
 
 require_once('../application/autoload.php');
 
-class User
+class UserController
 {
     // Montrer la page de connection
     public static function ShowConnect()
@@ -22,7 +22,7 @@ class User
     }
 
     // Verifier les données d'un formulaire
-    public function Verif($donnees)
+    public function verif($donnees)
     {
         if ($donnees) {
             $donnees = trim($donnees);
@@ -32,27 +32,25 @@ class User
             $_SESSION['erreur']='Veuillez remplir tous les champs'.$_POST["email"];
             
             $pageTitle = "Connexion" ;
-            \Application\Renderer::Render('users/connection', compact('pageTitle'));
+            \Application\Renderer::render('users/connection', compact('pageTitle'));
         }
-
-
 
         return $donnees;
     }
 
     // Montrer la page d'administration
-    public function Connect()
+    public function connect()
     {
       
       /**
        * 1- verifier les informations
        */
-        $email= $this->Verif($_POST["email"]);
+        $email= $this->verif($_POST["email"]);
         /**
          * 2- connecter un utilisateur
          */
-        $modeluser= new \Models\Users();
-        $user= $modeluser->Search('mail', $email);
+        $modeluser= new \Models\User();
+        $user= $modeluser->search('mail', $email);
       
         /**
         * 2- Affichage (Show)
@@ -62,30 +60,33 @@ class User
 
             if (password_verify($_POST['password'], $user['password'] ) ) {
                 $pageTitle = $user["nickname"]." Admin";
+
                 $modelpost= new \Models\Post();
-                $posts= $modelpost->FindAll();
+                $posts= $modelpost->findAll();
+
                 $modelcomment= new \Models\Comment();
-                $comments= $modelcomment->FindAll();
+                $comments= $modelcomment->findAll();
+                
                 if (\session_status() === PHP_SESSION_NONE) {
                     session_start();
                     $_SESSION['user'] = $user["nickname"];
-                    \Application\Renderer::Render('users/indexuser', compact('pageTitle', 'user', 'posts', 'comments'));
+                    \Application\Renderer::render('users/indexuser', compact('pageTitle', 'user', 'posts', 'comments'));
                 }
             } else {
                 $_SESSION['erreur']='Adresse mail ou mots de passe incorrect ';
                 $pageTitle = "Connexion";
 
-                \Application\Renderer::Render('users/connection', compact('pageTitle'));
+                \Application\Renderer::render('users/connection', compact('pageTitle'));
             }
         } else {
-            //echo'<script language="Javascript"> alert ( "Adresse Mail ou Mot de passe incorrect" )</script>';
             $_SESSION['erreur']='Adresse mail ou mots de passe incorrect ';
             $pageTitle = "Connexion" ;
-            \Application\Renderer::Render('users/connection', compact('pageTitle'));
+
+            \Application\Renderer::render('users/connection', compact('pageTitle'));
         }
     }
     // Deconnecter l'utilisateur
-    public function Disconnect()
+    public function disconnect()
     {
         session_start();
         session_destroy();

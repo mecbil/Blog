@@ -5,9 +5,9 @@ use Renderer;
 
 require_once('../application/autoload.php');
 
-class Post
+class PostController
 {
-    public function ShowIndex()
+    public function showIndex()
     {
         // Montrer la page index avec 3 Posts
 
@@ -17,16 +17,16 @@ class Post
          * Get all posts
          */
 
-        $posts = $model->FindAll("date DESC", "3");
+        $posts = $model->findAll("date DESC", "3");
 
         /**
          * Affichage (Show)
          */
           
         $pageTitle = "Home" ;
-        \Application\Renderer::Render('index', compact('pageTitle', 'posts'));
+        \Application\Renderer::render('index', compact('pageTitle', 'posts'));
     }
-    public function ShowPosts()
+    public function showPosts()
     {
         // Montrer la page de tous les Posts trier par date'
 
@@ -36,17 +36,17 @@ class Post
          * Get all posts
          */
 
-        $posts = $model->FindAll("date DESC");
+        $posts = $model->findAll("date DESC");
 
         /**
          * Affichage (Show)
          */
 
         $pageTitle = "Blog Posts";
-        \Application\Renderer::Render('posts/posts', compact('pageTitle', 'posts'));
+        \Application\Renderer::render('posts/posts', compact('pageTitle', 'posts'));
     }
       
-    public function ShowOnePost()
+    public function showOnePost()
     {
         // Montrer la page d'un post identifier par son id'
 
@@ -56,13 +56,13 @@ class Post
          * Get a post with UUid
          */
         $get= $_GET['UUid'];
-        $post = $model->Find($get, "posts");
+        $post = $model->find($get, "posts");
   
         /**
          * Affichage (Show)
          */
 
         $pageTitle = "Blog Posts";
-        \Application\Renderer::Render('posts/post', compact('pageTitle', 'post'));
+        \Application\Renderer::render('posts/post', compact('pageTitle', 'post'));
     }
 }

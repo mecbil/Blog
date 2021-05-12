@@ -10,7 +10,7 @@
                 <?= $_SESSION['erreur'] ; ?>
                 </div>
             <?php endif; ?>
-            <form action="index.php?Controller=User&task=Connect" method="post">
+            <form action="index.php?controller=UserController&task=connect" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group">
                     <input type="email" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email"  autocomplete="off">

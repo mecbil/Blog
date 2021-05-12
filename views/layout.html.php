@@ -33,24 +33,24 @@ if (\session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=Post&task=ShowPosts">Blog</a>
+                            <a class="nav-link" href="index.php?controller=PostController&task=showPosts">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="cv/MeciliNabil_CDev_CV.pdf">CV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?Controller=Contact&task=Verif">Contact</a>
+                            <a class="nav-link" href="index.php?controller=ContactController&task=verif">Contact</a>
                         </li>
                         <?php if (isset($_SESSION['user'])) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?Controller=User&task=Disconnect">Disconnect</a>
+                            <a class="nav-link" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="index.php?Controller=User&task=ShowConnect" tabindex="-1">Administrer</a>
+                            <a class="nav-link " href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
                         </li>
                         <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?Controller=User&task=ShowConnect">Connect</a>
+                            <a class="nav-link" href="index.php?controller=UserController&task=showConnect">Connect</a>
                         </li>
 
 
@@ -68,8 +68,8 @@ if (\session_status() === PHP_SESSION_NONE) {
       <?= $pageContent ?>
     </main>
     <footer class="container-Fluid text-white bg-dark text-center">
-      <p>&copy; 2021 Mecili, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> <a href="#">
-      <i class="fab fa-linkedin-in"></i></a> &middot; <a href="#"><i class="fab fa-github"></i></a> &middot;<a href="#"><i class="fas fa-users-cog"></i></a></p>
+      <p>&copy; 2021 Mecili, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> 
+      <a href="https://www.linkedin.com/in/nabil-mecili-3b0b7527" target="_blank"><i class="fab fa-linkedin-in"></i></a> &middot; <a href="https://github.com/mecbil/" target="_blank"><i class="fab fa-github"></i></a> &middot; <a href="index.php?Controller=User&task=ShowConnect"><i class="fas fa-users-cog"></i></a></p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
