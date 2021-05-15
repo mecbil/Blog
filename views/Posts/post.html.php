@@ -1,10 +1,10 @@
 <div class="text-light">
     <div class="container m-2">
-        <h1><?= $post['title'] ?></h1>
-        <small>Publié le : <?php $datef= strtotime($post['date']); echo(date('d-m-Y H:i:s', $datef)) ?></small>
-        <p><?= $post['chapo'] ?></p>
-        <p><?= $post['content'] ?></p>
-        <div class="text-warning"><?= $post['author'] ?></div>
+        <h1><?= $post->title ?></h1>
+        <small>Publié le : <?php $datef= strtotime($post->date); echo(date('d-m-Y H:i:s', $datef)) ?></small>
+        <p><?= $post->chapo ?></p>
+        <p><?= $post->content ?></p>
+        <div class="text-warning"><?= $post->author ?></div>
     </div>
 <hr>
 <form action="save-comment.php" method="POST">
