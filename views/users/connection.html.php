@@ -1,19 +1,20 @@
 
 <section class="conninscri text-light">
-    <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 mt-2">
+    <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
 
         <!-- zone de connexion -->
 
         <div class="login-form">
-            <?php if (isset($_SESSION['erreur'])) : ?>
+                <?php if (!empty($erreur)): ?>
                 <div class="alert alert-danger">
-                <?= $_SESSION['erreur'] ; ?>
+                <?= $erreur ?>
                 </div>
-            <?php endif; ?>
+                <?php endif; ?>
+           
             <form action="index.php?controller=UserController&task=connect" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group">
-                    <input type="email" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email"  autocomplete="off">
+                    <input type="text" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Password"  autocomplete="off">

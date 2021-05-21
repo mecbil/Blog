@@ -1,16 +1,16 @@
 <?php
 namespace Application;
 
+use Controllers\PostController;
+
 class Site
 {
     public static function frontControl()
     {
-        //Controller par default Post
-        // if (empty($_GET['Controller'])) {
-        //     $controllerUse='Post';
-        // } else {
-        //     $controllerUse = ucfirst($_GET['controller']);
-        // }
+        if (empty($_GET['controller']) && $_SERVER['REQUEST_URI'] !='/') {
+            header('Location: /404.php');
+            // var_dump($_SERVER['SERVER_NAME'].'/404.php');
+        }
         $controllerUse = 'PostController';
         if (!empty($_GET['controller'])) {
             $controllerUse = ucfirst($_GET['controller']);
@@ -18,13 +18,18 @@ class Site
 
         //Tache par default showindex
         $task="showIndex";
+
         if (!empty($_GET['task'])) {
             $task = $_GET['task'];
         }
 
-        $controllerUse = "\Controllers\\" . $controllerUse;
+        $controllerUse = "Controllers\\" . $controllerUse;
 
-        $controller = new $controllerUse();
-        $controller->$task();
+        if (is_file('..\\'.$controllerUse.'.php')) {
+            $controller = new $controllerUse();
+            $controller->$task();
+        }else {
+            header('Location: /404.php');
+        } 
     }
 }

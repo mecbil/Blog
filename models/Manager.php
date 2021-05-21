@@ -3,7 +3,7 @@ namespace Models;
 
 use Models\Database;
 
-abstract class Model
+abstract class Manager
 {
     protected $pdo;
     protected $table;
@@ -13,7 +13,7 @@ abstract class Model
         $this->pdo = Database::dbConnect();
     }
 
-    // trouver tous les enregistrement
+    // trouver tous les enregistrement ?trier &/ou limiter
     public function findAll(?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM {$this->table}";
@@ -31,21 +31,22 @@ abstract class Model
     }
 
     // trouver un enregistrement par son uuid -a voir -
-    public function find(string $UUid)
+    public function find(string $fword, string $word)
     {
-        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE UUid = :UUid");
-        $query->execute(['UUid' => $UUid]);
+        $sql= "SELECT * FROM {$this->table} WHERE ".' '.$fword.' = '."'$word'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute([$fword => $word]);
         $item = $query->fetch();
         return $item;
     }
 
-    // Supprime un enregistrement
+    // Rechercher un enregistrement
     public function search(string $sword, string $word)
     {
         $sql= "SELECT * FROM {$this->table} WHERE ".' '.$sword.' = '."'$word'";
         $query = $this->pdo->prepare($sql);
         $query->execute([$sword => $word]);
-        $item = $query->fetch();
+        $item = $query->fetchAll();
         
         return $item;
     }

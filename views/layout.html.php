@@ -12,7 +12,8 @@ if (\session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?></title>
     <link rel="shortcut icon" type="image/png" href="images/mn.png">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Charm&family=Lato&display=swap" rel="stylesheet">
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -30,27 +31,27 @@ if (\session_status() === PHP_SESSION_NONE) {
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/"){echo 'active';} ?>" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=PostController&task=showPosts">Blog</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=PostController&task=showPosts"){echo 'active';} ?>" href="index.php?controller=PostController&task=showPosts">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cv/MeciliNabil_CDev_CV.pdf">CV</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "index.php"){echo 'active';} ?>" href="cv/MeciliNabil_CDev_CV.pdf " target='_blanck'>CV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=ContactController&task=verif">Contact</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=ContactController&task=verif"){echo 'active';} ?>" href="index.php?controller=ContactController&task=verif">Contact</a>
                         </li>
                         <?php if (isset($_SESSION['user'])) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=disconnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
                         </li>
                         <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=UserController&task=showConnect">Connect</a>
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
                         </li>
 
 
@@ -69,7 +70,7 @@ if (\session_status() === PHP_SESSION_NONE) {
     </main>
     <footer class="container-Fluid text-white bg-dark text-center">
       <p>&copy; 2021 Mecili, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> 
-      <a href="https://www.linkedin.com/in/nabil-mecili-3b0b7527" target="_blank"><i class="fab fa-linkedin-in"></i></a> &middot; <a href="https://github.com/mecbil/" target="_blank"><i class="fab fa-github"></i></a> &middot; <a href="index.php?Controller=User&task=ShowConnect"><i class="fas fa-users-cog"></i></a></p>
+      <a href="https://www.linkedin.com/in/nabil-mecili-3b0b7527" target="_blank"><i class="fab fa-linkedin-in"></i></a> &middot; <a href="https://github.com/mecbil/" target="_blank"><i class="fab fa-github"></i></a> &middot; <a href="/index.php?controller=UserController&task=showConnect"><i class="fas fa-users-cog"></i></a></p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>

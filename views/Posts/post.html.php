@@ -17,17 +17,17 @@
     <button>Commenter !</button>
 </form>
 
-<!-- <?php if (count($commentaires) === 0) : ?>
+<?php if (!$comments) : ?>
     <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
 <?php else : ?>
-    <h2>Il y a déjà <?= count($commentaires) ?> réactions : </h2>
+    <h2>Il y a déjà <?= count($comments) ?> réactions : </h2>
     <?php foreach ($comments as $commentaire) : ?>
-        <h3>Commentaire de <?= $commentaire['author'] ?></h3>
-        <small>Le <?= $commentaire['date'] ?></small>
+        <h3>Commentaire de : <?= $commentaire->Author ?></h3>
+        <small>Le <?= $commentaire->date ?></small>
         <blockquote>
-            <em><?= $commentaire['content'] ?></em>
+            <em><?= $commentaire->comment ?></em>
         </blockquote>
-        <a href="delete-comment.php?UUid=<?= $commentaire['UUid'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+        <a href="delete-comment.php?UUid=<?= $commentaire->UUid ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
     <?php endforeach ?>
 <?php endif ?>
-</div> -->
+</div>
