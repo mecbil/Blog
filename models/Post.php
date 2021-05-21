@@ -1,12 +1,12 @@
 <?php
 namespace Models;
 
-class Post extends Model
+class Post extends Manager
 {
-    protected $table = "posts";
     protected $id;
     protected $uuid;
-    protected $date;
+    protected $date_creat;
+    protected $date_modify;
     protected $chapo;
     protected $content;
     protected $title;
@@ -14,7 +14,7 @@ class Post extends Model
     protected $valide;
     protected $users_id;
 
-    // Get the value of id 
+    // Get the value of id
     public function getId()
     {
         return $this->id;
@@ -41,17 +41,31 @@ class Post extends Model
 
         return $this;
     }
-
-    // Get the value of date
-    public function getDate()
+    
+    // Get the value of date_creat
+    public function getDate_creat()
     {
-        return $this->date;
+        return $this->date_creat;
     }
 
-    // Set the value of date
-    public function setDate($date)
+    // Set the value of date_creat
+    public function setDate_creat($date_creat)
     {
-        $this->date = $date;
+        $this->date_creat = $date_creat;
+
+        return $this;
+    }
+
+    // Get the value of date_modify
+    public function getDate_modify()
+    {
+        return $this->date_modify;
+    }
+
+    // Set the value of date_modify
+    public function setDate_modify($date_modify)
+    {
+        $this->date_modify = $date_modify;
 
         return $this;
     }

@@ -1,16 +1,16 @@
 <?php
 namespace Models;
 
-class Comment extends Model
+class Comment extends Manager
 {
-    protected $table = "comments";
     protected $id;
     protected $uuid;
     protected $posts_id;
-    protected $date;
+    protected $date_creat;
+    protected $date_modify;
     protected $comment;
-    protected $title;
     protected $author;
+    protected $valide;
     protected $users_id;
 
     // Get the value of id
@@ -55,16 +55,30 @@ class Comment extends Model
         return $this;
     }
 
-    // Get the value of date
-    public function getDate()
+    // Get the value of date_creat
+    public function getDate_creat()
     {
-        return $this->date;
+        return $this->date_creat;
     }
 
-    // Set the value of date
-    public function setDate($date)
+    // Set the value of date_creat
+    public function setDate_creat($date_creat)
     {
-        $this->date = $date;
+        $this->date_creat = $date_creat;
+
+        return $this;
+    }
+
+    // Get the value of date_modify
+    public function getDate_modify()
+    {
+        return $this->date_modify;
+    }
+
+    // Set the value of date_modify
+    public function setDate_modify($date_modify)
+    {
+        $this->date_modify = $date_modify;
 
         return $this;
     }
@@ -83,20 +97,6 @@ class Comment extends Model
         return $this;
     }
 
-    // Get the value of title
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    // Set the value of title
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     // Get the value of author
     public function getAuthor()
     {
@@ -107,6 +107,20 @@ class Comment extends Model
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    // Get the value of valide
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    // Set the value of valide
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
 
         return $this;
     }
