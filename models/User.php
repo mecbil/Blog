@@ -1,15 +1,14 @@
 <?php
 namespace Models;
 
-class User extends Model
+class User extends Manager
 {
-    protected $table = "users";
-    protected $id;
+    private $id;
     protected $uuid;
     protected $nickname;
     protected $password;
     protected $mail;
-    protected $rule;
+    protected $role;
 
 
     // Get the value of id 
@@ -82,13 +81,13 @@ class User extends Model
     }
 
     // Get the value of rule
-    public function getRule()
+    public function getRole()
     {
         return $this->rule;
     }
 
     // Set the value of rule
-    public function setRule(bool $rule)
+    public function setRole(bool $rule)
     {
         $this->rule = $rule;
 
