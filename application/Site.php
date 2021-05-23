@@ -11,7 +11,7 @@ class Site
             header('Location: /404.php');
             // var_dump($_SERVER['SERVER_NAME'].'/404.php');
         }
-        $controllerUse = 'PostController';
+        $controllerUse = 'MainController';
         if (!empty($_GET['controller'])) {
             $controllerUse = ucfirst($_GET['controller']);
         }

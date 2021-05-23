@@ -25,8 +25,8 @@
                 </p>
             </div>
             <div class="card-footer bg-success text-center pb-0">
-                <p><a class="btn btn-outline-light btn-warning "
-                        href="/?controller=postcontroller&task=showOnePost&UUid=<?= $article->uuid ?>">View details &raquo;</a>
+                <p><a class="btn btn-outline-light btn-dark"
+                        href="/?controller=postcontroller&task=showOnePost&uuid=<?= $article->uuid ?>">View details &raquo;</a>
                 </p>
             </div>
 

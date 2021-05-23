@@ -11,8 +11,7 @@ class Post extends Manager
     protected $content;
     protected $title;
     protected $author;
-    protected $valide;
-    protected $users_id;
+    protected $userid;
 
     // Get the value of id
     public function getId()
@@ -126,30 +125,16 @@ class Post extends Manager
         return $this;
     }
 
-    // Get the value of valide
-    public function getValide()
-    {
-        return $this->valide;
-    }
-
-    // Set the value of valide
-    public function setValide($valide)
-    {
-        $this->valide = $valide;
-
-        return $this;
-    }
-
     // Get the value of users_id
-    public function getUsers_id()
+    public function getUserid()
     {
-        return $this->users_id;
+        return $this->userid;
     }
 
     // Set the value of users_id
-    public function setUsers_id($users_id)
+    public function setUserid($userid)
     {
-        $this->users_id = $users_id;
+        $this->userid = $userid;
 
         return $this;
     }

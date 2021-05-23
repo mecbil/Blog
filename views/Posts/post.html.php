@@ -1,7 +1,7 @@
 <div class="text-light">
     <div class="container m-2">
         <h1><?= $post->title ?></h1>
-        <small>Publié le : <?php $datef= strtotime($post->date); echo(date('d-m-Y H:i:s', $datef)) ?></small>
+        <small>Publié le : <?php $datef= strtotime($post->date_creat); echo(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
         <p><?= $post->chapo ?></p>
         <p><?= $post->content ?></p>
         <div class="text-warning"><?= $post->author ?></div>
@@ -27,7 +27,7 @@
         <blockquote>
             <em><?= $commentaire->comment ?></em>
         </blockquote>
-        <a href="delete-comment.php?UUid=<?= $commentaire->UUid ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+        <a href="delete-comment.php?uuid=<?= $commentaire->uuid ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
     <?php endforeach ?>
 <?php endif ?>
 </div>

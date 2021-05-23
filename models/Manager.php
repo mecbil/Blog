@@ -14,9 +14,13 @@ abstract class Manager
     }
 
     // trouver tous les enregistrement ?trier &/ou limiter
-    public function findAll(?string $order="", ?string $limit="")
+    public function findAll(?string $condition="", ?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM {$this->table}";
+
+        if ($condition) {
+            $sql .=" WHERE valide = ".$condition;
+        }
         
         if ($order) {
             $sql .=" ORDER BY ".$order;
@@ -59,30 +63,30 @@ abstract class Manager
     }
 
     // Ajoute un enregistrement
-    public function insert()
-    {
-        $sql="INSERT INTO {$this->table} SET";
+    // public function insert()
+    // {
+    //     $sql="INSERT INTO {$this->table} SET";
         
-        $query = $this->pdo->prepare();
+    //     $query = $this->pdo->prepare();
 
-        $query->execute(compact('val1', 'val2', 'val3'));
-    }
+    //     $query->execute(compact('val1', 'val2', 'val3'));
+    // }
 
     // Modifie un enregistrement 
-    public function update(int $uuid, array $champs)
-    {
-        $sql="UPDATE {$this->table} SET ";
+    // public function update(int $uuid, array $champs)
+    // {
+    //     $sql="UPDATE {$this->table} SET ";
         
-        foreach ($champs as $champ => $valeur) {
-            $sql .= ' '.$champ.'= '.$valeur;
-        }
+    //     foreach ($champs as $champ => $valeur) {
+    //         $sql .= ' '.$champ.'= '.$valeur;
+    //     }
 
-        var_dump($sql);
+    //     var_dump($sql);
         
-        // $query = $this->pdo->prepare();
+    //     // $query = $this->pdo->prepare();
 
-        // $query->execute(compact('val1', 'val2', 'val3'));
-    }
+    //     // $query->execute(compact('val1', 'val2', 'val3'));
+    // }
     
     // Hydrater un enregistrement 
     public function hydrate($donnees)

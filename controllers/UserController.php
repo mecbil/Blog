@@ -5,6 +5,7 @@ require_once('../application/autoload.php');
 
 use Models\UserManager;
 use \Application\Renderer;
+use Controllers\MainController;
 
 class UserController
 {
@@ -33,11 +34,16 @@ class UserController
         $userManager = new UserManager();
         $erreur= $userManager->connection();
 
-        if (empty($erreur)){
+        if (empty($erreur)) {
             $pageTitle = $_SESSION['user'];
-            Renderer::render('users/indexuser', compact('pageTitle'));
-
-        }else {
+            
+            if ($_SESSION['role'] == true) {
+                Renderer::render('users/indexuser', compact('pageTitle'));
+            } else {
+                $redirect = new MainController;
+                $redirect->showPosts();
+            }
+        } else {
             $pageTitle = "Connexion";
 
             Renderer::render('users/connection', compact('pageTitle', 'erreur'));
