@@ -135,6 +135,31 @@ class Post extends Manager
     public function setUserid($userid)
     {
         $this->userid = $userid;
+    }
+    // Get the value of valide
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    // Set the value of valide
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+
+        return $this;
+    }
+
+    // Get the value of users_id
+    public function getUsers_id()
+    {
+        return $this->users_id;
+    }
+
+    // Set the value of users_id
+    public function setUsers_id($users_id)
+    {
+        $this->users_id = $users_id;
 
         return $this;
     }
