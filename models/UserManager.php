@@ -5,6 +5,22 @@ class UserManager extends Manager
 {
     protected $table = "users";
 
+mecbil
+
+    // Verifier les données d'un formulaire
+    // public function verif($donnees)
+    // {
+    //     // Si le mail est valide
+    //     if (filter_var($donnees,FILTER_VALIDATE_EMAIL)) {
+    //         return $donnees;
+    //     } 
+
+    //     $_SESSION['erreur']='Veuillez saisir une adresse mail valide';        
+    //     $pageTitle = "Connexion" ;
+        
+    //     \Application\Renderer::render('users/connection', compact('pageTitle'));
+    // }
+master
     public function connection() {
         // Mail ou password vide
         if (empty($_POST['email']) || empty($_POST['password'])) {
@@ -38,8 +54,12 @@ class UserManager extends Manager
                 if (\session_status() === PHP_SESSION_NONE) {
                     session_start();
                     $_SESSION['user'] = $user->getNickname();
+mecbil
                     $_SESSION['id'] = $user->getId();
                     $_SESSION['role'] = $user->getRole();
+
+                    $_SESSION['rule'] = $user->getRole();
+master
                 }
 
                 return  $erreur;

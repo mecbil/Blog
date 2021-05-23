@@ -1,5 +1,9 @@
 <section class="conninscri text-light">
+mecbil
     <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-5">
+
+    <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
+master
 
         <!-- zone de connexion -->
         <div class="login-form">
@@ -12,7 +16,7 @@
             <form action="index.php?controller=UserController&task=connect" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group">
-                    <input type="email" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email"  autocomplete="off">
+                    <input type="text" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Password"  autocomplete="off">
