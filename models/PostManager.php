@@ -1,6 +1,7 @@
 <?php
 namespace Models;
 
+mecbil
 use Models\Post;
 
 class PostManager extends Manager
@@ -80,4 +81,9 @@ class PostManager extends Manager
         $pageTitle = "Blog Posts";
         \Application\Renderer::render('posts/post', compact('pageTitle', 'post', 'comments'));
     }
+
+class PostManager extends Manager
+{
+    protected $table = "posts";
+master
 }
