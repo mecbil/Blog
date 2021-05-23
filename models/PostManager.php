@@ -65,19 +65,18 @@ class PostManager extends Manager
         return $erreur;
     }
 
-    // Montrer la page d'un post identifier par son uuid'
-    public function showOnePost()
+    public function delettePost($uuid)
     {
-        $modelpost= new Post();
-        $modelcomment= new Comment();
+        $post = $this->find('uuid', $uuid);
+        if ($post) {
+            $this->delete($uuid);
 
-        // Get a post with uuid
-        $get= $_GET['uuid'];
-        $post = $modelpost->search('uuid',$get);
-        $comments = $modelcomment->search('uuid',$get);
-    
-        // Affichage (Show)
-        $pageTitle = "Blog Posts";
-        \Application\Renderer::render('posts/post', compact('pageTitle', 'post', 'comments'));
+            $erreur='';
+            return $erreur;            
+        } else {
+            $erreur='Veuillez donner un identifiant valable';
+            return $erreur; 
+        }
+
     }
 }
