@@ -1,9 +1,11 @@
-
 <section class="conninscri text-light">
+mecbil
+    <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-5">
+
     <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
+master
 
         <!-- zone de connexion -->
-
         <div class="login-form">
                 <?php if (!empty($erreur)): ?>
                 <div class="alert alert-danger">
@@ -20,15 +22,14 @@
                     <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Password"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
-                    <button type="submit" class="btn btn-warning text-light btn-block mt-2">Connexion</button>
+                    <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Connexion</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- zone de d'enregistrement -->
-
-    <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 mt-2">
+    <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 mt-5">
         <div class="login-form">
             <form action="" method="post">
                 <h2 class=" text-center "> Enregistrement </h2>
@@ -46,7 +47,7 @@
                         required="required" autocomplete="off">
                 </div>
                 <div class=" form-group ">
-                    <button type=" submit " class="btn btn-warning text-light btn-block mt-2"> Enregistrer </button>
+                    <button type=" submit " class="btn btn-dark btn-outline-light btn-block mt-2"> Enregistrer </button>
                 </div>
                 
             </form>

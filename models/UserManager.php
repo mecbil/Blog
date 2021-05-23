@@ -5,6 +5,8 @@ class UserManager extends Manager
 {
     protected $table = "users";
 
+mecbil
+
     // Verifier les données d'un formulaire
     // public function verif($donnees)
     // {
@@ -18,7 +20,7 @@ class UserManager extends Manager
         
     //     \Application\Renderer::render('users/connection', compact('pageTitle'));
     // }
-
+master
     public function connection() {
         // Mail ou password vide
         if (empty($_POST['email']) || empty($_POST['password'])) {
@@ -52,7 +54,12 @@ class UserManager extends Manager
                 if (\session_status() === PHP_SESSION_NONE) {
                     session_start();
                     $_SESSION['user'] = $user->getNickname();
+mecbil
+                    $_SESSION['id'] = $user->getId();
+                    $_SESSION['role'] = $user->getRole();
+
                     $_SESSION['rule'] = $user->getRole();
+master
                 }
 
                 return  $erreur;

@@ -14,9 +14,19 @@ abstract class Manager
     }
 
     // trouver tous les enregistrement ?trier &/ou limiter
+mecbil
+    public function findAll(?string $condition="", ?string $order="", ?string $limit="")
+    {
+        $sql= "SELECT * FROM {$this->table}";
+
+        if ($condition) {
+            $sql .=" WHERE valide = ".$condition;
+        }
+
     public function findAll(?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM {$this->table}";
+master
         
         if ($order) {
             $sql .=" ORDER BY ".$order;
@@ -58,6 +68,9 @@ abstract class Manager
         $query->execute(['uuid' => $uuid]);
     }
 
+mecbil
+    //Modifie un enregistrement 
+
     // Ajoute un enregistrement
     public function insert()
     {
@@ -69,6 +82,7 @@ abstract class Manager
     }
 
     // Modifie un enregistrement 
+master
     public function update(int $uuid, array $champs)
     {
         $sql="UPDATE {$this->table} SET ";

@@ -34,32 +34,41 @@ if (\session_status() === PHP_SESSION_NONE) {
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/"){echo 'active';} ?>" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
+mecbil
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=MainController&task=showPosts"){echo 'active';} ?>" href="index.php?controller=MainController&task=showPosts">Blog</a>
+
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=PostController&task=showPosts"){echo 'active';} ?>" href="index.php?controller=PostController&task=showPosts">Blog</a>
+master
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "index.php"){echo 'active';} ?>" href="cv/MeciliNabil_CDev_CV.pdf " target='_blanck'>CV</a>
                         </li>
                         <li class="nav-item">
+mecbil
+                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=ContactController&task=verif"){echo 'active';} ?>" href="index.php?controller=MainController&task=showContact">Contact</a>
+
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=ContactController&task=verif"){echo 'active';} ?>" href="index.php?controller=ContactController&task=verif">Contact</a>
+master
                         </li>
-                        <?php if (isset($_SESSION['user'])) { ?>
+                        <?php if (isset($_SESSION['user'])): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=disconnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
                         </li>
-                        <?php } else { ?>
+                        <?php endif; ?>
+                        <?php if (!isset($_SESSION['user'])): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
                         </li>
-
-
-                        <?php } ?>
+                        <?php endif; ?>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light btn-warning" type="submit">Search</button>
+                        <button class="btn btn-dark btn-outline-light" type="submit">Search</button>
                     </form>
                 </div>
             </div>

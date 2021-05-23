@@ -14,7 +14,11 @@
                   ?></h5>
                 <p class="text-secondary"><p>Modifié le : <?= $article->date_modify ?></p></p>
               </div>
+mecbil
+              <div class="card-footer bg-success text-center pb-0"><p><a class="btn btn-outline-light btn-dark" href="/?controller=postcontroller&task=showOnePost&uuid=<?= $article->uuid ?>">View details &raquo;</a></p></div>
+
               <div class="card-footer bg-success text-center pb-0"><p><a class="btn btn-outline-light btn-dark " href="/?controller=postcontroller&task=showOnePost&UUid=<?= $article->uuid ?>">View details &raquo;</a></p></div>
+master
               
             </div>
         </div>
