@@ -62,7 +62,7 @@ master
     }
 
     // Supprime un enregistrement on ayant son uuid
-    public function delete(int $uuid):void
+    public function delete(string $uuid):void
     {
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE uuid = :uuid");
         $query->execute(['uuid' => $uuid]);
@@ -117,5 +117,4 @@ master
             return $this;
         }
     }    
-
 }

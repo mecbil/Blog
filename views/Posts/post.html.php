@@ -1,3 +1,9 @@
+<?php
+if (\session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <div class="text-light">
     <div class="container m-2">
         <h1><?= $post->title ?></h1>
@@ -7,8 +13,12 @@ mecbil
         <small>Publié le : <?php $datef= strtotime($post->date); echo(date('d-m-Y H:i:s', $datef)) ?></small>
 master
         <p><?= $post->chapo ?></p>
-        <p><?= $post->content ?></p>
+        <p><?= nl2br($post->content) ?></p>
         <div class="text-warning"><?= $post->author ?></div>
+        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
+        
+                <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=delettePost&uuid=<?= $_GET['uuid'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
+        <?php endif; ?>
     </div>
 <hr>
 <form action="save-comment.php" method="POST">

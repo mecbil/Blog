@@ -41,28 +41,28 @@ class ContactController
         }
 
         // Formulaire valide
-        // $adressemail = 'mecbil@yahoo.fr';
-        // $nom = htmlspecialchars($_POST['nom']);
-        // $prenom = htmlspecialchars($_POST['prenom']);
-       	// $email = htmlspecialchars($_POST['email']);
-        // $sujet = htmlspecialchars($_POST['sujet']);
-        // $message = nl2br(htmlspecialchars($_POST['msg']));
-        // $content = '<html><head><title> '.htmlspecialchars($sujet) .' </title></head><body>';
-        // $content .= '<p>' .$message .'<p>';
-        // $content .= '-------------------' .'<br>';
-        // $content .= 'De: ' .$nom .' ' .$prenom .' (' .$email .')';
-        // $content .= '<p>' .'Formulaire de contact envoyé depuis le site nabilmecili.fr' .'<p>';
-        // $content .= '</body></html>';
+        $adressemail = 'mecbil@yahoo.fr';
+        $nom = htmlspecialchars($_POST['nom']);
+        $prenom = htmlspecialchars($_POST['prenom']);
+       	$email = htmlspecialchars($_POST['email']);
+        $sujet = htmlspecialchars($_POST['sujet']);
+        $message = nl2br(htmlspecialchars($_POST['msg']));
+        $content = '<html><head><title> '.htmlspecialchars($sujet) .' </title></head><body>';
+        $content .= '<p>' .$message .'<p>';
+        $content .= '-------------------' .'<br>';
+        $content .= 'De: ' .$nom .' ' .$prenom .' (' .$email .')';
+        $content .= '<p>' .'Formulaire de contact envoyé depuis le site nabilmecili.fr' .'<p>';
+        $content .= '</body></html>';
      
-        // $headers  = 'MIME-Version: 1.0' . "\r\n";
-        // $headers .= 'From:' .$nom .' ' .$prenom .'  <'.$email.'>' . '\r\n';
-        // $headers .=	'Content-Type: text/plain; charset="iso-8859-1"';
-        // $headers .= '\r\nContent-Transfer-Encoding: 8bit'.'\r\n';
-        // $headers .=	'X-Mailer:PHP/'. phpversion().'\r\n';
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'From:' .$nom .' ' .$prenom .'  <'.$email.'>' . '\r\n';
+        $headers .=	'Content-Type: text/plain; charset="iso-8859-1"';
+        $headers .= '\r\nContent-Transfer-Encoding: 8bit'.'\r\n';
+        $headers .=	'X-Mailer:PHP/'. phpversion().'\r\n';
 
-        // ini_set('sendmail_from', 'me@domain.com');
+        ini_set('sendmail_from', 'me@domain.com');
 
-        // mail($adressemail, $sujet, $content, $headers);
+        mail($adressemail, $sujet, $content, $headers);
 
         $erreur = '';
 
