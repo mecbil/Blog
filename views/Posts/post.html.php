@@ -9,7 +9,7 @@ if (\session_status() === PHP_SESSION_NONE) {
         <h1><?= $post->title ?></h1>
         <small>Publié le : <?php $datef= strtotime($post->date_creat); echo(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
         <p><?= $post->chapo ?></p>
-        <p><?= $post->content ?></p>
+        <p><?= nl2br($post->content) ?></p>
         <div class="text-warning"><?= $post->author ?></div>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
         

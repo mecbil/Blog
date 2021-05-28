@@ -26,7 +26,6 @@ class PostController
     }
 
     // Ajouter un Blog post
-
     public function insertPost()
     {
         $post = new PostManager();

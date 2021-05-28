@@ -97,5 +97,4 @@ abstract class Manager
             return $this;
         }
     }    
-
 }
