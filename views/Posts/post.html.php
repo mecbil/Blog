@@ -13,7 +13,7 @@ mecbil
         <small>Publié le : <?php $datef= strtotime($post->date); echo(date('d-m-Y H:i:s', $datef)) ?></small>
 master
         <p><?= $post->chapo ?></p>
-        <p><?= $post->content ?></p>
+        <p><?= nl2br($post->content) ?></p>
         <div class="text-warning"><?= $post->author ?></div>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
         
