@@ -1,7 +1,6 @@
 <?php
 namespace Models;
 
-mecbil
 use Models\Post;
 
 class PostManager extends Manager
@@ -80,9 +79,4 @@ class PostManager extends Manager
         }
 
     }
-
-class PostManager extends Manager
-{
-    protected $table = "posts";
-master
 }
