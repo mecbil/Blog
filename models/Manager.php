@@ -14,7 +14,6 @@ abstract class Manager
     }
 
     // trouver tous les enregistrement ?trier &/ou limiter
-mecbil
     public function findAll(?string $condition="", ?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM {$this->table}";
@@ -22,11 +21,6 @@ mecbil
         if ($condition) {
             $sql .=" WHERE valide = ".$condition;
         }
-
-    public function findAll(?string $order="", ?string $limit="")
-    {
-        $sql= "SELECT * FROM {$this->table}";
-master
         
         if ($order) {
             $sql .=" ORDER BY ".$order;
@@ -68,21 +62,7 @@ master
         $query->execute(['uuid' => $uuid]);
     }
 
-mecbil
     //Modifie un enregistrement 
-
-    // Ajoute un enregistrement
-    public function insert()
-    {
-        $sql="INSERT INTO {$this->table} SET";
-        
-        $query = $this->pdo->prepare();
-
-        $query->execute(compact('val1', 'val2', 'val3'));
-    }
-
-    // Modifie un enregistrement 
-master
     public function update(int $uuid, array $champs)
     {
         $sql="UPDATE {$this->table} SET ";
