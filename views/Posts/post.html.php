@@ -13,17 +13,25 @@ if (\session_status() === PHP_SESSION_NONE) {
         <div class="text-warning"><?= $post->author ?></div>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
         
-                <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=delettePost&uuid=<?= $_GET['uuid'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
+                <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= $_GET['uuid'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
         <?php endif; ?>
     </div>
 <hr>
-<form action="save-comment.php" method="POST">
+
+<?php if (!empty($erreur)): ?>
+<div class="alert alert-danger">
+<?= $erreur ?>
+</div>
+<?php endif; ?>
+
+<form action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
     <h3>Vous voulez réagir ? N'hésitez pas !</h3>
-    <input type="text" name="" placeholder="Votre pseudo !">
+    <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){echo $_SESSION['user'];} ?>"" placeholder="Votre pseudo !">
     <br>
-    <textarea name="content" id="" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
-    <input type="hidden" name="article_id" value="<?= $article_id ?>">
+    <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
     <br>
+    <input type="hidden" name="id" value ="<?= $post->id ?>">
+    <input type="hidden" name="userid" value ="<?= $_SESSION['userid'] ?>">
     <button>Commenter !</button>
 </form>
 
@@ -32,8 +40,8 @@ if (\session_status() === PHP_SESSION_NONE) {
 <?php else : ?>
     <h2>Il y a déjà <?= count($comments) ?> réactions : </h2>
     <?php foreach ($comments as $commentaire) : ?>
-        <h3>Commentaire de : <?= $commentaire->Author ?></h3>
-        <small>Le <?= $commentaire->date ?></small>
+        <h3>Commentaire de : <?= $commentaire->author ?></h3>
+        <small>Le <?= $commentaire->date_modify ?></small>
         <blockquote>
             <em><?= $commentaire->comment ?></em>
         </blockquote>

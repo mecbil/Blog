@@ -5,13 +5,13 @@ class Comment extends Manager
 {
     protected $id;
     protected $uuid;
-    protected $posts_id;
+    protected $post_id;
     protected $date_creat;
     protected $date_modify;
     protected $comment;
     protected $author;
     protected $valide;
-    protected $users_id;
+    protected $user_id;
 
     // Get the value of id
     public function getId()
@@ -41,16 +41,16 @@ class Comment extends Manager
         return $this;
     }
 
-    // Get the value of posts_id
-    public function getPosts_id()
+    // Get the value of post_id
+    public function getPost_id()
     {
-        return $this->posts_id;
+        return $this->post_id;
     }
 
-    // Set the value of posts_id
-    public function setPosts_id($posts_id)
+    // Set the value of post_id
+    public function setPost_id($post_id)
     {
-        $this->posts_id = $posts_id;
+        $this->post_id = $post_id;
 
         return $this;
     }
@@ -125,16 +125,16 @@ class Comment extends Manager
         return $this;
     }
 
-    // Get the value of users_id
-    public function getUsers_id()
+    // Get the value of user_id
+    public function getUser_id()
     {
-        return $this->users_id;
+        return $this->user_id;
     }
 
-    // Set the value of users_id
-    public function setUsers_id($users_id)
+    // Set the value of user_id
+    public function setUser_id($user_id)
     {
-        $this->users_id = $users_id;
+        $this->user_id = $user_id;
 
         return $this;
     }

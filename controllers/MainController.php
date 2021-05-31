@@ -25,7 +25,8 @@ class MainController
     public function showContact()
     {
         $pageTitle = "Contact Us" ;
-        \Application\Renderer::render('users/contact', compact('pageTitle'));
+        Renderer::render('users/contact', compact('pageTitle'));
+        exit();
     }
 
     // Montrer la page de tous les Posts trier par date'
@@ -39,5 +40,6 @@ class MainController
         // Affichage (Show)
         $pageTitle = "Blog Posts";
         Renderer::render('posts/posts', compact('pageTitle', 'posts'));
+        exit();
     }
 }
