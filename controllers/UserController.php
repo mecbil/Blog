@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers ;
 
 require_once('../application/autoload.php');
@@ -20,11 +19,13 @@ class UserController
                 $pageTitle = $_SESSION['user'];
 
                 Renderer::Render('users/indexuser', compact('pageTitle'));
+                exit();
             } else {
                 // Utilisateur pas connecté
                 $pageTitle = "Connexion" ;
 
                 Renderer::Render('users/connection', compact('pageTitle'));
+                exit();
             }
         }
     }
@@ -38,8 +39,9 @@ class UserController
         if (empty($erreur)) {
             $pageTitle = $_SESSION['user'];
             
-            if ($_SESSION['role'] == true) {
+            if ($_SESSION['role'] === true) {
                 Renderer::render('users/indexuser', compact('pageTitle'));
+                exit();
             } else {
                 $redirect = new MainController;
                 $redirect->showPosts();
@@ -48,6 +50,7 @@ class UserController
             $pageTitle = "Connexion";
 
             Renderer::render('users/connection', compact('pageTitle', 'erreur'));
+            exit();
         }
     }
 
@@ -58,5 +61,24 @@ class UserController
         session_destroy();
         // unset($_SESSION['user']);
         header('Location: /');
+    }
+
+    public function insertUser()
+    {
+        $user = new UserManager();
+        $erreurAdd= $user->insertion();
+
+        // Pas d'erreur
+        if (empty($erreurAdd)) {
+            $pageTitle = $_SESSION['user'];
+
+            $redirect = new MainController;
+            $redirect->showIndex();
+        } else {
+            $pageTitle = "Connexion";
+
+            Renderer::render('users/connection', compact('pageTitle', 'erreurAdd'));
+            exit();
+        }
     }
 }

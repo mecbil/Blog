@@ -13,7 +13,7 @@ class Database
 
     public static function dbConnect()
     {
-        if (self::$instance===null) {
+        if (self::$instance === null) {
             try {
                 self::$instance = new \PDO(
                     'mysql:host=localhost;dbname=mnblog;charset=utf8',

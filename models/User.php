@@ -83,13 +83,13 @@ class User extends Manager
     // Get the value of rule
     public function getRole()
     {
-        return $this->rule;
+        return $this->role;
     }
 
     // Set the value of rule
-    public function setRole(bool $rule)
+    public function setRole($role)
     {
-        $this->rule = $rule;
+        $this->role = $role;
 
         return $this;
     }

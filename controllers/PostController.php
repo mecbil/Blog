@@ -18,11 +18,13 @@ class PostController
         // Get a post with uuid
         $get= $_GET['uuid'];
         $post = $modelpost->find('uuid', $get);
-        $comments = $modelcomment->search('uuid', $get);
+        $postid = $post->id;
+        $comments = $modelcomment->search('post_id', $postid);
   
         // Affichage (Show)
         $pageTitle = "Blog Posts";
         Renderer::render('posts/post', compact('pageTitle', 'post', 'comments'));
+        exit();
     }
 
     // Ajouter un Blog post
@@ -32,10 +34,9 @@ class PostController
         $erreur= $post->insert();
 
         if (empty($erreur)) {
-            $model= new PostManager();
-
+            
             // Get all posts
-            $posts = $model->findAll("", "date_modify DESC");
+            $posts = $post->findAll("", "date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -47,15 +48,16 @@ class PostController
                     $pageTitle = $_SESSION['user'];
     
                     Renderer::Render('users/indexuser', compact('pageTitle', 'erreur'));
+                    exit();
                 }
             }
         }
     }
 
-    public function delettePost()
+    public function deletePost()
     {
         $modelpost= new PostManager();
-        $modelpost->delettePost($_GET['uuid']);
+        $modelpost->deletePost($_GET['uuid']);
 
         // 
         if (empty($erreur)) {
@@ -67,8 +69,9 @@ class PostController
             // Affichage (Show)
             $pageTitle = "Blog Posts";
             Renderer::render('posts/posts', compact('pageTitle', 'posts'));
+            exit();
         } else {
-            echo ('<script>alert(\"la variable est nulle\")</script>');
+            echo ('<script>alert(\"Enregistrement non trouver")</script>');
             $this->showOnePost();
         }
 

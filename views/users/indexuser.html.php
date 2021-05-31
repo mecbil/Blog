@@ -10,7 +10,7 @@
       </div>
       <?php endif; ?>
             
-      <form action="index.php?controller=Postcontroller&task=insertpost&id=<?= $_SESSION['id'] ?>" method="post">
+      <form action="index.php?controller=Postcontroller&task=insertpost" method="post">
           <h2 class="text-center">Ajout d'un Blog Post </h2>
           <div class="form-group">
             <input type="text" name="title" value="<?php if (isset($_POST['title'])){echo $_POST['title'];} ?>" class="form-control" placeholder="Title"  autocomplete="off">

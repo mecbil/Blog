@@ -24,7 +24,7 @@ class PostManager extends Manager
         $date_creat = date("Y-m-d h:i:s");
         $date_modify = date("Y-m-d h:i:s");
         $uuid = uniqid();
-        $userid=$_GET['id'];
+        $userid=$_SESSION['userid'];
 
         // On instencie le model;
         $post = new Post;       
@@ -53,11 +53,6 @@ class PostManager extends Manager
         $sql->bindValue(':title', $post->getTitle());
         $sql->bindValue(':author', $post->getAuthor());
         $sql->bindValue(':userid', $post->getUserId());
-
-        //$sql .= "(NULL,'".$post->getUuid()."', '".$post->getDate_creat()."', '".$post->getDate_modify()."', '".$post->getChapo()."', '".$post->getContent()."', '".$post->getTitle()."', '".$post->getAuthor()."', '".$post->getUserId()."' )";
-        // var_dump($sql);
-        // exit;
-        //$query = $this->pdo->prepare($sql);
         $sql->execute();
 
         $erreur = '';
@@ -65,7 +60,7 @@ class PostManager extends Manager
         return $erreur;
     }
 
-    public function delettePost($uuid)
+    public function deletePost($uuid)
     {
         $post = $this->find('uuid', $uuid);
         if ($post) {
@@ -77,6 +72,5 @@ class PostManager extends Manager
             $erreur='Veuillez donner un identifiant valable';
             return $erreur; 
         }
-
     }
 }
