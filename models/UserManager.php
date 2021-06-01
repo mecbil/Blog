@@ -9,21 +9,23 @@ class UserManager extends Manager
     public function connection()
     {
         // Mail ou password vide
-        if (empty($_POST['email']) || empty($_POST['password'])) {
+        $gpassword = $_POST['password'];
+        $gmail = $_POST['email'];
+        if (empty($gmail) || empty($gpassword)) {
             $erreur='Veuillez remplir tous les champs';
 
             return $erreur;
         }
 
         // Format de mail NON valide
-        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
             $erreur = 'Veuillez saisir un Mail valide';
 
             return $erreur;
         }
         // Formulaire valide
         // 2- chercher l'enregistrement avec le mail donné
-        $userExist = $this->find('mail', $_POST['email']);
+        $userExist = $this->find('mail', $gmail);
 
         // 2- L'enregistrement existe
         if ($userExist) {
@@ -34,7 +36,7 @@ class UserManager extends Manager
 
 
             // On verifie le mot de passe dans la table avec celui donné
-            if (password_verify($_POST['password'], $user->getPassword())) {
+            if (password_verify($gpassword, $user->getPassword())) {
                 // Ici Mail et mots de passe exacte
                 $erreur = '';
                 $_SESSION['user'] = $user->getNickname();
@@ -42,14 +44,11 @@ class UserManager extends Manager
                 $_SESSION['role'] = $user->getRole();
 
                 return  $erreur;
-            } else {
-                // Utilisateur avec mail donné n'existe pas
-                $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
-    
-                return $erreur;
-            }
-        } else {
-            // Utilisateur avec mail donné n'existe pas
+            } 
+        }
+
+        if (password_verify($gpassword, $user->getPassword()) == false){
+            // Utilisateur avec mail donné n'existe pas 
             $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
 
             return $erreur;
@@ -57,28 +56,30 @@ class UserManager extends Manager
     }
 
     // Traitement de l'ajout d'un nouveau utilisateur
-
     public function insertion()
     {
         // tester le formulaire
+        $gpseudo = $_POST['pseudo'];
+        $gmail = $_POST['email'];
+        $gpassword = $_POST['password'];
         // 1- Un des elements du formulaire vide
-        if (empty($_POST['pseudo']) || empty($_POST['email'])|| empty($_POST['password'])) {
+        if (empty($gpseudo) || empty($gmail)|| empty($gpassword)) {
             $erreurAdd='Veuillez remplir tous les champs';
 
             return $erreurAdd;
         }
 
         // 2- Format de mail NON valide
-        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
             $erreurAdd = 'Veuillez saisir un Mail valide';
 
             return $erreurAdd;
         }
 
         // 3- Verification & initialisation des champs
-        $pseudo = strip_tags($_POST['pseudo']);
-        $email = strip_tags($_POST['email']);
-        $password = strip_tags($_POST['password']);
+        $pseudo = strip_tags($gpseudo);
+        $email = strip_tags($gmail);
+        $password = strip_tags($gpassword);
         $passwordhash = password_hash($password, PASSWORD_DEFAULT);
         $uuid = uniqid();
         
