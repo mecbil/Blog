@@ -18,11 +18,9 @@ class ContactController
             $erreur = 'Message envoyé !';
 
             Renderer::render('users/contact', compact('pageTitle','erreur'));
-            exit();
         }
         else {
             Renderer::render('users/contact', compact('pageTitle', 'erreur'));
-            exit();
         }
     }
     // Traiment et envoi du mail

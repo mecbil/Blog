@@ -25,7 +25,6 @@ class CommentController
             $redirect = new MainController;
 
             $redirect->showPosts();
-            exit();
         }
     }
 }

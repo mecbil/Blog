@@ -32,19 +32,21 @@ class UserManager extends Manager
             $user = new User;
             $user = $user->hydrate($userExist);
 
+
             // On verifie le mot de passe dans la table avec celui donné
             if (password_verify($_POST['password'], $user->getPassword())) {
                 // Ici Mail et mots de passe exacte
                 $erreur = '';
-
-                if (\session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                    $_SESSION['user'] = $user->getNickname();
-                    $_SESSION['userid'] = $user->getId();
-                    $_SESSION['role'] = $user->getRole();
-                }
+                $_SESSION['user'] = $user->getNickname();
+                $_SESSION['userid'] = $user->getId();
+                $_SESSION['role'] = $user->getRole();
 
                 return  $erreur;
+            } else {
+                // Utilisateur avec mail donné n'existe pas
+                $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
+    
+                return $erreur;
             }
         } else {
             // Utilisateur avec mail donné n'existe pas

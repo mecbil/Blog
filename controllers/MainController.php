@@ -18,7 +18,7 @@ class MainController
 
         // Affichage (Show)
         $pageTitle = "Home" ;
-        \Application\Renderer::render('index', compact('pageTitle', 'posts'));
+        Renderer::render('index', compact('pageTitle', 'posts'));
     }
 
     // Montrer la page contact
@@ -26,7 +26,6 @@ class MainController
     {
         $pageTitle = "Contact Us" ;
         Renderer::render('users/contact', compact('pageTitle'));
-        exit();
     }
 
     // Montrer la page de tous les Posts trier par date'
@@ -40,6 +39,5 @@ class MainController
         // Affichage (Show)
         $pageTitle = "Blog Posts";
         Renderer::render('posts/posts', compact('pageTitle', 'posts'));
-        exit();
     }
 }

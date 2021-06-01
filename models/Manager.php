@@ -44,7 +44,7 @@ abstract class Manager
         return $item;
     }
 
-    // Rechercher un enregistrement
+    // Rechercher des enregistrement
     public function search(string $sword, string $word)
     {
         $sql= "SELECT * FROM {$this->table} WHERE ".' '.$sword.' = '."'$word'";

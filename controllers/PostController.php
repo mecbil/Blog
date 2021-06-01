@@ -24,7 +24,6 @@ class PostController
         // Affichage (Show)
         $pageTitle = "Blog Posts";
         Renderer::render('posts/post', compact('pageTitle', 'post', 'comments'));
-        exit();
     }
 
     // Ajouter un Blog post
@@ -42,21 +41,18 @@ class PostController
             $pageTitle = "Blog Posts";
             Renderer::render('posts/posts', compact('pageTitle', 'posts'));
         } else {
-            if (\session_status() === PHP_SESSION_NONE) {
-                session_start();
-                if (isset($_SESSION['user'])) {
-                    $pageTitle = $_SESSION['user'];
-    
-                    Renderer::Render('users/indexuser', compact('pageTitle', 'erreur'));
-                    exit();
-                }
+
+            if (isset($_SESSION['user'])) {
+                $pageTitle = $_SESSION['user'];
+
+                Renderer::Render('users/indexuser', compact('pageTitle', 'erreur'));
             }
         }
     }
 
     public function deletePost()
     {
-        $modelpost= new PostManager();
+        $modelpost = new PostManager();
         $modelpost->deletePost($_GET['uuid']);
 
         // 
@@ -69,12 +65,23 @@ class PostController
             // Affichage (Show)
             $pageTitle = "Blog Posts";
             Renderer::render('posts/posts', compact('pageTitle', 'posts'));
-            exit();
         } else {
             echo ('<script>alert(\"Enregistrement non trouver")</script>');
             $this->showOnePost();
         }
+    }
 
+    // Liste des posts non validé
 
+    public function validPosts()
+    {
+        $model= new PostManager();
+
+        // Get all posts
+        $comments = $model->findAll("0", "date_modify DESC");
+
+        // Affichage (Show)
+
+        Renderer::render('users/indexuser', compact('comments'));
     }
 }
