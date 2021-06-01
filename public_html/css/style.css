@@ -26,7 +26,7 @@ body {
 
 main {
   overflow-y: scroll;
-  margin: 0.2em 0em;
+  margin: 0.2em 0;
   height: 476px;
 }
 
@@ -51,6 +51,7 @@ main {
 span {
   font-weight: bold;
 }
+
 .mb-4 {
   margin-bottom: 0 !important;
 }
@@ -67,12 +68,14 @@ footer {
   color: cornsilk;
   background-color: darkgray;
 }
+
 h2 {
   color: goldenrod;
   font-weight: bold;
   margin-left: 1em;
   padding-top: 0.5em;
 }
+
 .baniere {
   width: 56px;
   border-radius: 10% 35%;
@@ -91,18 +94,22 @@ h2 {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
 }
+
 .login-form h2 {
   margin: 0 0 15px;
 }
+
 .form-control,
 .btn {
   min-height: 38px;
   border-radius: 2px;
 }
+
 .btn {
   font-size: 15px;
   font-weight: bold;
 }
+
 .valider {
   width: 26em;
   height: 10em;
