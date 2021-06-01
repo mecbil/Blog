@@ -5,12 +5,7 @@ class Database
 {
     private static $instance= null;
 
-    /**
-     * Connexion à la base de données
-     *
-     */
-    
-
+    // Connexion à la base de données
     public static function dbConnect()
     {
         if (self::$instance === null) {

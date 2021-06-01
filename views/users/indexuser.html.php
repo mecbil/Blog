@@ -34,11 +34,18 @@
   
   
   <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
-  <form action="index.php?controller=UserController&task=connect" method="post">
-          <h2 class="text-center">Gestion :</h2>
-          <div class=" form-group ">
-              <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Blog Post Non validé</button>
-          </div>
-      </form>      
+    <h2 class="text-center">Gestion :</h2>
+    <form action="index.php?controller=Postcontroller&task=validposts" method="post">
+      <div class="form-group">
+        <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Blog Post Non validé</button>
+      </div>
+      <div class="valider">
+        <?php foreach ($comments as $comment) : ?>
+          <br>
+          <div class=""><?= $comment->comment ?> </div>
+          <a class="btn btn-success btn-outline-light"href="delete-comment.php?uuid=<?= $comment->uuid ?>" >Valider</a>
+        <?php endforeach ?>
+      </div> 
+    </form>      
   </div>
 </div>

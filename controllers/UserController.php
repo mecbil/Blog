@@ -6,6 +6,7 @@ require_once('../application/autoload.php');
 use Models\UserManager;
 use \Application\Renderer;
 use Controllers\MainController;
+use Models\CommentManager;
 
 class UserController
 {
@@ -13,20 +14,17 @@ class UserController
     public static function showConnect()
     {
         // Utilisateur connecté
-        if (\session_status() === PHP_SESSION_NONE) {
-            session_start();
-            if (isset($_SESSION['user'])) {
-                $pageTitle = $_SESSION['user'];
+        if (isset($_SESSION['user'])) {
+            $pageTitle = $_SESSION['user'];
+            $commentmanager = new CommentManager();
+            $comments = $commentmanager->findAll("0");
 
-                Renderer::Render('users/indexuser', compact('pageTitle'));
-                exit();
-            } else {
-                // Utilisateur pas connecté
-                $pageTitle = "Connexion" ;
+            Renderer::Render('users/indexuser', compact('pageTitle', 'comments'));
+        } else {
+            // Utilisateur pas connecté
+            $pageTitle = "Connexion" ;
 
-                Renderer::Render('users/connection', compact('pageTitle'));
-                exit();
-            }
+            Renderer::Render('users/connection', compact('pageTitle'));
         }
     }
 
@@ -34,14 +32,16 @@ class UserController
     public function connect()
     {
         $userManager = new UserManager();
-        $erreur= $userManager->connection();
+        $erreur = $userManager->connection();
 
         if (empty($erreur)) {
             $pageTitle = $_SESSION['user'];
             
-            if ($_SESSION['role'] === true) {
-                Renderer::render('users/indexuser', compact('pageTitle'));
-                exit();
+            if ($_SESSION['role'] == true) {
+                $commentmanager = new CommentManager();
+                $comments = $commentmanager->findAll("0");
+
+                Renderer::render('users/indexuser', compact('pageTitle', 'comments'));
             } else {
                 $redirect = new MainController;
                 $redirect->showPosts();
@@ -50,7 +50,6 @@ class UserController
             $pageTitle = "Connexion";
 
             Renderer::render('users/connection', compact('pageTitle', 'erreur'));
-            exit();
         }
     }
 
@@ -78,7 +77,6 @@ class UserController
             $pageTitle = "Connexion";
 
             Renderer::render('users/connection', compact('pageTitle', 'erreurAdd'));
-            exit();
         }
     }
 }
