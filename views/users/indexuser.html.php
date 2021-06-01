@@ -42,8 +42,8 @@
       <div class="valider">
         <?php foreach ($comments as $comment) : ?>
           <br>
-          <div class=""><?= $comment->comment ?> </div>
-          <a class="btn btn-success btn-outline-light"href="delete-comment.php?uuid=<?= $comment->uuid ?>" >Valider</a>
+          <div class=""><?= stripslashes($comment->comment) ?> </div>
+          <a class="btn btn-success btn-outline-light"href="delete-comment.php?uuid=<?= stripslashes($comment->uuid) ?>" >Valider</a>
         <?php endforeach ?>
       </div> 
     </form>      

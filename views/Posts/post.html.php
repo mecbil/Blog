@@ -6,11 +6,11 @@ if (\session_status() === PHP_SESSION_NONE) {
 
 <div class="text-light">
     <div class="container m-2">
-        <h1><?= $post->title ?></h1>
-        <small>Publié le : <?php $datef= strtotime($post->date_creat); echo(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
-        <p><?= $post->chapo ?></p>
-        <p><?= nl2br($post->content) ?></p>
-        <div class="text-warning"><?= $post->author ?></div>
+        <h1><?= stripslashes($post->title) ?></h1>
+        <small>Publié le : <?php $datef= stripslashes(strtotime($post->date_creat)); echo(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
+        <p><?= stripslashes($post->chapo) ?></p>
+        <p><?= stripslashes(nl2br($post->content)) ?></p>
+        <div class="text-warning"><?= stripslashes($post->author) ?></div>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
         
                 <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= $_GET['uuid'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
@@ -26,12 +26,12 @@ if (\session_status() === PHP_SESSION_NONE) {
 
 <form action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
     <h3>Vous voulez réagir ? N'hésitez pas !</h3>
-    <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){echo $_SESSION['user'];} ?>"" placeholder="Votre pseudo !">
+    <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){echo stripslashes($_SESSION['user']);} ?>"" placeholder="Votre pseudo !">
     <br>
     <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
     <br>
-    <input type="hidden" name="id" value ="<?= $post->id ?>">
-    <input type="hidden" name="userid" value ="<?= $_SESSION['userid'] ?>">
+    <input type="hidden" name="id" value ="<?= stripslashes($post->id) ?>">
+    <input type="hidden" name="userid" value ="<?= stripslashes($_SESSION['userid']) ?>">
     <button>Commenter !</button>
 </form>
 
@@ -40,12 +40,12 @@ if (\session_status() === PHP_SESSION_NONE) {
 <?php else : ?>
     <h2>Il y a déjà <?= count($comments) ?> réactions : </h2>
     <?php foreach ($comments as $commentaire) : ?>
-        <h3>Commentaire de : <?= $commentaire->author ?></h3>
-        <small>Le <?= $commentaire->date_modify ?></small>
+        <h3>Commentaire de : <?= stripslashes($commentaire->author) ?></h3>
+        <small>Le <?= stripslashes($commentaire->date_modify) ?></small>
         <blockquote>
-            <em><?= $commentaire->comment ?></em>
+            <em><?= stripslashes($commentaire->comment) ?></em>
         </blockquote>
-        <a href="delete-comment.php?uuid=<?= $commentaire->uuid ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+        <a href="delete-comment.php?uuid=<?= stripslashes($commentaire->uuid) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
     <?php endforeach ?>
 <?php endif ?>
 </div>
