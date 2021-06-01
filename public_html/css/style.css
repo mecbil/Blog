@@ -1,58 +1,62 @@
 
-a{
+a {
     color: goldenrod;
 }
+
 .container{
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
 }
-footer p{
+
+footer p {
     margin-bottom: 0px;
 }
-.row{
+
+.row {
     display: flex;
     justify-content: space-around;
     align-items: center;
-
 }
-body{
+
+body {
     margin: 0 2px ;
     font-family: 'Charm', cursive;
 }
-main{
+
+main {
     overflow-y:scroll;
-    /* scrollbar-color: white #ff5621; */
     margin: 0.2em 0em;  
     height: 476px; 
 }
-#carte
-{
+
+#carte {
     width: 16rem;
     box-shadow: 1px 1px white;
     padding: 0;
     margin: 1em;
 }
-.card-body
-{
+
+.card-body {
     font-family: 'Lato', sans-serif;
     height: 7rem;
     margin-bottom: 0;
 }
-.present{
+
+.present {
     display: flex;
     justify-content: space-between;
 }
 
-span{
+span {
     font-weight: bold;
 }
 .mb-4 {
     margin-bottom: 0rem !important;
 }
 
-footer{
+footer {
     display: flex;
     justify-content: center;
     padding: 0.5em 0;
@@ -64,29 +68,25 @@ footer{
     color: cornsilk;
     background-color: darkgray;
 }
-h2{
+h2 {
     color: goldenrod;
     font-weight: bold;
     margin-left: 1em;
     padding-top: .5em;
 }
-.baniere{
+.baniere {
     width: 56px;
     border-radius: 10% 35%;
-    /* position: relative; */
-    /* top: 10px; left: 2px; */
 }
 
-.conninscri
-{ 
+.conninscri { 
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-} 
-/* Formulaire de connexion */
+}
 
-.login-form form 
-{
+/* Formulaire de connexion */
+.login-form form {
     background: #f7f7f7ea;
     border-radius: 2em; 
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);

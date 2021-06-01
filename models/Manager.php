@@ -63,20 +63,18 @@ abstract class Manager
     }
 
     //Modifie un enregistrement 
-    public function update(int $uuid, array $champs)
-    {
-        $sql="UPDATE {$this->table} SET ";
+    // public function update(int $uuid, array $champs)
+    // {
+    //     $sql="UPDATE {$this->table} SET ";
         
-        foreach ($champs as $champ => $valeur) {
-            $sql .= ' '.$champ.'= '.$valeur;
-        }
-
-        var_dump($sql);
+    //     foreach ($champs as $champ => $valeur) {
+    //         $sql .= ' '.$champ.'= '.$valeur;
+    //     }
         
         // $query = $this->pdo->prepare();
 
-        // $query->execute(compact('val1', 'val2', 'val3'));
-    }
+    //     // $query->execute(compact('val1', 'val2', 'val3'));
+    // }
     
     // Hydrater un enregistrement 
     public function hydrate($donnees)
