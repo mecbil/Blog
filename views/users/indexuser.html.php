@@ -2,11 +2,11 @@
 
   <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
     <!-- zone de Ajout Post blog -->
-    <h1>Dashbord <?= $_SESSION['user']?></h1>
+    <h1>Dashbord <?= "{$_SESSION['user']}" ?></h1>
     <div class="">
       <?php if (!empty($erreur)): ?>
       <div class="alert alert-danger">
-        <?= $erreur ?>
+        <?= "{$erreur}" ?>
       </div>
       <?php endif; ?>
             
@@ -21,19 +21,19 @@
       method="post">
           <h2 class="text-center">Ajout d'un Blog Post </h2>
           <div class="form-group">
-            <input type="text" name="title" value="<?php if (isset($_POST['title'])){echo $_POST['title'];} ?>" class="form-control" placeholder="Title"  autocomplete="off">
+            <input type="text" name="title" value="<?php if (isset($_POST['title'])){echo "{$_POST['title']}";} ?>" class="form-control" placeholder="Title"  autocomplete="off">
           </div>
           <div class="form-group">
-            <input type="text" name="chapo" value="<?php if (isset($_POST['chapo'])){echo $_POST['chapo'];} ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
+            <input type="text" name="chapo" value="<?php if (isset($_POST['chapo'])){echo "{$_POST['chapo']}";} ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
           </div>
           <div class=" form-group ">
-            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php if (isset($_POST['content'])) {echo $_POST['content'];} ?></textarea>
+            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php if (isset($_POST['content'])) {echo "{$_POST['content']}";} ?></textarea>
           </div>
           <div class=" form-group ">
-              <input type="text" name="author" value="<?php if (isset($_POST['author'])){echo $_POST['author'];} ?>" class="form-control" placeholder="Author"  autocomplete="off">
+              <input type="text" name="author" value="<?php if (isset($_POST['author'])){echo "{$_POST['author']}";} ?>" class="form-control" placeholder="Author"  autocomplete="off">
           </div>
           <div class=" form-group ">
-              <input type="hidden" name="id" value="<?php if (isset($_POST['id'])){echo $_POST['id'];} ?>" class="form-control" >
+              <input type="hidden" name="id" value="<?php if (isset($_POST['id'])){echo "{$_POST['id']}";} ?>" class="form-control" >
           </div>
           <div class=" form-group ">
             <?php if ($edit == false ): ?>
@@ -58,8 +58,8 @@
       <div class="valider">
         <?php foreach ($comments as $comment) : ?>
           <br>
-          <div class=""><?= stripslashes($comment->comment) ?> </div>
-          <a class="btn btn-success btn-outline-light"href="delete-comment.php?uuid=<?= stripslashes($comment->uuid) ?>" >Valider</a>
+          <div class=""><?= "{$comment->comment}" ?> </div>
+          <a class="btn btn-success btn-outline-light"href="delete-comment.php?uuid=<?= "{$comment->uuid}" ?>" >Valider</a>
         <?php endforeach ?>
       </div> 
     </form>      
