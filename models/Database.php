@@ -20,7 +20,7 @@ class Database
             ]
                 );
             } catch (\Exception $e) {
-                echo stripslashes('<script language="Javascript"> alert ( "'. $e->getMessage() .'" )</script>');
+                //echo stripslashes('<script language="Javascript"> alert ( "'. $e->getMessage() .'" )</script>');
             }
         }
         
