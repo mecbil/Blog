@@ -8,7 +8,7 @@ class Renderer
         
         extract($variables);
         ob_start(); 
-        require '../views/'.$path.'.html.php';
+        require "../views/{$path}.html.php";
         $pageContent = ob_get_clean();
         require '../views/layout.html.php';
     }
