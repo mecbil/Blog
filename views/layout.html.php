@@ -67,7 +67,7 @@ if (\session_status() === PHP_SESSION_NONE) {
         </nav>
     </header>
     <main class="container-Fluid bg-dark">
-      <?= $pageContent ?>
+      <?= "{$pageContent}" ?>
     </main>
     <footer class="container-Fluid text-white bg-dark text-center">
       <p>&copy; 2021 Mecili, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> 
