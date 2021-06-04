@@ -16,10 +16,11 @@ class UserController
         // Utilisateur connecté
         if (isset($_SESSION['user'])) {
             $pageTitle = $_SESSION['user'];
+            $edit = false;
             $commentmanager = new CommentManager();
-            $comments = $commentmanager->findAll("0");
+            $comments = $commentmanager->findAll("0", "date_modify DESC");
 
-            Renderer::Render('users/indexuser', compact('pageTitle', 'comments'));
+            Renderer::Render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
         } else {
             // Utilisateur pas connecté
             $pageTitle = "Connexion" ;
@@ -38,10 +39,11 @@ class UserController
             $pageTitle = $_SESSION['user'];
             
             if ($_SESSION['role'] == true) {
+                $edit = false;
                 $commentmanager = new CommentManager();
-                $comments = $commentmanager->findAll("0");
+                $comments = $commentmanager->findAll("0", "date_modify DESC");
 
-                Renderer::render('users/indexuser', compact('pageTitle', 'comments'));
+                Renderer::render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
             } else {
                 $redirect = new MainController;
                 $redirect->showPosts();

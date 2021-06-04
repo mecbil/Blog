@@ -7,7 +7,8 @@
         <div class="text-warning"><?= "{$post->author}" ?></div>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
         
-                <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= "{$_GET['uuid']}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
+            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= "{$_GET['uuid']}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
+            <a class="btn btn-secoundary btn-outline-light" href="/?controller=postcontroller&task=editPost&uuid=<?= "{$_GET['uuid']}" ?>" tabindex="-1">Editer</a>
         <?php endif; ?>
     </div>
 <hr>

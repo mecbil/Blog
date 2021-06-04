@@ -39,13 +39,17 @@ class PostController
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
+            
             Renderer::render('posts/posts', compact('pageTitle', 'posts'));
         } else {
 
             if (isset($_SESSION['user'])) {
+                $modelcomment= new CommentManager();
+                $comments = $modelcomment->findAll("", "date_modify DESC");
                 $pageTitle = $_SESSION['user'];
+                $edit = false;
 
-                Renderer::Render('users/indexuser', compact('pageTitle', 'erreur'));
+                Renderer::Render('users/indexuser', compact('pageTitle', 'erreur', 'edit', 'comments'));
             }
         }
     }
@@ -72,16 +76,68 @@ class PostController
     }
 
     // Liste des posts non validé
-
     public function validPosts()
     {
-        $model= new PostManager();
+        $model= new commentManager();
 
         // Get all posts
         $comments = $model->findAll("0", "date_modify DESC");
 
         // Affichage (Show)
+        $edit = false;
 
-        Renderer::render('users/indexuser', compact('comments'));
+        Renderer::render('users/indexuser', compact('comments','edit'));
     }
+
+        // Editer un posts
+        public function editPost()
+        {
+            $model= new PostManager();
+            $modelcomment= new CommentManager();
+            $comments = $modelcomment->findAll("0", "date_modify DESC");
+    
+            // Get a posts with uuid
+            $get= $_GET['uuid'];
+            $post = $model->find("uuid", $get);
+            $_POST['title'] = $post->title;
+            $_POST['chapo'] = $post->chapo;
+            $_POST['content'] = $post->content;
+            $_POST['author'] = $post->author;
+            $_POST['id'] = $post->id;
+    
+            // Affichage (Show)
+            $pageTitle = "Admin - ".$_SESSION['user'];
+            $edit = true;
+
+            Renderer::render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
+        }
+
+        public function updatePost()
+        {
+            $modelpost = new PostManager();
+            $erreur = $modelpost->updatePost($_POST['id']);
+
+            if (empty($erreur)) {
+            
+                // Get all posts
+                $posts = $modelpost->findAll("", "date_modify DESC");
+        
+                // Affichage (Show)
+                $pageTitle = "Blog Posts";
+                Renderer::render('posts/posts', compact('pageTitle', 'posts'));
+            } 
+            
+            if (!empty($erreur)) {
+    
+                if (isset($_SESSION['user'])) {
+                    $modelcomment= new CommentManager();
+                    $comments = $modelcomment->findAll("", "date_modify DESC");
+                    $pageTitle = $_SESSION['user'];
+                    $edit = true;
+    
+                    Renderer::Render('users/indexuser', compact('pageTitle', 'erreur', 'comments', 'edit' ));
+                }
+            }
+            
+        }
 }
