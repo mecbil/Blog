@@ -3,7 +3,7 @@ namespace Application;
 
 class Renderer
 {
-    public static function render(string $path, array $variables= []):void
+    public function render(string $path, array $variables= []):void
     {
         
         extract($variables);

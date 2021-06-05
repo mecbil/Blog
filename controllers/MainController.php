@@ -18,14 +18,16 @@ class MainController
 
         // Affichage (Show)
         $pageTitle = "Home" ;
-        Renderer::render('index', compact('pageTitle', 'posts'));
+        $rendu = new renderer;
+        $rendu->render('index', compact('pageTitle', 'posts'));
     }
 
     // Montrer la page contact
     public function showContact()
     {
         $pageTitle = "Contact Us" ;
-        Renderer::render('users/contact', compact('pageTitle'));
+        $rendu = new renderer;
+        $rendu->render('users/contact', compact('pageTitle'));
     }
 
     // Montrer la page de tous les Posts trier par date'
@@ -38,6 +40,7 @@ class MainController
 
         // Affichage (Show)
         $pageTitle = "Blog Posts";
-        Renderer::render('posts/posts', compact('pageTitle', 'posts'));
+        $rendu = new renderer;
+        $rendu->render('posts/posts', compact('pageTitle', 'posts'));
     }
 }
