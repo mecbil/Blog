@@ -12,10 +12,10 @@
             <form action="index.php?controller=UserController&task=connect" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group">
-                    <input type="email" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email"  autocomplete="off">
+                    <input type="email" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Adresse mail"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
-                    <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Password"  autocomplete="off">
+                    <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Mot de passe"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Connexion</button>
@@ -41,10 +41,10 @@
                     <input type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])){echo $_POST['pseudo'];} ?>" class="form-control" placeholder="Pseudo" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Email" autocomplete="off">
+                    <input type="text" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Adresse mail" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Password" autocomplete="off">
+                    <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Mot de passe" autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <button type=" submit " class="btn btn-dark btn-outline-light btn-block mt-2"> Enregistrer </button>

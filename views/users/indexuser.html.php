@@ -33,7 +33,7 @@
               <input type="text" name="author" value="<?php if (isset($_POST['author'])){echo htmlentities($_POST['author']);} ?>" class="form-control" placeholder="Author"  autocomplete="off">
           </div>
           <div class=" form-group ">
-              <input type="hidden" name="id" value="<?php if (isset($_POST['id'])){echo htmlentities($_POST['id']);} ?>" class="form-control" >
+              <input type="hidden" name="post_id" value="<?php if (isset($_POST['post_id'])){echo htmlentities($_POST['post_id']);} ?>" class="form-control" >
           </div>
           <div class=" form-group ">
             <?php if ($edit == false ): ?>

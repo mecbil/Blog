@@ -10,16 +10,16 @@ class CommentManager extends Manager
         // tester le formulaire
         // 1- Un des elements du formulaire vide
         if (empty($_POST['pseudo']) || empty($_POST['comment'])) {
-            $erreurAdd='Veuillez remplir tous les champs';
+            $erreur[1]='Veuillez remplir tous les champs';
 
-            return $erreurAdd;
+            return $erreur;
         }
 
         // 2- Verification & initialisation des champs
         $pseudo = strip_tags($_POST['pseudo']);
         $comments = strip_tags($_POST['comment']);
-        $user_id = $_POST['userid'];
-        $post_id = $_POST['id'];
+        $user_id = $_POST['user_id'];
+        $post_id = $_POST['post_id'];
         $uuid = uniqid();
 
         // On instencie le model;
@@ -43,9 +43,55 @@ class CommentManager extends Manager
         $sql->bindValue(':author', $comment->getAuthor());
         $sql->bindValue(':user_id', intval($comment->getUser_id()));
         $sql->execute();
-
-        $erreur = '';
+        $erreur[0] = $this->pdo->lastInsertId();
+        $erreur[1] = '';
+        
 
         return $erreur;
-    } 
+    }
+
+    public function updatecomment($comment_id)
+    {
+        // tester le formulaire
+        // 1- Un des elements du formulaire vide
+
+        if (empty($_POST['title']) || empty($_POST['chapo'])|| empty($_POST['content']) || empty($_POST['author'])) {
+            $erreur='Veuillez remplir tous les champs';
+
+            return $erreur;
+        }
+
+        $title = strip_tags($_POST['title']);
+        $chapo = strip_tags($_POST['chapo']);
+        $content = strip_tags($_POST['content']);
+        $author = strip_tags($_POST['author']);
+        $date_modify = date("Y-m-d h:i:s");
+
+        // On instencie le model;
+        $post = new Post;       
+
+        // Hydraté les informations reçus
+        $post->setTitle($title)
+            ->setChapo($chapo)
+            ->setContent($content)
+            ->setAuthor($author)
+            ->setDate_modify($date_modify);
+
+        // On enregistre
+
+        $sql = $this->pdo->prepare('UPDATE posts SET date_modify = :date_modify, chapo = :chapo,
+         content = :content, title = :title, author = :author WHERE comment_id = '.$comment_id.'');
+         
+         $sql->bindValue(':date_modify', $post->getDate_modify());
+         $sql->bindValue(':chapo', $post->getChapo());
+         $sql->bindValue(':content', $post->getContent());
+         $sql->bindValue(':title', $post->getTitle());
+         $sql->bindValue(':author', $post->getAuthor());
+
+         $sql->execute();
+
+         $erreur='';
+         return $erreur;
+    }
+
 }
