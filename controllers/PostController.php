@@ -16,7 +16,7 @@ class PostController
         $modelcomment= new CommentManager();
 
         // Get a post with uuid
-        $get= $_GET['uuid'];
+        $get = (isset($_GET['uuid'])) ? $_GET['uuid'] :"";
         $post = $modelpost->find('uuid', $get);
         $post_id = $post->post_id;
         $comments = $modelcomment->search('post_id', $post_id);
@@ -57,7 +57,8 @@ class PostController
     public function deletePost()
     {
         $modelpost = new PostManager();
-        $modelpost->deletePost($_GET['uuid']);
+        $get = (isset($_GET['uuid'])) ? $_GET['uuid'] :"";
+        $modelpost->deletePost($get);
 
         // 
         if (empty($erreur)) {
@@ -97,7 +98,7 @@ class PostController
             $comments = $modelcomment->findAll("0", "date_modify DESC");
     
             // Get a posts with uuid
-            $get= $_GET['uuid'];
+            $get = (isset($_GET['uuid'])) ? $_GET['uuid'] :"";
             $post = $model->find("uuid", $get);
             $_POST['title'] = $post->title;
             $_POST['chapo'] = $post->chapo;
