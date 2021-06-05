@@ -3,7 +3,7 @@ namespace Models;
 
 class Post extends Manager
 {
-    protected $id;
+    protected $post_id;
     protected $uuid;
     protected $date_creat;
     protected $date_modify;
@@ -11,18 +11,18 @@ class Post extends Manager
     protected $content;
     protected $title;
     protected $author;
-    protected $userid;
+    protected $user_id;
 
     // Get the value of id
-    public function getId()
+    public function getPost_id()
     {
-        return $this->id;
+        return $this->post_id;
     }
 
     // Set the value of id
-    public function setId($id)
+    public function setPost_id($post_id)
     {
-        $this->id = $id;
+        $this->post_id = $post_id;
 
         return $this;
     }
@@ -126,15 +126,15 @@ class Post extends Manager
     }
 
     // Get the value of users_id
-    public function getUserid()
+    public function getUser_id()
     {
-        return $this->userid;
+        return $this->user_id;
     }
 
     // Set the value of users_id
-    public function setUserid($userid)
+    public function setUser_id($user_id)
     {
-        $this->userid = $userid;
+        $this->user_id = $user_id;
     }
     // Get the value of valide
     public function getValide()

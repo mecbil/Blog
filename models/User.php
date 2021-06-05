@@ -3,7 +3,7 @@ namespace Models;
 
 class User extends Manager
 {
-    private $id;
+    private $user_id;
     protected $uuid;
     protected $nickname;
     protected $password;
@@ -12,15 +12,15 @@ class User extends Manager
 
 
     // Get the value of id 
-    public function getId()
+    public function getUser_id()
     {
-        return $this->id;
+        return $this->user_id;
     }
 
     // Set the value of id 
-    public function setId($id)
+    public function setuser_id($user_id)
     {
-        $this->id = $id;
+        $this->user_id = $user_id;
 
         return $this;
     }

@@ -19,28 +19,30 @@
 </div>
 <?php endif; ?>
 
-<form action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
+<form class="m-2" action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
     <h3>Vous voulez réagir ? N'hésitez pas !</h3>
     <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){echo addslashes($_SESSION['user']);} ?>"" placeholder="Votre pseudo !">
     <br>
     <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
     <br>
-    <input type="hidden" name="id" value ="<?= "{$post->id}" ?>">
-    <input type="hidden" name="userid" value ="<?= "{$_SESSION['userid']}" ?>">
-    <button>Commenter !</button>
+    <input type="hidden" name="post_id" value ="<?= "{$post->post_id}" ?>">
+    <input type="hidden" name="user_id" value ="<?= "{$_SESSION['user_id']}" ?>">
+    <br>
+    <button type="submit" class="btn btn-dark btn-outline-light">Commenter !</button>
 </form>
-
-<?php if (!$comments) : ?>
-    <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
-<?php else : ?>
-    <h2>Il y a déjà <?= count($comments) ?> réactions : </h2>
-    <?php foreach ($comments as $commentaire) : ?>
-        <h3>Commentaire de : <?= "{$commentaire->author}" ?></h3>
-        <small>Le <?= "{$commentaire->date_modify}" ?></small>
-        <blockquote>
-            <em><?= "{$commentaire->comment}" ?></em>
-        </blockquote>
-        <a href="delete-comment.php?uuid=<?= "{$commentaire->uuid}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
-    <?php endforeach ?>
-<?php endif ?>
+<div class="m-2">
+    <?php if (!$comments) : ?>
+        <p>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</p>
+    <?php else : ?>
+        <h2>Il y a déjà <?= count($comments) ?> réactions : </h2>
+        <?php foreach ($comments as $commentaire) : ?>
+            <h3>Commentaire de : <?= "{$commentaire->author}" ?></h3>
+            <small>Le <?= "{$commentaire->date_modify}" ?></small>
+            <blockquote>
+                <em><?= "{$commentaire->comment}" ?></em>
+            </blockquote>
+            <a href="delete-comment.php?uuid=<?= "{$commentaire->uuid}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+        <?php endforeach ?>
+    <?php endif ?>
+</div>
 </div>

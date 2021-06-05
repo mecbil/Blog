@@ -18,8 +18,8 @@ class PostController
         // Get a post with uuid
         $get= $_GET['uuid'];
         $post = $modelpost->find('uuid', $get);
-        $postid = $post->id;
-        $comments = $modelcomment->search('post_id', $postid);
+        $post_id = $post->post_id;
+        $comments = $modelcomment->search('post_id', $post_id);
   
         // Affichage (Show)
         $pageTitle = "Blog Posts";
@@ -103,7 +103,7 @@ class PostController
             $_POST['chapo'] = $post->chapo;
             $_POST['content'] = $post->content;
             $_POST['author'] = $post->author;
-            $_POST['id'] = $post->id;
+            $_POST['post_id'] = $post->post_id;
     
             // Affichage (Show)
             $pageTitle = "Admin - ".$_SESSION['user'];
@@ -115,7 +115,7 @@ class PostController
         public function updatePost()
         {
             $modelpost = new PostManager();
-            $erreur = $modelpost->updatePost($_POST['id']);
+            $erreur = $modelpost->updatePost($_POST['post_id']);
 
             if (empty($erreur)) {
             

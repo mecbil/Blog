@@ -40,7 +40,7 @@ class UserManager extends Manager
                 // Ici Mail et mots de passe exacte
                 $erreur = '';
                 $_SESSION['user'] = $user->getNickname();
-                $_SESSION['userid'] = $user->getId();
+                $_SESSION['user_id'] = $user->getUser_id();
                 $_SESSION['role'] = $user->getRole();
 
                 return  $erreur;
@@ -108,7 +108,7 @@ class UserManager extends Manager
         if (\session_status() === PHP_SESSION_NONE) {
             session_start();
             $_SESSION['user'] = $user->getNickname();
-            $_SESSION['userid'] = $user->getId();
+            $_SESSION['user_id'] = $user->getuser_id();
             $_SESSION['role'] = $user->getRole();
         }
             

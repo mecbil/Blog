@@ -24,7 +24,7 @@ class PostManager extends Manager
         $date_creat = date("Y-m-d h:i:s");
         $date_modify = date("Y-m-d h:i:s");
         $uuid = uniqid();
-        $userid=$_SESSION['userid'];
+        $user_id=$_SESSION['user_id'];
 
         // On instencie le model;
         $post = new Post;       
@@ -38,12 +38,12 @@ class PostManager extends Manager
             ->setDate_creat($date_creat)
             ->setDate_modify($date_modify)
             ->setUuid($uuid)
-            ->setUserid($userid);
+            ->setUser_id($user_id);
 
         // On enregistre
 
-        $sql = $this->pdo->prepare("INSERT INTO  posts (uuid, date_creat, date_modify, chapo, content, title, author, userid) 
-        VALUES (:uuid, :date_creat, :date_modify, :chapo, :content, :title, :author, :userid)");
+        $sql = $this->pdo->prepare("INSERT INTO  posts (uuid, date_creat, date_modify, chapo, content, title, author, user_id) 
+        VALUES (:uuid, :date_creat, :date_modify, :chapo, :content, :title, :author, :user_id)");
 
         $sql->bindValue(':uuid', $post->getUuid());
         $sql->bindValue(':date_creat', $post->getDate_creat());
@@ -52,7 +52,7 @@ class PostManager extends Manager
         $sql->bindValue(':content', $post->getContent());
         $sql->bindValue(':title', $post->getTitle());
         $sql->bindValue(':author', $post->getAuthor());
-        $sql->bindValue(':userid', $post->getUserId());
+        $sql->bindValue(':user_id', $post->getUser_id());
         $sql->execute();
 
         $erreur = '';
@@ -74,7 +74,7 @@ class PostManager extends Manager
         }
     }
 
-    public function updatePost($id)
+    public function updatePost($post_id)
     {
         // tester le formulaire
         // 1- Un des elements du formulaire vide
@@ -104,7 +104,7 @@ class PostManager extends Manager
         // On enregistre
 
         $sql = $this->pdo->prepare('UPDATE posts SET date_modify = :date_modify, chapo = :chapo,
-         content = :content, title = :title, author = :author WHERE id = '.$id.'');
+         content = :content, title = :title, author = :author WHERE post_id = '.$post_id.'');
          
          $sql->bindValue(':date_modify', $post->getDate_modify());
          $sql->bindValue(':chapo', $post->getChapo());
@@ -117,49 +117,4 @@ class PostManager extends Manager
          $erreur='';
          return $erreur;
     }
-
-    public function updatecomment($id)
-    {
-        // tester le formulaire
-        // 1- Un des elements du formulaire vide
-
-        if (empty($_POST['title']) || empty($_POST['chapo'])|| empty($_POST['content']) || empty($_POST['author'])) {
-            $erreur='Veuillez remplir tous les champs';
-
-            return $erreur;
-        }
-
-        $title = strip_tags($_POST['title']);
-        $chapo = strip_tags($_POST['chapo']);
-        $content = strip_tags($_POST['content']);
-        $author = strip_tags($_POST['author']);
-        $date_modify = date("Y-m-d h:i:s");
-
-        // On instencie le model;
-        $post = new Post;       
-
-        // Hydraté les informations reçus
-        $post->setTitle($title)
-            ->setChapo($chapo)
-            ->setContent($content)
-            ->setAuthor($author)
-            ->setDate_modify($date_modify);
-
-        // On enregistre
-
-        $sql = $this->pdo->prepare('UPDATE posts SET date_modify = :date_modify, chapo = :chapo,
-         content = :content, title = :title, author = :author WHERE id = '.$id.'');
-         
-         $sql->bindValue(':date_modify', $post->getDate_modify());
-         $sql->bindValue(':chapo', $post->getChapo());
-         $sql->bindValue(':content', $post->getContent());
-         $sql->bindValue(':title', $post->getTitle());
-         $sql->bindValue(':author', $post->getAuthor());
-
-         $sql->execute();
-
-         $erreur='';
-         return $erreur;
-    }
-
 }

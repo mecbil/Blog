@@ -3,7 +3,7 @@ namespace Models;
 
 class Comment extends Manager
 {
-    protected $id;
+    protected $comment_id;
     protected $uuid;
     protected $post_id;
     protected $date_creat;
@@ -14,15 +14,15 @@ class Comment extends Manager
     protected $user_id;
 
     // Get the value of id
-    public function getId()
+    public function getComment_d()
     {
-        return $this->id;
+        return $this->comment_id;
     }
 
     // Set the value of id
-    public function setId($id)
+    public function setComment_id($comment_id)
     {
-        $this->id = $id;
+        $this->comment_id = $comment_id;
 
         return $this;
     }
