@@ -20,12 +20,14 @@ class UserController
             $commentmanager = new CommentManager();
             $comments = $commentmanager->findAll("0", "date_modify DESC");
 
-            Renderer::Render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
+            $rendu = new renderer;
+            $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
         } else {
             // Utilisateur pas connecté
             $pageTitle = "Connexion" ;
 
-            Renderer::Render('users/connection', compact('pageTitle'));
+            $rendu = new renderer;
+            $rendu->render('users/connection', compact('pageTitle'));
         }
     }
 
@@ -43,7 +45,8 @@ class UserController
                 $commentmanager = new CommentManager();
                 $comments = $commentmanager->findAll("0", "date_modify DESC");
 
-                Renderer::render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
+                $rendu = new renderer;
+                $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
             } else {
                 $redirect = new MainController;
                 $redirect->showPosts();
@@ -51,7 +54,8 @@ class UserController
         } else {
             $pageTitle = "Connexion";
 
-            Renderer::render('users/connection', compact('pageTitle', 'erreur'));
+            $rendu = new renderer;
+            $rendu->render('users/connection', compact('pageTitle', 'erreur'));
         }
     }
 
@@ -78,7 +82,8 @@ class UserController
         } else {
             $pageTitle = "Connexion";
 
-            Renderer::render('users/connection', compact('pageTitle', 'erreurAdd'));
+            $rendu = new renderer;
+            $rendu->render('users/connection', compact('pageTitle', 'erreurAdd'));
         }
     }
 }
