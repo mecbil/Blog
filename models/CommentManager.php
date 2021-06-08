@@ -38,10 +38,10 @@ class CommentManager extends Manager
         VALUES (Now(), Now(), :uuid, :post_id, :comment, :author, :user_id)");
 
         $sql->bindValue(':uuid', $comment->getUuid());
-        $sql->bindValue(':post_id', intval($comment->getPost_id()));
+        $sql->bindValue(':post_id', $comment->getPost_id());
         $sql->bindValue(':comment', $comment->getComment());
         $sql->bindValue(':author', $comment->getAuthor());
-        $sql->bindValue(':user_id', intval($comment->getUser_id()));
+        $sql->bindValue(':user_id', $comment->getUser_id());
         $sql->execute();
         $erreur[0] = $this->pdo->lastInsertId();
         $erreur[1] = '';

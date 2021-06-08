@@ -42,8 +42,8 @@ class CommentController
 
     public function deleteComment()
     {
-        $get = isset(filter_var($_GET['commentid'], FILTER_VALIDATE_INT)) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
-        $uuid = isset(filter_var($_GET['uuid'], FILTER_SANITIZE_STRING)) ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING) :"";
+        $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
+        $uuid = isset($_GET['uuid']) ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING) :"";
 
         $modelcomment = new CommentManager();
         $erreur = $modelcomment->deletecomment($get);
