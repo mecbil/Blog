@@ -12,94 +12,100 @@ class PostController
     // Montrer la page d'un post identifier par son uuid'
     public function showOnePost()
     {
-        $modelpost= new PostManager();
-        $modelcomment= new CommentManager();
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
 
         // Get a post with uuid
-        $get = (isset($_GET['uuid'])) ? $_GET['uuid'] :"";
-        $post = $modelpost->find('uuid', $get);
+        $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
+        $post = $postManager->find('uuid', $uuid);
         $post_id = $post->post_id;
-        $comments = $modelcomment->search('post_id', $post_id);
+        $comments = $commentManager->search('post_id', $post_id);
   
         // Affichage (Show)
         $pageTitle = "Blog Posts";
-        Renderer::render('posts/post', compact('pageTitle', 'post', 'comments'));
+
+        $rendu = new renderer;
+        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments'));
     }
 
     // Ajouter un Blog post
     public function insertPost()
     {
-        $post = new PostManager();
-        $erreur= $post->insert();
+        $postManager = new PostManager();
+        $erreur= $postManager->insert();
 
         if (empty($erreur)) {
             
             // Get all posts
-            $posts = $post->findAll("", "date_modify DESC");
+            $posts = $postManager->findAll("", "date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
             
-            Renderer::render('posts/posts', compact('pageTitle', 'posts'));
+            $rendu = new renderer;
+            $rendu->render('posts/posts', compact('pageTitle', 'posts'));
         } else {
 
             if (isset($_SESSION['user'])) {
-                $modelcomment= new CommentManager();
-                $comments = $modelcomment->findAll("", "date_modify DESC");
+                $commentManager= new CommentManager();
+                $comments = $commentManager->findAll("", "date_modify DESC");
                 $pageTitle = $_SESSION['user'];
                 $edit = false;
 
-                Renderer::Render('users/indexuser', compact('pageTitle', 'erreur', 'edit', 'comments'));
+                $rendu = new renderer;
+                $rendu->render('users/indexuser', compact('pageTitle', 'erreur', 'edit', 'comments'));
             }
         }
     }
 
     public function deletePost()
     {
-        $modelpost = new PostManager();
-        $get = (isset($_GET['uuid'])) ? $_GET['uuid'] :"";
-        $modelpost->deletePost($get);
+        $postManager = new PostManager();
+        $uuid = isset($_GET['uuid'])  ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING):"";
+        $erreur = $postManager->deletePost($uuid);
 
         // 
         if (empty($erreur)) {
-            $model= new PostManager();
 
             // Get all posts
-            $posts = $model->findAll("", "date_modify DESC");
+            $posts = $postManager->findAll("", "date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
-            Renderer::render('posts/posts', compact('pageTitle', 'posts'));
-        } else {
-            echo ('<script>alert(\"Enregistrement non trouver")</script>');
-            $this->showOnePost();
+
+            $rendu = new renderer;
+            $rendu->render('posts/posts', compact('pageTitle', 'posts'));
+        } 
+        if (!empty($erreur)) {
+            // echo ('<script>alert(\"Enregistrement non trouver")</script>');
         }
     }
 
     // Liste des posts non validé
     public function validPosts()
     {
-        $model= new commentManager();
+        $commentManager= new CommentManager();
 
         // Get all posts
-        $comments = $model->findAll("0", "date_modify DESC");
+        $comments = $commentManager->findAll("0", "date_modify DESC");
 
         // Affichage (Show)
         $edit = false;
 
-        Renderer::render('users/indexuser', compact('comments','edit'));
+        $rendu = new renderer;
+        $rendu->render('users/indexuser', compact('comments','edit'));
     }
 
         // Editer un posts
         public function editPost()
         {
-            $model= new PostManager();
-            $modelcomment= new CommentManager();
-            $comments = $modelcomment->findAll("0", "date_modify DESC");
+            $postManager= new PostManager();
+            $commentManager= new CommentManager();
+            $comments = $commentManager->findAll("0", "date_modify DESC");
     
             // Get a posts with uuid
-            $get = (isset($_GET['uuid'])) ? $_GET['uuid'] :"";
-            $post = $model->find("uuid", $get);
+            $uuid = isset($_GET['uuid'])  ? $_GET['uuid'] :"";
+            $post = $postManager->find("uuid", $uuid);
             $_POST['title'] = $post->title;
             $_POST['chapo'] = $post->chapo;
             $_POST['content'] = $post->content;
@@ -110,35 +116,38 @@ class PostController
             $pageTitle = "Admin - ".$_SESSION['user'];
             $edit = true;
 
-            Renderer::render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
+            $rendu = new renderer;
+            $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
         }
 
         public function updatePost()
         {
-            $modelpost = new PostManager();
-            $erreur = $modelpost->updatePost($_POST['post_id']);
+            $postManager = new PostManager();
+            $erreur = $postManager->updatePost($_POST['post_id']);
 
             if (empty($erreur)) {
             
                 // Get all posts
-                $posts = $modelpost->findAll("", "date_modify DESC");
+                $posts = $postManager->findAll("", "date_modify DESC");
         
                 // Affichage (Show)
                 $pageTitle = "Blog Posts";
-                Renderer::render('posts/posts', compact('pageTitle', 'posts'));
+
+                $rendu = new renderer;
+                $rendu->render('posts/posts', compact('pageTitle', 'posts'));
             } 
             
             if (!empty($erreur)) {
     
                 if (isset($_SESSION['user'])) {
-                    $modelcomment= new CommentManager();
-                    $comments = $modelcomment->findAll("", "date_modify DESC");
+                    $commentManager= new CommentManager();
+                    $comments = $commentManager->findAll("", "date_modify DESC");
                     $pageTitle = $_SESSION['user'];
                     $edit = true;
-    
-                    Renderer::Render('users/indexuser', compact('pageTitle', 'erreur', 'comments', 'edit' ));
+                    
+                    $rendu = new renderer;
+                    $rendu->render('users/indexuser', compact('pageTitle', 'erreur', 'comments', 'edit' ));
                 }
-            }
-            
+            }          
         }
 }

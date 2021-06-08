@@ -17,10 +17,12 @@ class ContactController
         if (empty($erreur)){
             $erreur = 'Message envoyé !';
 
-            Renderer::render('users/contact', compact('pageTitle','erreur'));
+            $rendu = new renderer;
+            $rendu->render('users/contact', compact('pageTitle','erreur'));
         }
         else {
-            Renderer::render('users/contact', compact('pageTitle', 'erreur'));
+            $rendu = new renderer;
+            $rendu->render('users/contact', compact('pageTitle', 'erreur'));
         }
     }
     // Traiment et envoi du mail

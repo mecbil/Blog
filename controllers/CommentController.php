@@ -14,20 +14,15 @@ class CommentController
     {
         $post = $_POST['post_id'];
         $comment = new CommentManager();
-        $erreur= $comment->creat();
+        $erreur = $comment->creat();
 
         // Pas d'erreur
         if (empty($erreur[1])) {
 
             $modelpost= new PostManager();
-            $modelcomment= new CommentManager();
             $post = $modelpost->find('post_id', $post);
-            $post_id = $post->post_id;
-            $comments = $modelcomment->search('post_id', $post_id);
-
-            // Affichage (Show)
-            $pageTitle = "Blog Posts";
-            Renderer::render('posts/post', compact('pageTitle', 'post', 'comments'));
+            $uuid = $post->uuid;
+            $this->affiche($uuid);
 
         } else {
             $modelpost= new PostManager();
@@ -39,8 +34,37 @@ class CommentController
             // Affichage (Show)
             $pageTitle = "Blog Posts";
             $erreur = $erreur[1];
-            Renderer::render('posts/post', compact('pageTitle', 'post', 'comments', 'erreur' ));
 
+            $rendu = new renderer;
+            $rendu->render('posts/post', compact('pageTitle', 'post', 'comments', 'erreur' ));
         }
+    }
+
+    public function deleteComment()
+    {
+        $get = isset(filter_var($_GET['commentid'], FILTER_VALIDATE_INT)) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
+        $uuid = isset(filter_var($_GET['uuid'], FILTER_SANITIZE_STRING)) ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING) :"";
+
+        $modelcomment = new CommentManager();
+        $erreur = $modelcomment->deletecomment($get);
+
+        if (empty($erreur)) {
+            $this->affiche($uuid);
+        }
+    }
+
+    public function affiche($uuid)
+    {
+        $modelpost= new PostManager();
+        $modelcomment= new CommentManager();
+        $post = $modelpost->find('uuid', $uuid);
+        $post_id = $post->post_id;
+        $comments = $modelcomment->search('post_id', $post_id);
+
+        // Affichage (Show)
+        $pageTitle = "Blog Posts";
+
+        $rendu = new renderer;
+        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments'));
     }
 }
