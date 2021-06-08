@@ -93,5 +93,22 @@ class CommentManager extends Manager
          $erreur='';
          return $erreur;
     }
+    // Supprimer un commentaire
+    public function deleteComment($id)
+    {
+
+        $comment = $this->find('comment_id', $id);
+
+        if ($comment) {
+            $uuid = $comment->uuid;
+            $this->delete($uuid);
+
+            $erreur='';
+            return $erreur;            
+        } else {
+            $erreur='Veuillez donner un identifiant valable';
+            return $erreur; 
+        }
+    }
 
 }

@@ -75,10 +75,11 @@ class UserController
 
         // Pas d'erreur
         if (empty($erreurAdd)) {
-            $pageTitle = $_SESSION['user'];
+            $pageTitle = "Connexion";
+            $erreurAdd = 'Enregistrement reussi, veuillez vous edentifier dans la zone Connection';
 
-            $redirect = new MainController;
-            $redirect->showIndex();
+            $rendu = new renderer;
+            $rendu->render('users/connection', compact('pageTitle', 'erreurAdd'));
         } else {
             $pageTitle = "Connexion";
 

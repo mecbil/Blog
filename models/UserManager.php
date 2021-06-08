@@ -9,8 +9,8 @@ class UserManager extends Manager
     public function connection()
     {
         // Mail ou password vide
-        $gpassword = $_POST['password'];
-        $gmail = $_POST['email'];
+        $gpassword = $_POST['passwordconnect'];
+        $gmail = $_POST['emailconnect'];
         if (empty($gmail) || empty($gpassword)) {
             $erreur='Veuillez remplir tous les champs';
 
@@ -47,7 +47,7 @@ class UserManager extends Manager
             } 
         }
 
-        if (password_verify($gpassword, $user->getPassword()) == false){
+        if (!$userExist){
             // Utilisateur avec mail donné n'existe pas 
             $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
 
@@ -64,7 +64,7 @@ class UserManager extends Manager
         $gpassword = $_POST['password'];
         // 1- Un des elements du formulaire vide
         if (empty($gpseudo) || empty($gmail)|| empty($gpassword)) {
-            $erreurAdd='Veuillez remplir tous les champs';
+            $erreurAdd = 'Veuillez remplir tous les champs';
 
             return $erreurAdd;
         }
@@ -73,6 +73,11 @@ class UserManager extends Manager
         if (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
             $erreurAdd = 'Veuillez saisir un Mail valide';
 
+            return $erreurAdd;
+        }
+        // 3- Verification Mot de passe
+        if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#', $gpassword)) {
+            $erreurAdd = $gpassword.' pas Bon mot de passe';
             return $erreurAdd;
         }
 

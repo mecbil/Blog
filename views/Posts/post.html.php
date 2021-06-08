@@ -4,10 +4,12 @@
         <small>Publié le : <?php $datef= strtotime("{$post->date_creat}"); echo(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
         <p><?= "{$post->chapo}" ?></p>
         <p><?= nl2br("{$post->content}") ?></p>
-        <div class="text-warning"><?= "{$post->author}" ?></div>
-        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
-        
-            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= "{$_GET['uuid']}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)" tabindex="-1">Supprimer</a>
+        <div >Auteur : <small class="text-warning"><?= "{$post->author}" ?></small></div>
+        <?php if (!isset($_SESSION['user'])): ?>
+            <h3>Veuillez vous connecter pour réagir !</h3>
+            <?php endif; ?>
+        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>        
+            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= "{$_GET['uuid']}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce Blog Post ?!`)" tabindex="-1">Supprimer</a>
             <a class="btn btn-secoundary btn-outline-light" href="/?controller=postcontroller&task=editPost&uuid=<?= "{$_GET['uuid']}" ?>" tabindex="-1">Editer</a>
         <?php endif; ?>
     </div>
@@ -18,18 +20,19 @@
 <?= $erreur ?>
 </div>
 <?php endif; ?>
-
-<form class="m-2" action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
-    <h3>Vous voulez réagir ? N'hésitez pas !</h3>
-    <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){echo addslashes($_SESSION['user']);} ?>"" placeholder="Votre pseudo !">
-    <br>
-    <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
-    <br>
-    <input type="hidden" name="post_id" value ="<?= "{$post->post_id}" ?>">
-    <input type="hidden" name="user_id" value ="<?= "{$_SESSION['user_id']}" ?>">
-    <br>
-    <button type="submit" class="btn btn-dark btn-outline-light">Commenter !</button>
-</form>
+<?php if (isset($_SESSION['user'])): ?>
+    <form class="m-2" action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
+        <h3>Vous voulez réagir ? N'hésitez pas !</h3>
+        <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){echo addslashes($_SESSION['user']);} ?>"" placeholder="Votre pseudo !">
+        <br>
+        <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
+        <br>
+        <input type="hidden" name="post_id" value ="<?= "{$post->post_id}" ?>">
+        <input type="hidden" name="user_id" value ="<?= "{$_SESSION['user_id']}" ?>">
+        <br>
+        <button type="submit" class="btn btn-dark btn-outline-light">Commenter !</button>
+    </form>
+<?php endif; ?>
 <div class="m-2">
     <?php if (!$comments) : ?>
         <p>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</p>
@@ -41,7 +44,13 @@
             <blockquote>
                 <em><?= "{$commentaire->comment}" ?></em>
             </blockquote>
-            <a href="delete-comment.php?uuid=<?= "{$commentaire->uuid}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+            <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true): ?> 
+                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= "{$_GET['uuid']}" ?>&commentid=<?= $commentaire->comment_id ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                <a class="btn btn-secoundary btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= "{$_GET['uuid']}" ?>" tabindex="-1">Editer</a>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['user'])  && $_SESSION['role'] == false && ($_SESSION['user_id'] === $commentaire->user_id)): ?>
+                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= "{$commentaire->uuid}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+            <?php endif; ?>
         <?php endforeach ?>
     <?php endif ?>
 </div>

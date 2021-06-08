@@ -35,11 +35,11 @@ abstract class Manager
     }
 
     // trouver un enregistrement par son uuid -a voir -
-    public function find(string $fword, string $word)
+    public function find(string $findword, string $word)
     {
-        $sql= "SELECT * FROM {$this->table} WHERE ".' '.$fword.' = '."'$word'";
+        $sql= "SELECT * FROM {$this->table} WHERE ".' '.$findword.' = '."'$word'";
         $query = $this->pdo->prepare($sql);
-        $query->execute([$fword => $word]);
+        $query->execute([$findword => $word]);
         $item = $query->fetch();
         return $item;
     }

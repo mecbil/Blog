@@ -11,10 +11,10 @@ class MainController
     // Montrer la page index avec 3 Posts
     public function showIndex()
     {
-        $model= new PostManager();
+        $postManager= new PostManager();
 
         // Get all posts
-        $posts = $model->findAll("", "date_modify DESC", "3");
+        $posts = $postManager->findAll("", "date_modify DESC", "3");
 
         // Affichage (Show)
         $pageTitle = "Home" ;
@@ -33,10 +33,10 @@ class MainController
     // Montrer la page de tous les Posts trier par date'
     public function showPosts()
     {
-        $model= new PostManager();
+        $postManager = new PostManager();
 
         // Get all posts
-        $posts = $model->findAll("", "date_modify DESC");
+        $posts = $postManager->findAll("", "date_modify DESC");
 
         // Affichage (Show)
         $pageTitle = "Blog Posts";
