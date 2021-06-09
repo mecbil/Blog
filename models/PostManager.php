@@ -68,7 +68,8 @@ class PostManager extends Manager
 
             $erreur='';
             return $erreur;            
-        } else {
+        } 
+        if (empty($post)) {
             $erreur='Veuillez donner un identifiant valable';
             return $erreur; 
         }

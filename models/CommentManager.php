@@ -45,7 +45,6 @@ class CommentManager extends Manager
         $sql->execute();
         $erreur[0] = $this->pdo->lastInsertId();
         $erreur[1] = '';
-        
 
         return $erreur;
     }
@@ -54,7 +53,6 @@ class CommentManager extends Manager
     {
         // tester le formulaire
         // 1- Un des elements du formulaire vide
-
         if (empty($_POST['title']) || empty($_POST['chapo'])|| empty($_POST['content']) || empty($_POST['author'])) {
             $erreur='Veuillez remplir tous les champs';
 
@@ -96,7 +94,6 @@ class CommentManager extends Manager
     // Supprimer un commentaire
     public function deleteComment($id)
     {
-
         $comment = $this->find('comment_id', $id);
 
         if ($comment) {
@@ -105,10 +102,10 @@ class CommentManager extends Manager
 
             $erreur='';
             return $erreur;            
-        } else {
+        } 
+        if (empty($comment)) {
             $erreur='Veuillez donner un identifiant valable';
             return $erreur; 
         }
     }
-
 }

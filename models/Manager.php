@@ -2,6 +2,7 @@
 namespace Models;
 
 use Models\Database;
+use Models\Post;
 
 abstract class Manager
 {
@@ -31,7 +32,14 @@ abstract class Manager
         $resultats = $this->pdo->query($sql);
         $items = $resultats->fetchAll();
 
-        return $items;
+        $itemshydrate = new Post;
+
+        foreach ($items as $item)
+        {
+            $items2[] =  $itemshydrate->hydrate($item) ;
+        }
+
+        return $items2;
     }
 
     // trouver un enregistrement par son uuid -a voir -
