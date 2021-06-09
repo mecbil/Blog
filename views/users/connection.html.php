@@ -3,9 +3,9 @@
 
         <!-- zone de connexion -->
         <div class="login-form">
-            <?php if (!empty(htmlspecialchars($erreur))): ?>
+            <?php if (!empty($erreur)): ?>
             <div class="alert alert-danger">
-            <?= $erreur ?>
+            <?= htmlspecialchars($erreur) ?>
             </div>
             <?php endif; ?>
            
@@ -28,9 +28,9 @@
     <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 mt-5">
         <div class="login-form">
 
-            <?php if (!empty(htmlspecialchars($erreurAdd))): ?>
+            <?php if (!empty($erreurAdd)): ?>
             <div class="alert alert-danger">
-            <?= $erreurAdd ?>
+            <?= htmlspecialchars($erreurAdd) ?>
             </div>
             <?php endif; ?>
 
