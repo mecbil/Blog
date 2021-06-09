@@ -2,11 +2,11 @@
 
   <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
     <!-- zone de Ajout Post blog -->
-    <h1>Dashbord <?= $_SESSION['user'] ?></h1>
+    <h1>Dashbord <?= htmlspecialchars($_SESSION['user']) ?></h1>
     <div class="">
       <?php if (!empty($erreur)): ?>
       <div class="alert alert-danger">
-        <?= $erreur ?>
+        <?= htmlspecialchars($erreur) ?>
       </div>
       <?php endif; ?>
             
@@ -21,19 +21,19 @@
       method="post">
           <h2 class="text-center">Ajout d'un Blog Post </h2>
           <div class="form-group">
-            <input type="text" name="title" value="<?php if (isset($_POST['title'])){echo $_POST['title'];} ?>" class="form-control" placeholder="Title"  autocomplete="off">
+            <input type="text" name="title" value="<?php if (isset($_POST['title'])){echo htmlspecialchars($_POST['title']);} ?>" class="form-control" placeholder="Title"  autocomplete="off">
           </div>
           <div class="form-group">
-            <input type="text" name="chapo" value="<?php if (isset($_POST['chapo'])){echo $_POST['chapo'];} ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
+            <input type="text" name="chapo" value="<?php if (isset($_POST['chapo'])){echo htmlspecialchars($_POST['chapo']);} ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
           </div>
           <div class=" form-group ">
-            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php if (isset($_POST['content'])) {echo $_POST['content'];} ?></textarea>
+            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php if (isset($_POST['content'])) {echo htmlspecialchars($_POST['content']);} ?></textarea>
           </div>
           <div class=" form-group ">
-              <input type="text" name="author" value="<?php if (isset($_POST['author'])){echo $_POST['author'];} ?>" class="form-control" placeholder="Author"  autocomplete="off">
+              <input type="text" name="author" value="<?php if (isset($_POST['author'])){echo htmlspecialchars($_POST['author']);} ?>" class="form-control" placeholder="Author"  autocomplete="off">
           </div>
           <div class=" form-group ">
-              <input type="hidden" name="post_id" value="<?php if (isset($_POST['post_id'])){echo $_POST['post_id'];} ?>" class="form-control" >
+              <input type="hidden" name="post_id" value="<?php if (isset($_POST['post_id'])){echo htmlspecialchars($_POST['post_id']);} ?>" class="form-control" >
           </div>
           <div class=" form-group ">
             <?php if ($edit == false ): ?>
