@@ -22,7 +22,8 @@ class UserController
 
             $rendu = new renderer;
             $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
-        } else {
+        } 
+        if (!isset($_SESSION['user'])) {
             // Utilisateur pas connecté
             $pageTitle = "Connexion" ;
 
@@ -51,7 +52,9 @@ class UserController
                 $redirect = new MainController;
                 $redirect->showPosts();
             }
-        } else {
+        }
+
+        if (!empty($erreur)) {
             $pageTitle = "Connexion";
 
             $rendu = new renderer;
@@ -64,14 +67,13 @@ class UserController
     {
         session_start();
         session_destroy();
-        // unset($_SESSION['user']);
         header('Location: /');
     }
 
     public function insertUser()
     {
-        $user = new UserManager();
-        $erreurAdd= $user->insertion();
+        $userManager = new UserManager();
+        $erreurAdd= $userManager->insertion();
 
         // Pas d'erreur
         if (empty($erreurAdd)) {

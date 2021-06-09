@@ -13,23 +13,23 @@ class CommentController
     public function insertComment()
     {
         $post = $_POST['post_id'];
-        $comment = new CommentManager();
-        $erreur = $comment->creat();
+        $commentManager = new CommentManager();
+        $erreur = $commentManager->creat();
 
         // Pas d'erreur
         if (empty($erreur[1])) {
 
-            $modelpost= new PostManager();
-            $post = $modelpost->find('post_id', $post);
+            $postManager= new PostManager();
+            $post = $postManager->find('post_id', $post);
             $uuid = $post->uuid;
             $this->affiche($uuid);
 
         } else {
-            $modelpost= new PostManager();
-            $modelcomment= new CommentManager();
-            $post = $modelpost->find('post_id', $post);
+            $postManager= new PostManager();
+            $commentManager= new CommentManager();
+            $post = $postManager->find('post_id', $post);
             $post_id = $post->post_id;
-            $comments = $modelcomment->search('post_id', $post_id);
+            $comments = $commentManager->search('post_id', $post_id);
 
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -45,8 +45,8 @@ class CommentController
         $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
         $uuid = isset($_GET['uuid']) ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING) :"";
 
-        $modelcomment = new CommentManager();
-        $erreur = $modelcomment->deletecomment($get);
+        $commentManager = new CommentManager();
+        $erreur = $commentManager->deletecomment($get);
 
         if (empty($erreur)) {
             $this->affiche($uuid);
@@ -55,11 +55,11 @@ class CommentController
 
     public function affiche($uuid)
     {
-        $modelpost= new PostManager();
-        $modelcomment= new CommentManager();
-        $post = $modelpost->find('uuid', $uuid);
+        $postManager= new PostManager();
+        $commentManager= new CommentManager();
+        $post = $postManager->find('uuid', $uuid);
         $post_id = $post->post_id;
-        $comments = $modelcomment->search('post_id', $post_id);
+        $comments = $commentManager->search('post_id', $post_id);
 
         // Affichage (Show)
         $pageTitle = "Blog Posts";

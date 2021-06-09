@@ -19,7 +19,7 @@
             </div>
             <div class="card-footer bg-success text-center pb-0">
                 <p><a class="btn btn-outline-light btn-dark"
-                        href="/?controller=postcontroller&task=showOnePost&uuid=<?= $article->getUuid ?>">Détails &raquo;</a>
+                        href="/?controller=postcontroller&task=showOnePost&uuid=<?= $article->getUuid() ?>">Détails &raquo;</a>
                 </p>
             </div>
 
