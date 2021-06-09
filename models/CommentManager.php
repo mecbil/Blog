@@ -16,7 +16,7 @@ class CommentManager extends Manager
         }
 
         // 2- Verification & initialisation des champs
-        $pseudo = strip_tags($_POST['pseudo']);
+        $pseudo = strip_tags(htmlspecialchars($_POST['pseudo']));
         $comments = strip_tags($_POST['comment']);
         $user_id = $_POST['user_id'];
         $post_id = $_POST['post_id'];
