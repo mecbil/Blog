@@ -3,7 +3,7 @@
 
         <!-- zone de connexion -->
         <div class="login-form">
-            <?php if (!empty($erreur)): ?>
+            <?php if (!empty(htmlspecialchars($erreur))): ?>
             <div class="alert alert-danger">
             <?= $erreur ?>
             </div>
@@ -12,10 +12,10 @@
             <form action="index.php?controller=UserController&task=connect" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group">
-                    <input type="email" name="emailconnect" value="<?php if (isset($_POST['emailconnect'])){echo $_POST['emailconnect'];} ?>" class="form-control" placeholder="Adresse mail"  autocomplete="off">
+                    <input type="email" name="emailconnect" value="<?php if (isset($_POST['emailconnect'])){echo htmlspecialchars($_POST['emailconnect']);} ?>" class="form-control" placeholder="Adresse mail"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
-                    <input type="password" name="passwordconnect" value="<?php if (isset($_POST['passwordconnect'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
+                    <input type="password" name="passwordconnect" value="<?php if (isset($_POST['passwordconnect'])){echo htmlspecialchars($_POST['password']);} ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Connexion</button>
@@ -28,7 +28,7 @@
     <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 mt-5">
         <div class="login-form">
 
-            <?php if (!empty($erreurAdd)): ?>
+            <?php if (!empty(htmlspecialchars($erreurAdd))): ?>
             <div class="alert alert-danger">
             <?= $erreurAdd ?>
             </div>
@@ -38,13 +38,13 @@
                 <h2 class=" text-center "> Enregistrement </h2>
 
                 <div class=" form-group ">
-                    <input type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])){echo $_POST['pseudo'];} ?>" class="form-control" placeholder="Pseudo" autocomplete="off">
+                    <input type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])){echo htmlspecialchars($_POST['pseudo']);} ?>" class="form-control" placeholder="Pseudo" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" class="form-control" placeholder="Adresse mail" autocomplete="off">
+                    <input type="text" name="email" value="<?php if (isset($_POST['email'])){echo htmlspecialchars($_POST['email']);} ?>" class="form-control" placeholder="Adresse mail" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo $_POST['password'];} ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
+                    <input type="password" name="password" value="<?php if (isset($_POST['password'])){echo htmlspecialchars($_POST['password']);} ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <button type=" submit " class="btn btn-dark btn-outline-light btn-block mt-2"> Enregistrer </button>
