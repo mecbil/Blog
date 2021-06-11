@@ -14,34 +14,6 @@ abstract class Manager
         $this->pdo = Database::dbConnect();
     }
 
-    // trouver tous les enregistrement ?trier &/ou limiter
-    public function findAll(?string $condition="", ?string $order="", ?string $limit="")
-    {
-        $sql= "SELECT * FROM {$this->table}";
-
-        if ($condition) {
-            $sql .=" WHERE valide = ".$condition;
-        }
-        
-        if ($order) {
-            $sql .=" ORDER BY ".$order;
-        }
-        if ($limit) {
-            $sql .=" LIMIT ".$limit;
-        }
-        $resultats = $this->pdo->query($sql);
-        $items = $resultats->fetchAll();
-
-        $itemshydrate = new Post;
-
-        foreach ($items as $item)
-        {
-            $items2[] =  $itemshydrate->hydrate($item) ;
-        }
-
-        return $items2;
-    }
-
     // trouver un enregistrement par son uuid -a voir -
     public function find(string $findword, string $word)
     {

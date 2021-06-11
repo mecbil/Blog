@@ -10,6 +10,8 @@ use Models\CommentManager;
 
 class UserController
 {
+
+
     // Montrer la page de connection
     public static function showConnect()
     {
@@ -18,7 +20,7 @@ class UserController
             $pageTitle = $_SESSION['user'];
             $edit = false;
             $commentmanager = new CommentManager();
-            $comments = $commentmanager->findAll("0", "date_modify DESC");
+            $comments = $commentmanager->findAllcomments("0", "date_modify DESC");
 
             $rendu = new renderer;
             $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
@@ -44,7 +46,7 @@ class UserController
             if ($_SESSION['role'] == true) {
                 $edit = false;
                 $commentmanager = new CommentManager();
-                $comments = $commentmanager->findAll("0", "date_modify DESC");
+                $comments = $commentmanager->findAllcomments("0", "date_modify DESC");
 
                 $rendu = new renderer;
                 $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
