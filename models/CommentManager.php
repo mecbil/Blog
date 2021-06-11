@@ -60,15 +60,18 @@ class CommentManager extends Manager
     {
         // tester le formulaire
         // 1- Un des elements du formulaire vide
-        if (empty(htmlentities($_POST['pseudo']) ) || empty(htmlentities($_POST['comment'])) ) {
+
+        $pseudo = strip_tags(htmlentities($_POST['pseudo']));
+        $comments = strip_tags(htmlentities($_POST['comment']));
+
+        if (empty($pseudo) || empty($comments) {
             $erreur[1]='Veuillez remplir tous les champs';
 
             return $erreur;
         }
 
         // 2- Verification & initialisation des champs
-        $pseudo = strip_tags(htmlentities($_POST['pseudo']));
-        $comments = strip_tags($_POST['comment']);
+
         $user_id = $_POST['user_id'];
         $post_id = $_POST['post_id'];
         $uuid = uniqid();
