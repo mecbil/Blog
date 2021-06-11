@@ -59,7 +59,7 @@ class CommentController
         $commentManager= new CommentManager();
         $post = $postManager->find('uuid', $uuid);
         $post_id = $post->post_id;
-        $comments = $commentManager->search('post_id', $post_id);
+        $comments = $commentManager->searchcomments('post_id', $post_id);
 
         // Affichage (Show)
         $pageTitle = "Blog Posts";

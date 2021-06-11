@@ -5,6 +5,57 @@ class CommentManager extends Manager
 {
     protected $table = "comments";
 
+    // trouver tous les enregistrement ?trier &/ou limiter
+    public function findAllComments(?string $condition="", ?string $order="", ?string $limit="")
+    {
+        $sql= "SELECT * FROM comments";
+
+        if ($condition) {
+            $sql .=" WHERE valide = ".$condition;
+        }
+        
+        if ($order) {
+            $sql .=" ORDER BY ".$order;
+        }
+        if ($limit) {
+            $sql .=" LIMIT ".$limit;
+        }
+        $resultats = $this->pdo->query($sql);
+        $items = $resultats->fetchAll();
+
+        // Hydrater les posts
+        $itemshydrate =array();
+
+        foreach ($items as $item)
+        {
+            $comment = new Comment;
+            array_push($itemshydrate, $comment->hydrate($item)) ;
+        }
+
+        return $itemshydrate;
+    }
+    
+    // Rechercher des commentaires
+    public function searchcomments(string $sword, string $word)
+    {
+        $sql= "SELECT * FROM comments WHERE ".' '.$sword.' = '."'$word'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute([$sword => $word]);
+        $items = $query->fetchAll();
+
+        // Hydrater les commentaires
+        $itemshydrate =array();
+
+        foreach ($items as $item)
+        {
+            $comment = new Comment;
+            array_push($itemshydrate, $comment->hydrate($item)) ;
+        }
+
+        return $itemshydrate;
+    }
+
+    // Ajout d'un nouveau commentaire
     public function creat()
     {
         // tester le formulaire
@@ -49,6 +100,7 @@ class CommentManager extends Manager
         return $erreur;
     }
 
+    // Mise à jour d'un commentaire
     public function updatecomment($comment_id)
     {
         // tester le formulaire
@@ -91,6 +143,7 @@ class CommentManager extends Manager
          $erreur='';
          return $erreur;
     }
+
     // Supprimer un commentaire
     public function deleteComment($id)
     {

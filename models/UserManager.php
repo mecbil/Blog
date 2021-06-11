@@ -5,6 +5,36 @@ class UserManager extends Manager
 {
     protected $table = "users";
 
+        // trouver tous les enregistrement ?trier &/ou limiter
+        public function findAllUsers(?string $condition="", ?string $order="", ?string $limit="")
+        {
+            $sql= "SELECT * FROM users";
+    
+            if ($condition) {
+                $sql .=" WHERE valide = ".$condition;
+            }
+            
+            if ($order) {
+                $sql .=" ORDER BY ".$order;
+            }
+            if ($limit) {
+                $sql .=" LIMIT ".$limit;
+            }
+            $resultats = $this->pdo->query($sql);
+            $items = $resultats->fetchAll();
+    
+            // Hydrater les posts
+            $itemshydrate =array();
+    
+            foreach ($items as $item)
+            {
+                $user = new User;
+                array_push($itemshydrate, $user->hydrate($item)) ;
+            }
+    
+            return $itemshydrate;
+        }
+
     // Traitement de la connection
     public function connection()
     {

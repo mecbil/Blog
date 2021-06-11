@@ -22,7 +22,7 @@ class PostController
         $posthydrate = new Post;
         $post = $posthydrate->hydrate($post);
         $post_id = $post->getPost_id();
-        $comments = $commentManager->search('post_id', $post_id);
+        $comments = $commentManager->searchcomments('post_id', $post_id);
   
         // Affichage (Show)
         $pageTitle = "Blog Posts";
@@ -40,7 +40,7 @@ class PostController
         if (empty($erreur)) {
             
             // Get all posts
-            $posts = $postManager->findAll("", "date_modify DESC");
+            $posts = $postManager->findAllPosts("", "date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -53,7 +53,7 @@ class PostController
 
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
-                $comments = $commentManager->findAll("", "date_modify DESC");
+                $comments = $commentManager->findAllcomments("", "date_modify DESC");
                 $pageTitle = $_SESSION['user'];
                 $edit = false;
 
@@ -73,7 +73,7 @@ class PostController
         if (empty($erreur)) {
 
             // Get all posts
-            $posts = $postManager->findAll("", "date_modify DESC");
+            $posts = $postManager->findAllPosts("", "date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -93,7 +93,7 @@ class PostController
         $commentManager= new CommentManager();
 
         // Get all posts
-        $comments = $commentManager->findAll("0", "date_modify DESC");
+        $comments = $commentManager->findAllcomments("0", "date_modify DESC");
 
         // Affichage (Show)
         $edit = false;
@@ -107,7 +107,7 @@ class PostController
     {
         $postManager= new PostManager();
         $commentManager= new CommentManager();
-        $comments = $commentManager->findAll("0", "date_modify DESC");
+        $comments = $commentManager->findAllcomments("0", "date_modify DESC");
 
         // Get a posts with uuid
         $uuid = isset($_GET['uuid'])  ? $_GET['uuid'] :"";
@@ -134,7 +134,7 @@ class PostController
         if (empty($erreur)) {
         
             // Get all posts
-            $posts = $postManager->findAll("", "date_modify DESC");
+            $posts = $postManager->findAllPosts("", "date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -147,7 +147,7 @@ class PostController
 
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
-                $comments = $commentManager->findAll("", "date_modify DESC");
+                $comments = $commentManager->findAllcomments("", "date_modify DESC");
                 $pageTitle = $_SESSION['user'];
                 $edit = true;
                 

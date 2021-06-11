@@ -14,7 +14,7 @@ class Comment extends Manager
     protected $user_id;
 
     // Get the value of id
-    public function getComment_d()
+    public function getComment_id()
     {
         return $this->comment_id;
     }
