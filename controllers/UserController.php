@@ -50,13 +50,14 @@ class UserController
 
                 $rendu = new renderer;
                 $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
-            } else {
+            } 
+            if ($_SESSION['role'] == false) {
                 $redirect = new MainController;
                 $redirect->showPosts();
             }
         }
 
-        if (!empty($erreur)) {
+        if ($erreur) {
             $pageTitle = "Connexion";
 
             $rendu = new renderer;
