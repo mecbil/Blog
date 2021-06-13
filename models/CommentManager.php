@@ -34,6 +34,25 @@ class CommentManager extends Manager
 
         return $itemshydrate;
     }
+
+    // trouver un enregistrement par son uuid -a voir -
+    public function findComment(string $findword, string $word)
+    {
+        $sql = "SELECT * FROM comments WHERE ".' '.$findword.' = '."'$word'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute([$findword => $word]);
+        $item = $query->fetch();
+
+        if ($item) {
+            $post = new Comment;
+            $itemshydrate = $post->hydrate($item);
+    
+            return $itemshydrate;
+        }
+
+        return $item;
+
+    }
     
     // Rechercher des commentaires
     public function searchcomments(string $sword, string $word)
@@ -61,17 +80,15 @@ class CommentManager extends Manager
         // tester le formulaire
         // 1- Un des elements du formulaire vide
 
-        $pseudo = strip_tags(htmlentities($_POST['pseudo']));
-        $comments = strip_tags(htmlentities($_POST['comment']));
-
-        if (empty($pseudo) || empty($comments) {
+        if (empty($_POST['pseudo']) || empty($_POST['comment'])) {
             $erreur[1]='Veuillez remplir tous les champs';
 
             return $erreur;
         }
 
         // 2- Verification & initialisation des champs
-
+        $pseudo = strip_tags($_POST['pseudo']);
+        $comments = strip_tags($_POST['comment']);
         $user_id = $_POST['user_id'];
         $post_id = $_POST['post_id'];
         $uuid = uniqid();
@@ -150,10 +167,10 @@ class CommentManager extends Manager
     // Supprimer un commentaire
     public function deleteComment($id)
     {
-        $comment = $this->find('comment_id', $id);
+        $comment = $this->findComment('comment_id', $id);
 
         if ($comment) {
-            $uuid = $comment->uuid;
+            $uuid = $comment->getUuid();
             $this->delete($uuid);
 
             $erreur='';

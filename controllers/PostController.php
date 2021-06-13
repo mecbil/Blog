@@ -18,7 +18,7 @@ class PostController
 
         // Get a post with uuid
         $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
-        $post = $postManager->find('uuid', $uuid);
+        $post = $postManager->findPost('uuid', $uuid);
         $posthydrate = new Post;
         $post = $posthydrate->hydrate($post);
         $post_id = $post->getPost_id();
@@ -49,7 +49,7 @@ class PostController
             $rendu->render('posts/posts', compact('pageTitle', 'posts'));
         } 
 
-        if (!empty($erreur)) {
+        if ($erreur) {
 
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
@@ -65,8 +65,9 @@ class PostController
 
     public function deletePost()
     {
+        $uuid = $_GET['uuid'];
+
         $postManager = new PostManager();
-        $uuid = isset($_GET['uuid'])  ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING):"";
         $erreur = $postManager->deletePost($uuid);
 
         // 
@@ -111,12 +112,12 @@ class PostController
 
         // Get a posts with uuid
         $uuid = isset($_GET['uuid'])  ? $_GET['uuid'] :"";
-        $post = $postManager->find("uuid", $uuid);
-        $_POST['title'] = $post->title;
-        $_POST['chapo'] = $post->chapo;
-        $_POST['content'] = $post->content;
-        $_POST['author'] = $post->author;
-        $_POST['post_id'] = $post->post_id;
+        $post = $postManager->findPost("uuid", $uuid);
+        $_POST['title'] = $post->getTitle();
+        $_POST['chapo'] = $post->getChapo();
+        $_POST['content'] = $post->getcontent();
+        $_POST['author'] = $post->getAuthor();
+        $_POST['post_id'] = $post->getPost_id();
 
         // Affichage (Show)
         $pageTitle = "Admin - ".$_SESSION['user'];

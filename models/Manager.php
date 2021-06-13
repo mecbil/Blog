@@ -3,6 +3,8 @@ namespace Models;
 
 use Models\Database;
 use Models\Post;
+use Models\Comment;
+
 
 abstract class Manager
 {
@@ -12,16 +14,6 @@ abstract class Manager
     public function __construct()
     {
         $this->pdo = Database::dbConnect();
-    }
-
-    // trouver un enregistrement par son uuid -a voir -
-    public function find(string $findword, string $word)
-    {
-        $sql= "SELECT * FROM {$this->table} WHERE ".' '.$findword.' = '."'$word'";
-        $query = $this->pdo->prepare($sql);
-        $query->execute([$findword => $word]);
-        $item = $query->fetch();
-        return $item;
     }
 
     // Rechercher des enregistrement

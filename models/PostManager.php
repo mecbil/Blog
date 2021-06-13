@@ -37,6 +37,24 @@ class PostManager extends Manager
         return $itemshydrate;
     }
 
+        // trouver un enregistrement par son uuid -a voir -
+        public function findPost(string $findword, string $word)
+        {
+            $sql = "SELECT * FROM posts WHERE ".' '.$findword.' = '."'$word'";
+            $query = $this->pdo->prepare($sql);
+            $query->execute([$findword => $word]);
+            $item = $query->fetch();
+
+            if ($item) {
+                $post = new Post;
+                $itemshydrate = $post->hydrate($item);
+        
+                return $itemshydrate;
+            }
+    
+            return $item;
+        }
+
     public function insert()
     {
         // tester le formulaire
@@ -92,7 +110,7 @@ class PostManager extends Manager
 
     public function deletePost($uuid)
     {
-        $post = $this->find('uuid', $uuid);
+        $post = $this->findPost('uuid', $uuid);
         if ($post) {
             $this->delete($uuid);
 

@@ -9,8 +9,8 @@
             <h3>Veuillez vous connecter pour réagir !</h3>
             <?php endif; ?>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>        
-            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= "{$_GET['uuid']}" ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce Blog Post ?!`)" tabindex="-1">Supprimer</a>
-            <a class="btn btn-secoundary btn-outline-light" href="/?controller=postcontroller&task=editPost&uuid=<?= "{$_GET['uuid']}" ?>" tabindex="-1">Editer</a>
+            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?= $post->getUuid() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce Blog Post ?!`)" tabindex="-1">Supprimer</a>
+            <a class="btn btn-secoundary btn-outline-light" href="/?controller=postcontroller&task=editPost&uuid=<?= $_GET['uuid'] ?>" tabindex="-1">Editer</a>
         <?php endif; ?>
     </div>
 <hr>

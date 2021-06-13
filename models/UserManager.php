@@ -1,6 +1,8 @@
 <?php
 namespace Models;
 
+use Models\User;
+
 class UserManager extends Manager
 {
     protected $table = "users";
@@ -41,6 +43,7 @@ class UserManager extends Manager
         // Mail ou password vide
         $gpassword = $_POST['passwordconnect'];
         $gmail = $_POST['emailconnect'];
+
         if (empty($gmail) || empty($gpassword)) {
             $erreur='Veuillez remplir tous les champs';
 
@@ -55,33 +58,36 @@ class UserManager extends Manager
         }
         // Formulaire valide
         // 2- chercher l'enregistrement avec le mail donné
-        $userExist = $this->find('mail', $gmail);
+        $userExist = $this->findUser('mail', $gmail);
 
-        // 2- L'enregistrement existe
-        if ($userExist) {
-
-            // 3- hydraté l'information reçu
-            $user = new User;
-            $user = $user->hydrate($userExist);
-
-
-            // On verifie le mot de passe dans la table avec celui donné
-            if (password_verify($gpassword, $user->getPassword())) {
-                // Ici Mail et mots de passe exacte
-                $erreur = '';
-                $_SESSION['user'] = $user->getNickname();
-                $_SESSION['user_id'] = $user->getUser_id();
-                $_SESSION['role'] = $user->getRole();
-
-                return  $erreur;
-            } 
-        }
-
-        if (!$userExist){
+        // 3- L'enregistrement n'existe pas
+        if (!($userExist)){
             // Utilisateur avec mail donné n'existe pas 
             $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
 
             return $erreur;
+        }
+        // 4- L'enregistrement existe
+        if ($userExist) {
+
+            // On verifie le mot de passe dans la table avec celui donné
+            if (password_verify($gpassword, $userExist->getPassword())) {
+                // Ici Mail et mots de passe exacte
+                $erreur = '';
+                $_SESSION['user'] = $userExist->getNickname();
+                $_SESSION['user_id'] = $userExist->getUser_id();
+                $_SESSION['role'] = $userExist->getRole();
+
+                return  $erreur;
+            }
+
+            if (!password_verify($gpassword, $userExist->getPassword())) {
+                // Ici Mail et mots de passe exacte
+                // Utilisateur avec mail donné n'existe pas 
+                $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
+
+                return $erreur;
+            }
         }
     }
 
@@ -149,4 +155,23 @@ class UserManager extends Manager
             
         return $erreurAdd;
     }
+
+    // trouver un user -
+    public function findUser(string $findword, string $word)
+    {
+        $sql = "SELECT * FROM users WHERE ".' '.$findword.' = '."'$word'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute([$findword => $word]);
+        $item = $query->fetch();
+
+        if ($item) {
+            $post = new User;
+            $itemshydrate = $post->hydrate($item);
+    
+            return $itemshydrate;
+        }
+
+        return $item;
+    }
+    
 }

@@ -20,16 +20,16 @@ class CommentController
         if (empty($erreur[1])) {
 
             $postManager= new PostManager();
-            $post = $postManager->find('post_id', $post);
-            $uuid = $post->uuid;
+            $post = $postManager->findPost('post_id', $post);
+            $uuid = $post->getUuid();
             $this->affiche($uuid);
 
         } else {
             $postManager= new PostManager();
             $commentManager= new CommentManager();
-            $post = $postManager->find('post_id', $post);
-            $post_id = $post->post_id;
-            $comments = $commentManager->search('post_id', $post_id);
+            $post = $postManager->findPost('post_id', $post);
+            $post_id = $post->getpost_id();
+            $comments = $commentManager->searchcomments('post_id', $post_id);
 
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -43,7 +43,7 @@ class CommentController
     public function deleteComment()
     {
         $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
-        $uuid = isset($_GET['uuid']) ? filter_var($_GET(['uuid']), FILTER_SANITIZE_STRING) :"";
+        $uuid = $_GET['uuid'];
 
         $commentManager = new CommentManager();
         $erreur = $commentManager->deletecomment($get);
@@ -57,8 +57,9 @@ class CommentController
     {
         $postManager= new PostManager();
         $commentManager= new CommentManager();
-        $post = $postManager->find('uuid', $uuid);
-        $post_id = $post->post_id;
+        $post = $postManager->findPost('uuid', $uuid);
+        $post_id = $post->getPost_id();
+
         $comments = $commentManager->searchcomments('post_id', $post_id);
 
         // Affichage (Show)
