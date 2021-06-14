@@ -6,14 +6,10 @@ class CommentManager extends Manager
     protected $table = "comments";
 
     // trouver tous les enregistrement ?trier &/ou limiter
-    public function findAllComments(?string $condition="", ?string $order="", ?string $limit="")
+    public function findAllComments( ?string $order="",?string $limit="")
     {
-        $sql= "SELECT * FROM comments";
-
-        if ($condition) {
-            $sql .=" WHERE valide = ".$condition;
-        }
-        
+        $sql= "SELECT * FROM comments  WHERE valide = false ";
+      
         if ($order) {
             $sql .=" ORDER BY ".$order;
         }
@@ -57,7 +53,7 @@ class CommentManager extends Manager
     // Rechercher des commentaires
     public function searchcomments(string $sword, string $word)
     {
-        $sql= "SELECT * FROM comments WHERE ".' '.$sword.' = '."'$word'";
+        $sql= "SELECT * FROM comments WHERE ".' '.$sword.' = '."'$word' AND `valide`='1'";
         $query = $this->pdo->prepare($sql);
         $query->execute([$sword => $word]);
         $items = $query->fetchAll();
@@ -121,53 +117,31 @@ class CommentManager extends Manager
     }
 
     // Mise à jour d'un commentaire
-    public function updatecomment($comment_id)
+    public function validecomment($uuid)
     {
-        // tester le formulaire
-        // 1- Un des elements du formulaire vide
-        if (empty($_POST['title']) || empty($_POST['chapo'])|| empty($_POST['content']) || empty($_POST['author'])) {
-            $erreur='Veuillez remplir tous les champs';
-
-            return $erreur;
-        }
-
-        $title = strip_tags($_POST['title']);
-        $chapo = strip_tags($_POST['chapo']);
-        $content = strip_tags($_POST['content']);
-        $author = strip_tags($_POST['author']);
-        $date_modify = date("Y-m-d h:i:s");
+        $valide = '1';
 
         // On instencie le model;
-        $post = new Post;       
+        $comment = new Comment;       
 
         // Hydraté les informations reçus
-        $post->setTitle($title)
-            ->setChapo($chapo)
-            ->setContent($content)
-            ->setAuthor($author)
-            ->setDate_modify($date_modify);
+        $comment->setValide($valide);
 
         // On enregistre
-
-        $sql = $this->pdo->prepare('UPDATE posts SET date_modify = :date_modify, chapo = :chapo,
-         content = :content, title = :title, author = :author WHERE comment_id = '.$comment_id.'');
+        $sql = $this->pdo->prepare("UPDATE comments SET valide = :valide WHERE uuid = '{$uuid}'");
          
-         $sql->bindValue(':date_modify', $post->getDate_modify());
-         $sql->bindValue(':chapo', $post->getChapo());
-         $sql->bindValue(':content', $post->getContent());
-         $sql->bindValue(':title', $post->getTitle());
-         $sql->bindValue(':author', $post->getAuthor());
+        $sql->bindValue(':valide', $comment->getValide());
 
-         $sql->execute();
+        $sql->execute();
 
-         $erreur='';
-         return $erreur;
+        $erreur='';
+        return $erreur;
     }
 
     // Supprimer un commentaire
-    public function deleteComment($id)
+    public function deleteComment($comment_id)
     {
-        $comment = $this->findComment('comment_id', $id);
+        $comment = $this->findComment('comment_id', $comment_id);
 
         if ($comment) {
             $uuid = $comment->getUuid();

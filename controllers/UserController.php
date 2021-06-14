@@ -20,13 +20,13 @@ class UserController
             $pageTitle = $_SESSION['user'];
             $edit = false;
             $commentmanager = new CommentManager();
-            $comments = $commentmanager->findAllcomments("0", "date_modify DESC");
+            $comments = $commentmanager->findAllcomments("date_modify DESC");
 
             $rendu = new renderer;
             $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
         } 
         if (!isset($_SESSION['user'])) {
-            // Utilisateur pas connecté
+            // Utilisateur Non connecté
             $pageTitle = "Connexion" ;
 
             $rendu = new renderer;
@@ -46,7 +46,7 @@ class UserController
             if ($_SESSION['role'] == true) {
                 $edit = false;
                 $commentmanager = new CommentManager();
-                $comments = $commentmanager->findAllcomments("0", "date_modify DESC");
+                $comments = $commentmanager->findAllcomments("date_modify DESC");
 
                 $rendu = new renderer;
                 $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));

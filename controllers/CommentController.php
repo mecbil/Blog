@@ -6,6 +6,7 @@ require_once '../application/autoload.php';
 use Models\CommentManager;
 use Application\Renderer;
 use Models\PostManager;
+use Models\Post;
 
 class CommentController
 {
@@ -42,15 +43,33 @@ class CommentController
 
     public function deleteComment()
     {
-        $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
-        $uuid = $_GET['uuid'];
-
+        $postManager = new PostManager();
         $commentManager = new CommentManager();
+
+        $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
+        $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
+  
         $erreur = $commentManager->deletecomment($get);
 
         if (empty($erreur)) {
             $this->affiche($uuid);
-        }
+        }      
+    }
+
+    public function valideComment()
+    {
+        $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
+        $commentManager = new CommentManager();
+        $erreur = $commentManager->valideComment($uuid);
+
+        if (empty($erreur)) {
+        $UserController = new UserController;
+        $UserController->showConnect();
+        } 
+        
+        if (!empty($erreur)) {
+
+        }          
     }
 
     public function affiche($uuid)

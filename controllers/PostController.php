@@ -19,8 +19,6 @@ class PostController
         // Get a post with uuid
         $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
         $post = $postManager->findPost('uuid', $uuid);
-        $posthydrate = new Post;
-        $post = $posthydrate->hydrate($post);
         $post_id = $post->getPost_id();
         $comments = $commentManager->searchcomments('post_id', $post_id);
   
@@ -94,7 +92,7 @@ class PostController
         $commentManager= new CommentManager();
 
         // Get all posts
-        $comments = $commentManager->findAllcomments("0", "date_modify DESC");
+        $comments = $commentManager->findAllcomments("date_modify DESC");
 
         // Affichage (Show)
         $edit = false;
