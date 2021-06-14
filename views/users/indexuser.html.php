@@ -2,11 +2,11 @@
 
   <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
     <!-- zone de Ajout Post blog -->
-    <h1>Dashbord <?= htmlspecialchars($_SESSION['user']) ?></h1>
+    <h1>Dashbord <?= strip_tags($_SESSION['user']) ?></h1>
     <div class="">
       <?php if (!empty($erreur)): ?>
       <div class="alert alert-danger">
-        <?= htmlspecialchars($erreur) ?>
+        <?= strip_tags($erreur) ?>
       </div>
       <?php endif; ?>
             
