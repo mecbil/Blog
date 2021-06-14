@@ -57,7 +57,7 @@
         <?php foreach ($comments as $comment) : ?>
           <br>
           <div class=""><?= $comment->getComment() ?> </div>
-          <a class="btn btn-success btn-outline-light"href="delete-comment.php?uuid=<?= $comment->getUuid() ?>" >Valider</a>
+          <a class="btn btn-success btn-outline-light"href="index.php?controller=Commentcontroller&task=validecomment&uuid=<?= $comment->getUuid() ?>" >Valider</a>
         <?php endforeach ?>
       </div> 
     </form>      
