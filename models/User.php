@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class User extends Manager
+class User
 {
     private $user_id;
     protected $uuid;

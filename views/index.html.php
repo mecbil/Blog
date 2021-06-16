@@ -4,7 +4,7 @@
 </div>
 
 <div class="row container-fluid">
-    <h2>Last Blogs posts</h2>
+    <h2>Derinières publications</h2>
 
     <?php foreach ($posts as $article) : ?>
     <div class="col-lg-4" id="carte">

@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class Comment extends Manager
+class Comment 
 {
     protected $comment_id;
     protected $uuid;

@@ -8,13 +8,9 @@ class PostManager extends Manager
     protected $table = "posts";
 
     // trouver tous les enregistrement ?trier &/ou limiter
-    public function findAllPosts(?string $condition="", ?string $order="", ?string $limit="")
+    public function findAllPosts(?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM posts";
-
-        if ($condition) {
-            $sql .=" WHERE valide = ".$condition;
-        }
         
         if ($order) {
             $sql .=" ORDER BY ".$order;
@@ -25,14 +21,17 @@ class PostManager extends Manager
         $resultats = $this->pdo->query($sql);
         $items = $resultats->fetchAll();
 
-        // Hydrater les posts
+        // Hydrate les posts
         $itemshydrate =array();
 
         foreach ($items as $item)
         {
             $post = new Post;
-            array_push($itemshydrate, $post->hydrate($item)) ;
+
+            array_push($itemshydrate, $this->hydrate($post, $item)) ;
+
         }
+
 
         return $itemshydrate;
     }
@@ -47,7 +46,7 @@ class PostManager extends Manager
 
             if ($item) {
                 $post = new Post;
-                $itemshydrate = $post->hydrate($item);
+                $itemshydrate = $this->hydrate($post, $item);
         
                 return $itemshydrate;
             }

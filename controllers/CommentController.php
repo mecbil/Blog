@@ -23,7 +23,7 @@ class CommentController
             $postManager= new PostManager();
             $post = $postManager->findPost('post_id', $post);
             $uuid = $post->getUuid();
-            $this->affiche($uuid);
+            $this->affiche($uuid, 'Votre commentaire sera afficher après validation!');
 
         } else {
             $postManager= new PostManager();
@@ -52,7 +52,7 @@ class CommentController
         $erreur = $commentManager->deletecomment($get);
 
         if (empty($erreur)) {
-            $this->affiche($uuid);
+            $this->affiche($uuid, 'Commentaire supprimer avec succès!');
         }      
     }
 
@@ -63,16 +63,17 @@ class CommentController
         $erreur = $commentManager->valideComment($uuid);
 
         if (empty($erreur)) {
-        $UserController = new UserController;
-        $UserController->showConnect();
+            $UserController = new UserController;
+            $UserController->showConnect();
+            return;
         } 
         
-        if (!empty($erreur)) {
+        // if ($erreur) {
 
-        }          
+        // }          
     }
 
-    public function affiche($uuid)
+    public function affiche($uuid, $erreur)
     {
         $postManager= new PostManager();
         $commentManager= new CommentManager();
@@ -85,6 +86,6 @@ class CommentController
         $pageTitle = "Blog Posts";
 
         $rendu = new renderer;
-        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments'));
+        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments', 'erreur'));
     }
 }

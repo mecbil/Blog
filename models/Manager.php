@@ -35,22 +35,21 @@ abstract class Manager
     }
 
     // Hydrater un enregistrement 
-    public function hydrate($donnees)
+    public function hydrate($objet, $donnees)
     {
-        foreach ($donnees as $key => $value)
-        {
-            foreach ($donnees as $key => $value) {
-                // On récupère le nom du setter correspondant à la clé (key)
-                // titre -> setTitre
-                $setter = 'set' . ucfirst($key);
-    
-                // On vérifie si le setter existe
-                if (method_exists($this, $setter)) {
-                    // On appelle le setter
-                    $this->$setter($value);
-                }
+
+        foreach ($donnees as $key => $value) {
+            // On récupère le nom du setter correspondant à la clé (key)
+            // titre -> setTitre
+            $setter = 'set' . ucfirst($key);
+
+            // On vérifie si le setter existe
+            if (method_exists($objet, $setter)) {
+                // On appelle le setter
+                $objet->$setter($value);
             }
-            return $this;
         }
+
+        return $objet;
     }    
 }
