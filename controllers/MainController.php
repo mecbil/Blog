@@ -14,7 +14,7 @@ class MainController
         $postManager= new PostManager();
 
         // Get all posts
-        $posts = $postManager->findAllposts("", "date_modify DESC", "3");
+        $posts = $postManager->findAllposts("date_modify DESC", "3");
 
         // Affichage (Show)
         $pageTitle = "Home" ;
@@ -36,7 +36,7 @@ class MainController
         $postManager = new PostManager();
 
         // Get all posts
-        $posts = $postManager->findAllPosts("", "date_modify DESC");
+        $posts = $postManager->findAllPosts("date_modify DESC");
 
         // Affichage (Show)
         $pageTitle = "Blog Posts";

@@ -38,7 +38,7 @@ class PostController
         if (empty($erreur)) {
             
             // Get all posts
-            $posts = $postManager->findAllPosts("", "date_modify DESC");
+            $posts = $postManager->findAllPosts("date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -51,7 +51,7 @@ class PostController
 
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
-                $comments = $commentManager->findAllcomments("", "date_modify DESC");
+                $comments = $commentManager->findAllcomments("date_modify DESC");
                 $pageTitle = $_SESSION['user'];
                 $edit = false;
 
@@ -72,7 +72,7 @@ class PostController
         if (empty($erreur)) {
 
             // Get all posts
-            $posts = $postManager->findAllPosts("", "date_modify DESC");
+            $posts = $postManager->findAllPosts("date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -133,7 +133,7 @@ class PostController
         if (empty($erreur)) {
         
             // Get all posts
-            $posts = $postManager->findAllPosts("", "date_modify DESC");
+            $posts = $postManager->findAllPosts("date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -146,7 +146,7 @@ class PostController
 
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
-                $comments = $commentManager->findAllcomments("", "date_modify DESC");
+                $comments = $commentManager->findAllcomments("0", "date_modify DESC");
                 $pageTitle = $_SESSION['user'];
                 $edit = true;
                 

@@ -31,7 +31,7 @@ class UserManager extends Manager
             foreach ($items as $item)
             {
                 $user = new User;
-                array_push($itemshydrate, $user->hydrate($item)) ;
+                array_push($itemshydrate, $this->hydrate($user, $item)) ;
             }
     
             return $itemshydrate;
@@ -165,8 +165,8 @@ class UserManager extends Manager
         $item = $query->fetch();
 
         if ($item) {
-            $post = new User;
-            $itemshydrate = $post->hydrate($item);
+            $user = new User;
+            $itemshydrate = $this->hydrate($user, $item);
     
             return $itemshydrate;
         }

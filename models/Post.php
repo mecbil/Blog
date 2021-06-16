@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class Post extends Manager
+class Post
 {
     protected $post_id;
     protected $uuid;

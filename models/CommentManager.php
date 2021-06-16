@@ -21,11 +21,9 @@ class CommentManager extends Manager
 
         // Hydrater les posts
         $itemshydrate =array();
-
-        foreach ($items as $item)
-        {
+        foreach ($items as $item) {
             $comment = new Comment;
-            array_push($itemshydrate, $comment->hydrate($item)) ;
+            array_push($itemshydrate, $this->hydrate($comment, $item)) ;
         }
 
         return $itemshydrate;
@@ -40,14 +38,12 @@ class CommentManager extends Manager
         $item = $query->fetch();
 
         if ($item) {
-            $post = new Comment;
-            $itemshydrate = $post->hydrate($item);
-    
-            return $itemshydrate;
+            $comment = new Comment;
+
+            return $this->hydrate($comment, $item);    
         }
 
         return $item;
-
     }
     
     // Rechercher des commentaires
@@ -60,11 +56,9 @@ class CommentManager extends Manager
 
         // Hydrater les commentaires
         $itemshydrate =array();
-
-        foreach ($items as $item)
-        {
+        foreach ($items as $item) {
             $comment = new Comment;
-            array_push($itemshydrate, $comment->hydrate($item)) ;
+            array_push($itemshydrate, $this->hydrate($comment, $item)) ;
         }
 
         return $itemshydrate;
@@ -119,21 +113,10 @@ class CommentManager extends Manager
     // Mise à jour d'un commentaire
     public function validecomment($uuid)
     {
-        $valide = '1';
-
-        // On instencie le model;
-        $comment = new Comment;       
-
-        // Hydraté les informations reçus
-        $comment->setValide($valide);
-
         // On enregistre
-        $sql = $this->pdo->prepare("UPDATE comments SET valide = :valide WHERE uuid = '{$uuid}'");
-         
-        $sql->bindValue(':valide', $comment->getValide());
-
+        $sql = $this->pdo->prepare("UPDATE comments SET valide = true WHERE uuid = '{$uuid}'");    
         $sql->execute();
-
+        // try catch??
         $erreur='';
         return $erreur;
     }
