@@ -2,9 +2,6 @@
 namespace Models;
 
 use Models\Database;
-use Models\Post;
-use Models\Comment;
-
 
 abstract class Manager
 {
@@ -14,17 +11,6 @@ abstract class Manager
     public function __construct()
     {
         $this->pdo = Database::dbConnect();
-    }
-
-    // Rechercher des enregistrement
-    public function search(string $sword, string $word)
-    {
-        $sql= "SELECT * FROM {$this->table} WHERE ".' '.$sword.' = '."'$word'";
-        $query = $this->pdo->prepare($sql);
-        $query->execute([$sword => $word]);
-        $item = $query->fetchAll();
-        
-        return $item;
     }
 
     // Supprime un enregistrement on ayant son uuid
