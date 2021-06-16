@@ -130,8 +130,7 @@ class CommentManager extends Manager
             $uuid = $comment->getUuid();
             $this->delete($uuid);
 
-            $erreur='';
-            return $erreur;            
+            return '';            
         } 
         if (empty($comment)) {
             $erreur='Veuillez donner un identifiant valable';

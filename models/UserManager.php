@@ -7,35 +7,34 @@ class UserManager extends Manager
 {
     protected $table = "users";
 
-        // trouver tous les enregistrement ?trier &/ou limiter
-        public function findAllUsers(?string $condition="", ?string $order="", ?string $limit="")
-        {
-            $sql= "SELECT * FROM users";
+    // trouver tous les enregistrement ?trier &/ou limiter
+    public function findAllUsers(?string $condition="", ?string $order="", ?string $limit="")
+    {
+        $sql= "SELECT * FROM users";
     
-            if ($condition) {
-                $sql .=" WHERE valide = ".$condition;
-            }
-            
-            if ($order) {
-                $sql .=" ORDER BY ".$order;
-            }
-            if ($limit) {
-                $sql .=" LIMIT ".$limit;
-            }
-            $resultats = $this->pdo->query($sql);
-            $items = $resultats->fetchAll();
-    
-            // Hydrater les posts
-            $itemshydrate =array();
-    
-            foreach ($items as $item)
-            {
-                $user = new User;
-                array_push($itemshydrate, $this->hydrate($user, $item)) ;
-            }
-    
-            return $itemshydrate;
+        if ($condition) {
+            $sql .=" WHERE valide = ".$condition;
         }
+            
+        if ($order) {
+            $sql .=" ORDER BY ".$order;
+        }
+        if ($limit) {
+            $sql .=" LIMIT ".$limit;
+        }
+        $resultats = $this->pdo->query($sql);
+        $items = $resultats->fetchAll();
+    
+        // Hydrater les posts
+        $itemshydrate =array();
+    
+        foreach ($items as $item) {
+            $user = new User;
+            array_push($itemshydrate, $this->hydrate($user, $item)) ;
+        }
+    
+        return $itemshydrate;
+    }
 
     // Traitement de la connection
     public function connection()
@@ -61,8 +60,8 @@ class UserManager extends Manager
         $userExist = $this->findUser('mail', $gmail);
 
         // 3- L'enregistrement n'existe pas
-        if (!($userExist)){
-            // Utilisateur avec mail donné n'existe pas 
+        if (!($userExist)) {
+            // Utilisateur avec mail donné n'existe pas
             $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
 
             return $erreur;
@@ -73,17 +72,16 @@ class UserManager extends Manager
             // On verifie le mot de passe dans la table avec celui donné
             if (password_verify($gpassword, $userExist->getPassword())) {
                 // Ici Mail et mots de passe exacte
-                $erreur = '';
                 $_SESSION['user'] = $userExist->getNickname();
                 $_SESSION['user_id'] = $userExist->getUser_id();
                 $_SESSION['role'] = $userExist->getRole();
 
-                return  $erreur;
+                return  null;
             }
 
             if (!password_verify($gpassword, $userExist->getPassword())) {
                 // Ici Mail et mots de passe exacte
-                // Utilisateur avec mail donné n'existe pas 
+                // Utilisateur avec mail donné n'existe pas
                 $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
 
                 return $erreur;
@@ -114,6 +112,7 @@ class UserManager extends Manager
         // 3- Verification Mot de passe
         if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#', $gpassword)) {
             $erreurAdd = $gpassword.' pas Bon mot de passe';
+
             return $erreurAdd;
         }
 
@@ -124,17 +123,14 @@ class UserManager extends Manager
         $passwordhash = password_hash($password, PASSWORD_DEFAULT);
         $uuid = uniqid();
         
-        // On instencie le model;
+        // On instencie et hydrate le model;
         $user = new user;
-        
-        // Hydraté les informations reçus
         $user->setNickname($pseudo)
         ->setUuid($uuid)
         ->setMail($email)
         ->setPassword($passwordhash);
 
         // On enregistre
-
         $sql = $this->pdo->prepare("INSERT INTO  users (uuid, nickname, password, mail) 
         VALUES (:uuid, :nickname, :password, :mail)");
 
@@ -144,8 +140,6 @@ class UserManager extends Manager
         $sql->bindValue(':mail', $user->getMail());
         $sql->execute();
 
-        $erreurAdd = '';
-
         if (\session_status() === PHP_SESSION_NONE) {
             session_start();
             $_SESSION['user'] = $user->getNickname();
@@ -153,7 +147,7 @@ class UserManager extends Manager
             $_SESSION['role'] = $user->getRole();
         }
             
-        return $erreurAdd;
+        return null;
     }
 
     // trouver un user -
@@ -166,12 +160,10 @@ class UserManager extends Manager
 
         if ($item) {
             $user = new User;
-            $itemshydrate = $this->hydrate($user, $item);
     
-            return $itemshydrate;
+            return $this->hydrate($user, $item);;
         }
 
         return $item;
     }
-    
 }
