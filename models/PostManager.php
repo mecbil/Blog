@@ -1,8 +1,6 @@
 <?php
 namespace Models;
 
-use Models\Post;
-
 class PostManager extends Manager
 {
     protected $table = "posts";

@@ -1,19 +1,13 @@
 <?php
 namespace Application;
 
-use Controllers\PostController;
-
 class Site
 {
     public static function frontControl()
     {
         $getcontroller = isset($_GET['controller']) ? filter_var($_GET['controller'], FILTER_SANITIZE_STRING) :"";
-        //$server = $_SERVER['REQUEST_URI'];
         $gettask = isset($_GET['task']) ? filter_var($_GET['task'], FILTER_SANITIZE_STRING) :"";
 
-        // if (empty($get) && $_SERVER['REQUEST_URI'] !='/') {
-        //     header('Location: /404.php');
-        // }
         // Controller par default MainController
         $controllerUse = 'MainController';
 
@@ -27,7 +21,6 @@ class Site
         if (!empty($gettask)) {
             $task = $gettask;
         }
-
 
         $controllerUse = "Controllers\\" . $controllerUse;
 
