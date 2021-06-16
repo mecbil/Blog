@@ -6,7 +6,6 @@ require_once '../application/autoload.php';
 use Models\CommentManager;
 use application\Renderer;
 use Models\PostManager;
-use Models\Post;
 
 class PostController
 {

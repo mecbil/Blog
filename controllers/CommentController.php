@@ -6,28 +6,24 @@ require_once '../application/autoload.php';
 use Models\CommentManager;
 use Application\Renderer;
 use Models\PostManager;
-use Models\Post;
 
 class CommentController
 {
-    // Ajouter un commentair
+    // Ajouter un commentaire
     public function insertComment()
     {
         $post = $_POST['post_id'];
+        $postManager= new PostManager();
         $commentManager = new CommentManager();
         $erreur = $commentManager->creat();
 
         // Pas d'erreur
         if (empty($erreur[1])) {
-
-            $postManager= new PostManager();
             $post = $postManager->findPost('post_id', $post);
             $uuid = $post->getUuid();
             $this->affiche($uuid, 'Votre commentaire sera afficher après validation!');
 
         } else {
-            $postManager= new PostManager();
-            $commentManager= new CommentManager();
             $post = $postManager->findPost('post_id', $post);
             $post_id = $post->getpost_id();
             $comments = $commentManager->searchcomments('post_id', $post_id);
@@ -43,7 +39,6 @@ class CommentController
 
     public function deleteComment()
     {
-        $postManager = new PostManager();
         $commentManager = new CommentManager();
 
         $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";

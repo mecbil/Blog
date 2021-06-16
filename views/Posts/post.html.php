@@ -40,17 +40,17 @@
     <?php else : ?>
         <h2>Il y a déjà <?= count($comments) ?> réactions : </h2>
         <?php foreach ($comments as $commentaire) : ?>
-            <h3>Commentaire de : <?= $commentaire->getAuthor() ?></h3>
-            <small>Le <?= $commentaire->getDate_modify() ?></small>
+            <h3>Commentaire de : <?= strip_tags($commentaire->getAuthor()) ?></h3>
+            <small>Le <?= strip_tags($commentaire->getDate_modify()) ?></small>
             <blockquote>
-                <em><?= nl2br($commentaire->getComment()) ?></em>
+                <em><?= strip_tags(nl2br($commentaire->getComment())) ?></em>
             </blockquote>
             <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true): ?> 
-                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $post->getUuid() ?>&commentid=<?= $commentaire->getComment_id() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= strip_tags($post->getUuid()) ?>&commentid=<?= strip_tags($commentaire->getComment_id()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                 <a class="btn btn-secoundary btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $_GET['uuid'] ?>" tabindex="-1">Editer</a>
             <?php endif; ?>
             <?php if (isset($_SESSION['user'])  && $_SESSION['role'] == false && ($_SESSION['user_id'] === $commentaire->getUser_id() )): ?>
-                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $commentaire->getUuid() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= strip_tags($commentaire->getUuid()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
             <?php endif; ?>
         <?php endforeach ?>
     <?php endif ?>
