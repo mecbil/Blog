@@ -21,19 +21,19 @@
       method="post">
           <h2 class="text-center">Ajout d'un Blog Post </h2>
           <div class="form-group">
-            <input type="text" name="title" value="<?php if (isset($_POST['title'])){ echo filter_input(INPUT_POST, 'title') ;} ?>" class="form-control" placeholder="Title"  autocomplete="off">
+            <input type="text" name="title" value="<?php $title = filter_input(INPUT_POST, 'title'); if (isset($title)){ echo $title ;} ?>" class="form-control" placeholder="Title"  autocomplete="off">
           </div>
           <div class="form-group">
-            <input type="text" name="chapo" value="<?php if (isset($_POST['chapo'])){ echo filter_input(INPUT_POST, 'chapo');} ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
+            <input type="text" name="chapo" value="<?php $chapo = filter_input(INPUT_POST, 'chapo'); if (isset($chapo)){ echo $chapo ;} ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
           </div>
           <div class=" form-group ">
-            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php if (isset($_POST['content'])) {echo filter_input(INPUT_POST, 'content');} ?></textarea>
+            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php $content = filter_input(INPUT_POST, 'content'); if (isset($content)) {echo $content;} ?></textarea>
           </div>
           <div class=" form-group ">
-              <input type="text" name="author" value="<?php if (isset($_POST['author'])){ echo filter_input(INPUT_POST, 'author');} ?>" class="form-control" placeholder="Author"  autocomplete="off">
+              <input type="text" name="author" value="<?php $author = filter_input(INPUT_POST, 'author'); if (isset($author)){ echo $author;} ?>" class="form-control" placeholder="Author"  autocomplete="off">
           </div>
           <div class=" form-group ">
-              <input type="hidden" name="post_id" value="<?php if (isset($_POST['post_id'])) { echo filter_input(INPUT_POST, 'post_id');} ?>" class="form-control" >
+              <input type="hidden" name="post_id" value="<?php $post_id = filter_input(INPUT_POST, 'post_id'); if (isset($post_id)) { echo $post_id;} ?>" class="form-control" >
           </div>
           <div class=" form-group ">
             <?php if ($edit == false ): ?>

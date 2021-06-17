@@ -47,7 +47,7 @@
             </blockquote>
             <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true): ?> 
                 <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $post->getUuid() ?>&commentid=<?= $commentaire->getComment_id() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
-                <a class="btn btn-secoundary btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $_GET['uuid'] ?>" tabindex="-1">Editer</a>
+                <a class="btn btn-secoundary btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= filter_input(INPUT_GET, 'uuid') ?>" tabindex="-1">Editer</a>
             <?php endif; ?>
             <?php if (isset($_SESSION['user'])  && $_SESSION['role'] == false && ($_SESSION['user_id'] === $commentaire->getUser_id() )): ?>
                 <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $commentaire->getUuid() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>

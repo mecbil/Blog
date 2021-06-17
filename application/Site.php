@@ -5,8 +5,10 @@ class Site
 {
     public static function frontControl()
     {
-        $getcontroller = isset($_GET['controller']) ? filter_var($_GET['controller'], FILTER_SANITIZE_STRING) :"";
-        $gettask = isset($_GET['task']) ? filter_var($_GET['task'], FILTER_SANITIZE_STRING) :"";
+        $gcontroller = filter_input(INPUT_GET, 'controller');
+        $gtask = filter_input(INPUT_GET, 'task');
+        $getcontroller = isset($gcontroller) ? filter_var($gcontroller, FILTER_SANITIZE_STRING) :"";
+        $gettask = isset($gtask) ? filter_var($gtask, FILTER_SANITIZE_STRING) :"";
 
         // Controller par default MainController
         $controllerUse = 'MainController';
