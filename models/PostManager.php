@@ -53,16 +53,16 @@ class PostManager extends Manager
     {
         // tester le formulaire
         // 1- Un des elements du formulaire vide
-        if (empty($_POST['title']) || empty($_POST['chapo'])|| empty($_POST['content']) || empty($_POST['author'])) {
+        if (empty(filter_input(INPUT_POST, 'title')) || empty(filter_input(INPUT_POST, 'chapo'))|| empty(filter_input(INPUT_POST, 'content')) || empty(filter_input(INPUT_POST, 'author'))) {
             $erreur='Veuillez remplir tous les champs';
 
             return $erreur;
         }
 
-        $title = strip_tags($_POST['title']);
-        $chapo = strip_tags($_POST['chapo']);
-        $content = strip_tags($_POST['content']);
-        $author = strip_tags($_POST['author']);
+        $title = strip_tags(filter_input(INPUT_POST, 'title'));
+        $chapo = strip_tags(filter_input(INPUT_POST, 'chapo'));
+        $content = strip_tags(filter_input(INPUT_POST, 'content'));
+        $author = strip_tags(filter_input(INPUT_POST, 'author'));
         $date_creat = date("Y-m-d h:i:s");
         $date_modify = date("Y-m-d h:i:s");
         $uuid = uniqid();
@@ -117,16 +117,16 @@ class PostManager extends Manager
         // tester le formulaire
         // 1- Un des elements du formulaire vide
 
-        if (empty($_POST['title']) || empty($_POST['chapo'])|| empty($_POST['content']) || empty($_POST['author'])) {
+        if (empty(filter_input(INPUT_POST, 'title')) || empty(filter_input(INPUT_POST, 'chapo'))|| empty(filter_input(INPUT_POST, 'content')) || empty(filter_input(INPUT_POST, 'author'))) {
             $erreur='Veuillez remplir tous les champs';
 
             return $erreur;
         }
 
-        $title = strip_tags($_POST['title']);
-        $chapo = strip_tags($_POST['chapo']);
-        $content = strip_tags($_POST['content']);
-        $author = strip_tags($_POST['author']);
+        $title = strip_tags(filter_input(INPUT_POST, 'title'));
+        $chapo = strip_tags(filter_input(INPUT_POST, 'chapo'));
+        $content = strip_tags(filter_input(INPUT_POST, 'content'));
+        $author = strip_tags(filter_input(INPUT_POST, 'author'));
         $date_modify = date("Y-m-d h:i:s");
 
         // On instencie et hydrater le model;

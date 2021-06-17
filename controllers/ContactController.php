@@ -29,14 +29,14 @@ class ContactController
     public function mail()
     {
         // Un des elements du mail vide
-        if (empty($_POST['nom']) || empty($_POST['prenom'])|| empty($_POST['email']) || empty($_POST['sujet']) || empty($_POST['msg'])) {
+        if (empty(filter_input(INPUT_POST, 'nom')) || empty(filter_input(INPUT_POST, 'prenom'))|| empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'sujet')) || empty(filter_input(INPUT_POST, 'msg'))) {
             $erreur='Veuillez remplir tous les champs';
 
             return $erreur;
         }
 
         // Format de mail NON valide
-        if (!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var(filter_input(INPUT_POST, 'email'),FILTER_VALIDATE_EMAIL)) {
             $erreur = 'Veuillez saisir un Mail valide';
 
             return $erreur;   
@@ -44,11 +44,11 @@ class ContactController
 
         // Formulaire valide
         $adressemail = 'mecbil@yahoo.fr';
-        $nom = htmlspecialchars($_POST['nom']);
-        $prenom = htmlspecialchars($_POST['prenom']);
-       	$email = htmlspecialchars($_POST['email']);
-        $sujet = htmlspecialchars($_POST['sujet']);
-        $message = nl2br(htmlspecialchars($_POST['msg']));
+        $nom = filter_input(INPUT_POST, 'nom');
+        $prenom = filter_input(INPUT_POST, 'prenom');
+       	$email = filter_input(INPUT_POST, 'email');
+        $sujet = filter_input(INPUT_POST, 'sujet');
+        $message = nl2br(filter_input(INPUT_POST, 'msg'));
         $content = '<html><head><title> '.htmlspecialchars($sujet) .' </title></head><body>';
         $content .= '<p>' .$message .'<p>';
         $content .= '-------------------' .'<br>';
