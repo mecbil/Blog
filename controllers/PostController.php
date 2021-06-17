@@ -16,7 +16,8 @@ class PostController
         $commentManager = new CommentManager();
 
         // Get a post with uuid
-        $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
+        $guuid = filter_input(INPUT_GET, 'uuid');
+        $uuid = isset($guuid) ? filter_var($guuid, FILTER_SANITIZE_STRING):"";
         $post = $postManager->findPost('uuid', $uuid);
         $post_id = $post->getPost_id();
         $comments = $commentManager->searchcomments('post_id', $post_id);
@@ -62,7 +63,7 @@ class PostController
 
     public function deletePost()
     {
-        $uuid = $_GET['uuid'];
+        $uuid = filter_input(INPUT_GET, 'uuid');
 
         $postManager = new PostManager();
         $erreur = $postManager->deletePost($uuid);
@@ -108,7 +109,8 @@ class PostController
         $comments = $commentManager->findAllcomments("0", "date_modify DESC");
 
         // Get a posts with uuid
-        $uuid = isset($_GET['uuid'])  ? $_GET['uuid'] :"";
+        $guuid = filter_input(INPUT_GET, 'uuid');
+        $uuid = isset($guuid)  ? $guuid :"";
         $post = $postManager->findPost("uuid", $uuid);
         $_POST['title'] = $post->getTitle();
         $_POST['chapo'] = $post->getChapo();
@@ -126,8 +128,10 @@ class PostController
 
     public function updatePost()
     {
+        $gpost = filter_input(INPUT_POST, 'post_id');
+        
         $postManager = new PostManager();
-        $erreur = $postManager->updatePost($_POST['post_id']);
+        $erreur = $postManager->updatePost($gpost);
 
         if (empty($erreur)) {
         

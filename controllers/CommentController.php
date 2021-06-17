@@ -12,7 +12,7 @@ class CommentController
     // Ajouter un commentaire
     public function insertComment()
     {
-        $post = $_POST['post_id'];
+        $post = filter_input(INPUT_POST, 'post_id');
         $postManager= new PostManager();
         $commentManager = new CommentManager();
         $erreur = $commentManager->creat();
@@ -41,8 +41,11 @@ class CommentController
     {
         $commentManager = new CommentManager();
 
-        $get = isset($_GET['commentid']) ? filter_var($_GET['commentid'], FILTER_VALIDATE_INT) :"";
-        $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
+        $gget = filter_input(INPUT_GET, 'commentid');
+        $guuid = filter_input(INPUT_GET, 'uuid');
+
+        $get = isset($gget) ? filter_var($gget, FILTER_VALIDATE_INT) :"";
+        $uuid = isset($guuid) ? filter_var($guuid, FILTER_SANITIZE_STRING):"";
   
         $erreur = $commentManager->deletecomment($get);
 
@@ -53,7 +56,8 @@ class CommentController
 
     public function valideComment()
     {
-        $uuid = isset($_GET['uuid']) ? filter_var($_GET['uuid'], FILTER_SANITIZE_STRING):"";
+        $guuid = filter_input(INPUT_GET, 'uuid');
+        $uuid = isset($guuid) ? filter_var($guuid, FILTER_SANITIZE_STRING):"";
         $commentManager = new CommentManager();
         $erreur = $commentManager->valideComment($uuid);
 
