@@ -31,30 +31,30 @@ if (\session_status() === PHP_SESSION_NONE) {
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/"){echo 'active';} ?>" aria-current="page" href="/">Acceuil</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/"){echo 'active';} ?>" aria-current="page" href="/">Acceuil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=MainController&task=showPosts"){echo 'active';} ?>" href="index.php?controller=MainController&task=showPosts">Blog</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=MainController&task=showPosts"){echo 'active';} ?>" href="index.php?controller=MainController&task=showPosts">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "index.php"){echo 'active';} ?>" href="cv/MeciliNabil_CDev_CV.pdf " target='_blanck'>CV</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "index.php"){echo 'active';} ?>" href="cv/MeciliNabil_CDev_CV.pdf " target='_blanck'>CV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=ContactController&task=verif"){echo 'active';} ?>" href="index.php?controller=MainController&task=showContact">Contact</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=ContactController&task=verif"){echo 'active';} ?>" href="index.php?controller=MainController&task=showContact">Contact</a>
                         </li>
                         <?php if (isset($_SESSION['user'])): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=disconnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=disconnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
                         </li>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
                         </li>
                         <?php endif; ?>
                         <?php if (!isset($_SESSION['user'])): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if($_SERVER['REQUEST_URI'] == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){echo 'active';} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
                         </li>
                         <?php endif; ?>
                     </ul>
