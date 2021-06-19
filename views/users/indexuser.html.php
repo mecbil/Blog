@@ -2,11 +2,11 @@
 
   <div class="text-light col-11 col-lg-5 col-md-9 col-sm-11 pt-2">
     <!-- zone de Ajout Post blog -->
-    <h1>Tableau de bord : <?= $_SESSION['user'] ?></h1>
+    <h1>Tableau de bord : <?php print_r($_SESSION['user']) ?></h1>
     <div class="">
       <?php if (!empty($erreur)): ?>
       <div class="alert alert-danger">
-        <?= $erreur ?>
+        <?php print_r($erreur) ?>
       </div>
       <?php endif; ?>
             
@@ -56,8 +56,8 @@
       <div class="valider">
         <?php foreach ($comments as $comment) : ?>
           <br>
-          <div class=""><?= $comment->getComment() ?> </div>
-          <a class="btn btn-success btn-outline-light"href="index.php?controller=Commentcontroller&task=validecomment&uuid=<?= $comment->getUuid() ?>" >Valider</a>
+          <div class=""><?php print_r($comment->getComment()) ?> </div>
+          <a class="btn btn-success btn-outline-light"href="index.php?controller=Commentcontroller&task=validecomment&uuid=<?php print_r($comment->getUuid()) ?>" >Valider</a>
         <?php endforeach ?>
       </div> 
     </form>      
