@@ -46,7 +46,7 @@
                 <em><?php print_r(nl2br($commentaire->getComment())) ?></em>
             </blockquote>
             <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true): ?> 
-                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?php print_r($post->getUuid()) ?>&commentid=<?= $commentaire->getComment_id() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?php print_r($post->getUuid()) ?>&commentid=<?php print_r($commentaire->getComment_id()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                 <a class="btn btn-secoundary btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= filter_input(INPUT_GET, 'uuid') ?>" tabindex="-1">Editer</a>
             <?php endif; ?>
             <?php if (isset($_SESSION['user'])  && $_SESSION['role'] == false && ($_SESSION['user_id'] === $commentaire->getUser_id() )): ?>
