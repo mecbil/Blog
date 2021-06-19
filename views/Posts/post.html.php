@@ -9,7 +9,7 @@
             <h3>Veuillez vous connecter pour réagir !</h3>
             <?php endif; ?>
         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>        
-            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?php print($post->getUuid()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce Blog Post ?!`)" tabindex="-1">Supprimer</a>
+            <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?php print_r($post->getUuid()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce Blog Post ?!`)" tabindex="-1">Supprimer</a>
             <a class="btn btn-secoundary btn-outline-light" href="/?controller=postcontroller&task=editPost&uuid=<?= filter_input(INPUT_GET, 'uuid') ?>" tabindex="-1">Editer</a>
         <?php endif; ?>
     </div>
@@ -20,10 +20,10 @@
 <?php print_r($erreur) ?>
 </div>
 <?php endif; ?>
-<?php if (isset($_SESSION['user'])): ?>
+<?php $user = $_SESSION['user']; if (isset($user)): ?>
     <form class="m-2" action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
         <h3>Réagir ? N'hésitez pas !</h3>
-        <input type="text" name="pseudo" value ="<?php if (isset($_SESSION['user'])){print_r($_SESSION['user']);} ?>"" placeholder="Votre pseudo !">
+        <input type="text" name="pseudo" value ="<?php $user = $_SESSION['user']; if  (isset($user)) {print_r($_SESSION['user']);} ?>"" placeholder="Votre pseudo !">
         <br>
         <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
         <br>
