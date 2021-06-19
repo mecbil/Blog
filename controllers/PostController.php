@@ -106,24 +106,19 @@ class PostController
     {
         $postManager= new PostManager();
         $commentManager= new CommentManager();
-        $comments = $commentManager->findAllcomments("0", "date_modify DESC");
+        $comments = $commentManager->findAllcomments("date_modify DESC");
 
         // Get a posts with uuid
         $guuid = filter_input(INPUT_GET, 'uuid');
         $uuid = isset($guuid)  ? $guuid :"";
         $post = $postManager->findPost("uuid", $uuid);
-        $_POST['title'] = $post->getTitle();
-        $_POST['chapo'] = $post->getChapo();
-        $_POST['content'] = $post->getcontent();
-        $_POST['author'] = $post->getAuthor();
-        $_POST['post_id'] = $post->getPost_id();
 
         // Affichage (Show)
         $pageTitle = "Admin - ".$_SESSION['user'];
         $edit = true;
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
+        $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit', 'post'));
     }
 
     public function updatePost()
@@ -149,7 +144,7 @@ class PostController
 
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
-                $comments = $commentManager->findAllcomments("0", "date_modify DESC");
+                $comments = $commentManager->findAllcomments("date_modify DESC");
                 $pageTitle = $_SESSION['user'];
                 $edit = true;
                 
