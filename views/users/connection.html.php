@@ -5,7 +5,7 @@
         <div class="login-form">
             <?php if (!empty($erreur)): ?>
             <div class="alert alert-danger">
-            <?= $erreur ?>
+            <?php print_r($erreur) ?>
             </div>
             <?php endif; ?>
            
@@ -30,7 +30,7 @@
 
             <?php if (!empty($erreurAdd)): ?>
             <div class="alert alert-danger">
-            <?= $erreurAdd ?>
+            <?php print_r($erreurAdd) ?>
             </div>
             <?php endif; ?>
 
