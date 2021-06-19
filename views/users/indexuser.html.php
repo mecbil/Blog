@@ -19,6 +19,7 @@
       <?php endif; ?>
 
       method="post">
+      <?php if ($edit == false ): ?>
           <h2 class="text-center">Ajout d'un Blog Post </h2>
           <div class="form-group">
             <input type="text" name="title" value="<?php $title = filter_input(INPUT_POST, 'title'); if (isset($title)){ print_r($title) ;} ?>" class="form-control" placeholder="Title"  autocomplete="off">
@@ -43,6 +44,33 @@
             <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Modifier</button>
             <?php endif; ?>
           </div>
+        <?php endif; ?>
+        <?php if ($edit == true ): ?>
+          <h2 class="text-center">Ajout d'un Blog Post </h2>
+          <div class="form-group">
+            <input type="text" name="title" value="<?php print_r($post->getTitle()) ; ?>" class="form-control" placeholder="Title"  autocomplete="off">
+          </div>
+          <div class="form-group">
+            <input type="text" name="chapo" value="<?php print_r($post->getChapo()) ; ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
+          </div>
+          <div class=" form-group ">
+            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?php print_r($post->getcontent()); ?></textarea>
+          </div>
+          <div class=" form-group ">
+              <input type="text" name="author" value="<?php print_r($post->getAuthor()); ?>" class="form-control" placeholder="Author"  autocomplete="off">
+          </div>
+          <div class=" form-group ">
+              <input type="hidden" name="post_id" value="<?php print_r($post->getPost_id()); ?>" class="form-control" >
+          </div>
+          <div class=" form-group ">
+            <?php if ($edit == false ): ?>
+            <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Valider</button>
+            <?php endif; ?>
+            <?php if ($edit == true ): ?>
+            <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Modifier</button>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
       </form>
     </div>
   </div>
