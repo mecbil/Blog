@@ -30,16 +30,12 @@ class ContactController
     {
         // Un des elements du mail vide
         if (empty(filter_input(INPUT_POST, 'nom')) || empty(filter_input(INPUT_POST, 'prenom'))|| empty(filter_input(INPUT_POST, 'email')) || empty(filter_input(INPUT_POST, 'sujet')) || empty(filter_input(INPUT_POST, 'msg'))) {
-            $erreur='Veuillez remplir tous les champs';
-
-            return $erreur;
+            return 'Veuillez remplir tous les champs';
         }
 
         // Format de mail NON valide
         if (!filter_var(filter_input(INPUT_POST, 'email'),FILTER_VALIDATE_EMAIL)) {
-            $erreur = 'Veuillez saisir un Mail valide';
-
-            return $erreur;   
+            return 'Veuillez saisir un Mail valide';   
         }
 
         // Formulaire valide
@@ -66,8 +62,6 @@ class ContactController
 
         mail($adressemail, $sujet, $content, $headers);
 
-        $erreur = '';
-
-        return $erreur;
+        return '';
     }
 }

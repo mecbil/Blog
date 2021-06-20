@@ -68,7 +68,7 @@ class PostController
         $postManager = new PostManager();
         $erreur = $postManager->deletePost($uuid);
 
-        // 
+        // Pas d'erreur de suppression
         if (empty($erreur)) {
 
             // Get all posts

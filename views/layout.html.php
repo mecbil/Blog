@@ -2,6 +2,8 @@
 if (\session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$user = filter_var($_SESSION['user']);
+$role = filter_var($_SESSION['role']);
 ?>
 
 <!DOCTYPE html>
@@ -42,17 +44,17 @@ if (\session_status() === PHP_SESSION_NONE) {
                         <li class="nav-item">
                             <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=ContactController&task=verif"){print_r('active');} ?>" href="index.php?controller=MainController&task=showContact">Contact</a>
                         </li>
-                        <?php if (isset($_SESSION['user'])): ?>
+                        <?php if (isset($user)): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=disconnect"){print_r('active');} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
                         </li>
                         <?php endif; ?>
-                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == true ): ?>
+                        <?php if (isset($user) && $role == true ): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){print_r('active');} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
                         </li>
                         <?php endif; ?>
-                        <?php if (!isset($_SESSION['user'])): ?>
+                        <?php if (!isset($user)): ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){print_r('active');} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
                         </li>

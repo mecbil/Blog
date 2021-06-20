@@ -66,10 +66,6 @@ class CommentController
             $UserController->showConnect();
             return;
         } 
-        
-        // if ($erreur) {
-
-        // }          
     }
 
     public function affiche($uuid, $erreur)
