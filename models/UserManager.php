@@ -44,16 +44,12 @@ class UserManager extends Manager
         $gmail = filter_input(INPUT_POST, 'emailconnect');
 
         if (empty($gmail) || empty($gpassword)) {
-            $erreur='Veuillez remplir tous les champs';
-
-            return $erreur;
+            return 'Veuillez remplir tous les champs';
         }
 
         // Format de mail NON valide
         if (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
-            $erreur = 'Veuillez saisir un Mail valide';
-
-            return $erreur;
+            return 'Veuillez saisir un Mail valide';
         }
         // Formulaire valide
         // 2- chercher l'enregistrement avec le mail donné
@@ -61,10 +57,7 @@ class UserManager extends Manager
 
         // 3- L'enregistrement n'existe pas
         if (!($userExist)) {
-            // Utilisateur avec mail donné n'existe pas
-            $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
-
-            return $erreur;
+            return 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
         }
         // 4- L'enregistrement existe
         if ($userExist) {
@@ -82,9 +75,7 @@ class UserManager extends Manager
             if (!password_verify($gpassword, $userExist->getPassword())) {
                 // Ici Mail et mots de passe exacte
                 // Utilisateur avec mail donné n'existe pas
-                $erreur = 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
-
-                return $erreur;
+                return 'Veuillez donnez les bons identifiant ou creer un nouveau compte';
             }
         }
     }
@@ -98,22 +89,16 @@ class UserManager extends Manager
         $gpassword = filter_input(INPUT_POST, 'password');
         // 1- Un des elements du formulaire vide
         if (empty($gpseudo) || empty($gmail)|| empty($gpassword)) {
-            $erreurAdd = 'Veuillez remplir tous les champs';
-
-            return $erreurAdd;
+            return 'Veuillez remplir tous les champs';
         }
 
         // 2- Format de mail NON valide
         if (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
-            $erreurAdd = 'Veuillez saisir un Mail valide';
-
-            return $erreurAdd;
+            return 'Veuillez saisir un Mail valide';
         }
         // 3- Verification Mot de passe
         if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#', $gpassword)) {
-            $erreurAdd = $gpassword.' pas Bon mot de passe';
-
-            return $erreurAdd;
+            return 'Saisissez (8) caractère (1) Majuscule et (1) caractère special';
         }
 
         // 3- Verification & initialisation des champs
@@ -161,7 +146,8 @@ class UserManager extends Manager
         if ($item) {
             $user = new User;
     
-            return $this->hydrate($user, $item);;
+            return $this->hydrate($user, $item);
+            ;
         }
 
         return $item;

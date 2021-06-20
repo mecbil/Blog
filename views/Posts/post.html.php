@@ -1,4 +1,4 @@
-<?php $user = filter_var($_SESSION['user']); ?>
+<?php $user = filter_var($_SESSION['user']); $role = filter_var($_SESSION['role']); $user_id = filter_var($_SESSION['user_id'])?>
 <div class="text-light">
     <div class="container m-2">
         <h1><?php print_r($post->getTitle()) ?></h1>
@@ -9,7 +9,7 @@
         <?php if (!isset($user)): ?>
             <h3>Veuillez vous connecter pour réagir !</h3>
             <?php endif; ?>
-        <?php if (isset($user) && $_SESSION['role'] == true ): ?>        
+        <?php if (isset($user) && $role == true ): ?>        
             <a class="btn btn-danger btn-outline-light" href="/?controller=postcontroller&task=deletePost&uuid=<?php print_r($post->getUuid()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce Blog Post ?!`)" tabindex="-1">Supprimer</a>
             <a class="btn btn-secoundary btn-outline-light" href="/?controller=postcontroller&task=editPost&uuid=<?= filter_input(INPUT_GET, 'uuid') ?>" tabindex="-1">Editer</a>
         <?php endif; ?>
@@ -46,11 +46,11 @@
             <blockquote>
                 <em><?php print_r(nl2br($commentaire->getComment())) ?></em>
             </blockquote>
-            <?php if (isset($user) && $_SESSION['role'] == true): ?> 
+            <?php if (isset($user) && $role == true): ?> 
                 <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?php print_r($post->getUuid()) ?>&commentid=<?php print_r($commentaire->getComment_id()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                 <a class="btn btn-secoundary btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= filter_input(INPUT_GET, 'uuid') ?>" tabindex="-1">Editer</a>
             <?php endif; ?>
-            <?php if (isset($user)  && $_SESSION['role'] == false && ($_SESSION['user_id'] === $commentaire->getUser_id() )): ?>
+            <?php if (isset($user)  && $role == false && ($user_id === $commentaire->getUser_id() )): ?>
                 <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?php print_r($commentaire->getUuid()) ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
             <?php endif; ?>
         <?php endforeach ?>

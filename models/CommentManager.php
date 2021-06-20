@@ -69,8 +69,6 @@ class CommentManager extends Manager
     {
         // tester le formulaire
         // 1- Un des elements du formulaire vide
-        
-
         if (empty(filter_input(INPUT_POST, 'pseudo')) || empty(filter_input(INPUT_POST, 'comment'))) {
             $erreur[1]='Veuillez remplir tous les champs';
 
@@ -117,9 +115,8 @@ class CommentManager extends Manager
         // On enregistre
         $sql = $this->pdo->prepare("UPDATE comments SET valide = true WHERE uuid = '{$uuid}'");    
         $sql->execute();
-        // try catch??
-        $erreur='';
-        return $erreur;
+
+        return '';
     }
 
     // Supprimer un commentaire
@@ -134,8 +131,7 @@ class CommentManager extends Manager
             return '';            
         } 
         if (empty($comment)) {
-            $erreur='Veuillez donner un identifiant valable';
-            return $erreur; 
+            return 'Veuillez donner un identifiant valable'; 
         }
     }
 }

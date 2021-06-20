@@ -54,9 +54,8 @@ class PostManager extends Manager
         // tester le formulaire
         // 1- Un des elements du formulaire vide
         if (empty(filter_input(INPUT_POST, 'title')) || empty(filter_input(INPUT_POST, 'chapo'))|| empty(filter_input(INPUT_POST, 'content')) || empty(filter_input(INPUT_POST, 'author'))) {
-            $erreur='Veuillez remplir tous les champs';
 
-            return $erreur;
+            return 'Veuillez remplir tous les champs';
         }
 
         $title = strip_tags(filter_input(INPUT_POST, 'title'));
@@ -106,9 +105,8 @@ class PostManager extends Manager
             return null;
         }
         if (empty($post)) {
-            $erreur='Veuillez donner un identifiant valable';
 
-            return $erreur;
+            return 'Veuillez donner un identifiant valable';
         }
     }
 
@@ -118,9 +116,8 @@ class PostManager extends Manager
         // 1- Un des elements du formulaire vide
 
         if (empty(filter_input(INPUT_POST, 'title')) || empty(filter_input(INPUT_POST, 'chapo'))|| empty(filter_input(INPUT_POST, 'content')) || empty(filter_input(INPUT_POST, 'author'))) {
-            $erreur='Veuillez remplir tous les champs';
 
-            return $erreur;
+            return 'Veuillez remplir tous les champs';
         }
 
         $title = strip_tags(filter_input(INPUT_POST, 'title'));

@@ -10,8 +10,6 @@ use Models\CommentManager;
 
 class UserController
 {
-
-
     // Montrer la page de connection
     public static function showConnect()
     {
