@@ -1,12 +1,13 @@
+<!DOCTYPE html>
 <?php
 if (\session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$user = filter_var($_SESSION['user']);
-$role = filter_var($_SESSION['role']);
+if (isset($_SESSION['user'])) {
+    $user = filter_var($_SESSION['user']);
+    $role = filter_var($_SESSION['role']);
+}
 ?>
-
-<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -77,7 +78,7 @@ $role = filter_var($_SESSION['role']);
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <script src="assets/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="https://kit.fontawesome.com/dbbb09a020.js" crossorigin="anonymous"></script>
 </body>
 

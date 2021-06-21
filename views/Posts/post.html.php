@@ -1,4 +1,10 @@
-<?php $user = filter_var($_SESSION['user']); $role = filter_var($_SESSION['role']); $user_id = filter_var($_SESSION['user_id'])?>
+<?php
+if (isset($_SESSION['user'])) {
+    $user = filter_var($_SESSION['user']);
+    $role = filter_var($_SESSION['role']);
+    $user_id = filter_var($_SESSION['user_id']);
+}
+?>
 <div class="text-light">
     <div class="container m-2">
         <h1><?php print_r($post->getTitle()) ?></h1>

@@ -30,9 +30,12 @@ main {
   height: 476px;
 }
 
+.container-fluid {
+  width: 98%;
+}
+
 #carte {
   width: 16rem;
-  box-shadow: 1px 1px white;
   padding: 0;
   margin: 1em;
 }
@@ -40,20 +43,35 @@ main {
 .card-body {
   font-family: "Lato", sans-serif;
   height: 7rem;
-  margin-bottom: 0;
+  margin: 0;
+  padding: 0 0 0 1em;
+}
+
+.card-title {
+  margin: 0;
+}
+
+
+.card-footer {
+  height: 3.4rem;
 }
 
 .present {
   display: flex;
   justify-content: space-between;
+  border: dashed rgb(236, 202, 7);
+  margin: 0.5em 1.4em;
+  padding: 5px;
+}
+
+.baniere {
+  width: 76px;
+  border-radius: 10% 35%;
+  margin: 0 6em 0 2em;
 }
 
 span {
   font-weight: bold;
-}
-
-.mb-4 {
-  margin-bottom: 0;
 }
 
 footer {
@@ -74,11 +92,6 @@ h2 {
   font-weight: bold;
   margin-left: 1em;
   padding-top: 0.5em;
-}
-
-.baniere {
-  width: 56px;
-  border-radius: 10% 35%;
 }
 
 .conninscri {
