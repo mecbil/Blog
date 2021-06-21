@@ -20,7 +20,8 @@ class ContactController
             $rendu = new renderer;
             $rendu->render('users/contact', compact('pageTitle','erreur'));
         }
-        else {
+        
+        if ($erreur) {
             $rendu = new renderer;
             $rendu->render('users/contact', compact('pageTitle', 'erreur'));
         }

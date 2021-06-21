@@ -35,7 +35,7 @@ if (isset($_SESSION['user'])) {
         <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
         <br>
         <input type="hidden" name="post_id" value ="<?php print_r($post->getPost_id()) ?>">
-        <input type="hidden" name="user_id" value ="<?php print_r($user) ?>">
+        <input type="hidden" name="user_id" value ="<?php print_r($post->getUser_id()) ?>">
         <input type="hidden" name="uuid" value ="<?php print_r($post->getUuid()) ?>">
         <br>
         <button type="submit" class="btn btn-dark btn-outline-light">Commenter !</button>

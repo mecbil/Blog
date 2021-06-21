@@ -23,7 +23,8 @@ class CommentController
             $uuid = $post->getUuid();
             $this->affiche($uuid, 'Votre commentaire sera afficher après validation!');
 
-        } else {
+        } 
+        if ($erreur[1]) {
             $post = $postManager->findPost('post_id', $post);
             $post_id = $post->getpost_id();
             $comments = $commentManager->searchcomments('post_id', $post_id);
