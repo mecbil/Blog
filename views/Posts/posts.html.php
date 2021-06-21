@@ -1,10 +1,10 @@
 <div class="row" >
     <?php foreach ($posts as $article) : ?>
     <div class="col-lg-4" id="carte">
-        <div class="card border-light mb-4">
+        <div class="card border-light mb-0">
             <div class="card-header text-light bg-success text-center"><?php print_r($article->getTitle()) ?></div>
             <p class="text-center"> Publié le : <?php $datefr= strtotime($article->getDate_modify()); print_r(date('d-m-Y H:i:s', $datefr)) ?></p>
-            <div class="card-body text-primary m-0 p-0">
+            <div class="card-body">
                 <h5 class="card-title">
                     <?php
                     if (strlen($article->getChapo())>=70) {

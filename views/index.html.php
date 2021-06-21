@@ -1,6 +1,6 @@
-<div class="present text-light container col-lg-12 p-2">
+<div class="present text-light container-fluid col-lg-12">
     <img class="rounded baniere " src="../images/me.png">
-    <p>Les oiseaux</p>
+    <h3>“L'enseignement devrait être ainsi : celui qui le reçoit le recueille comme un don inestimable mais jamais comme une contrainte pénible.”</h3>
 </div>
 
 <div class="row container-fluid">
@@ -8,10 +8,10 @@
 
     <?php foreach ($posts as $article) : ?>
     <div class="col-lg-4" id="carte">
-        <div class="card border-light mb-4">
+        <div class="card border-light">
             <div class="card-header text-light bg-success text-center"><?php print_r($article->getTitle())  ?> </div>
             <p class="text-center"> Publié le : <?php $datefr= strtotime($article->getDate_modify()); print_r(date('d-m-Y H:i:s', $datefr)) ?></p>
-            <div class="card-body text-primary m-0 p-0">
+            <div class="card-body">
                 <h5 class="card-title"><?php
                   if (strlen($article->getChapo())>=70) {
                       print_r(substr($article->getChapo(), 0, 70). "...") ;
