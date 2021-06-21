@@ -8,7 +8,7 @@ if (isset($_SESSION['user'])) {
 <div class="text-light">
     <div class="container m-2">
         <h1><?php print_r($post->getTitle()) ?></h1>
-        <small>Publié le : <?php $datef= strtotime($post->getDate_creat()); print_r(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
+        <small>Modifié le : <?php $datef= strtotime($post->getDate_modify()); print_r(date('d-m-Y'.' à '.' H:i:s', $datef)) ?></small>
         <p><?php print_r($post->getChapo()) ?></p>
         <p><?php print_r(nl2br($post->getContent())) ?></p>
         <div >Auteur : <small class="text-warning"><?php print_r($post->getAuthor()) ?></small></div>
