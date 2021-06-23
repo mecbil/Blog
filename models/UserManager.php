@@ -40,8 +40,8 @@ class UserManager extends Manager
     public function connection()
     {
         // Mail ou password vide
-        $gpassword = filter_input(INPUT_POST, 'passwordconnect');
-        $gmail = filter_input(INPUT_POST, 'emailconnect');
+        $gpassword = filter_input(INPUT_POST, 'gpasswordconnect');
+        $gmail = filter_input(INPUT_POST, 'gemailconnect');
 
         if (empty($gmail) || empty($gpassword)) {
             return 'Veuillez remplir tous les champs';
@@ -84,9 +84,9 @@ class UserManager extends Manager
     public function insertion()
     {
         // tester le formulaire
-        $gpseudo = filter_input(INPUT_POST, 'pseudo');
-        $gmail = filter_input(INPUT_POST, 'email');
-        $gpassword = filter_input(INPUT_POST, 'password');
+        $gpseudo = filter_input(INPUT_POST, 'gpseudo');
+        $gmail = filter_input(INPUT_POST, 'gmail');
+        $gpassword = filter_input(INPUT_POST, 'gpassword');
         // 1- Un des elements du formulaire vide
         if (empty($gpseudo) || empty($gmail)|| empty($gpassword)) {
             return 'Veuillez remplir tous les champs';
