@@ -17,12 +17,17 @@ class UserController
         if (isset($_SESSION['user'])) {
             $pageTitle = $_SESSION['user'];
             $edit = false;
+            $title = '';
+            $chapo = '';
+            $content = '';
+            $author = '';
+            $post_id = '';
             
             $commentmanager = new CommentManager();
             $comments = $commentmanager->findAllcomments("date_modify DESC");
 
             $rendu = new renderer;
-            $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit'));
+            $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit', 'title', 'chapo', 'content', 'author', 'post_id' ));
         } 
         // Utilisateur Non connecté
         if (!isset($_SESSION['user'])) {
@@ -49,14 +54,17 @@ class UserController
             
             if ($_SESSION['role'] == true) {
                 $edit = false;
-                $gemailconnect = filter_input(INPUT_POST, 'gemailconnect');
-                $gpasswordconnect = filter_input(INPUT_POST, 'gpasswordconnect');
+                $title = '';
+                $chapo = '';
+                $content = '';
+                $author = '';
+                $post_id = '';
 
                 $commentmanager = new CommentManager();
                 $comments = $commentmanager->findAllcomments("date_modify DESC");
 
                 $rendu = new renderer;
-                $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit','gemailconnect', 'gpasswordconnect'));
+                $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit', 'title', 'chapo', 'content', 'author', 'post_id' ));
             } 
 
             $redirect = new MainController;
