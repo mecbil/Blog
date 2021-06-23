@@ -38,7 +38,6 @@ main {
   width: 16rem;
   padding: 0;
   margin: 1em;
-
 }
 
 .card-header {
@@ -46,6 +45,7 @@ main {
   background: #e2e2e2ea;
   font-weight: bold;
 }
+
 .card-body {
   font-family: "Lato", sans-serif;
   height: 6.6rem;
@@ -61,7 +61,6 @@ main {
 .present {
   display: flex;
   justify-content: space-between;
-  /* border: dashed rgb(236, 202, 7); */
   margin: 0.5em 1.4em;
   padding: 5px;
 }
