@@ -93,7 +93,7 @@ class PostManager extends Manager
         $sql->bindValue(':user_id', $post->getUser_id());
         $sql->execute();
             
-        return null;
+        return '';
     }
 
     public function deletePost($uuid)
