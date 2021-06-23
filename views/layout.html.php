@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php print_r($pageTitle) ?></title>
+    <title><?= $pageTitle ?></title>
     <link rel="shortcut icon" type="image/png" href="images/mn.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Charm&family=Lato&display=swap" rel="stylesheet">
@@ -34,30 +34,30 @@ if (isset($_SESSION['user'])) {
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/"){print_r('active');} ?>" aria-current="page" href="/">Accueil</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/"){echo('active');} ?>" aria-current="page" href="/">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=MainController&task=showPosts"){print_r('active');} ?>" href="index.php?controller=MainController&task=showPosts">Blog</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=MainController&task=showPosts"){echo('active');} ?>" href="index.php?controller=MainController&task=showPosts">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "index.php"){print_r('active');} ?>" href="cv/MeciliNabil_CDev_CV.pdf " target='_blanck'>CV</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "index.php"){echo('active');} ?>" href="cv/MeciliNabil_CDev_CV.pdf " target='_blanck'>CV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=ContactController&task=verif"){print_r('active');} ?>" href="index.php?controller=MainController&task=showContact">Contact</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=ContactController&task=verif"){echo('active');} ?>" href="index.php?controller=MainController&task=showContact">Contact</a>
                         </li>
                         <?php if (isset($user)): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=disconnect"){print_r('active');} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=disconnect"){echo('active');} ?>" href="index.php?controller=UserController&task=disconnect">Disconnect</a>
                         </li>
                         <?php endif; ?>
                         <?php if (isset($user) && $role == true ): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){print_r('active');} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){echo('active');} ?>" href="index.php?controller=UserController&task=showConnect" tabindex="-1">Administrer</a>
                         </li>
                         <?php endif; ?>
                         <?php if (!isset($user)): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){print_r('active');} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){echo('active');} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
                         </li>
                         <?php endif; ?>
                     </ul>
@@ -70,7 +70,7 @@ if (isset($_SESSION['user'])) {
         </nav>
     </header>
     <main class="container-Fluid bg-dark">
-      <?php print_r($pageContent) ?>
+      <?= $pageContent ?>
     </main>
     <footer class="container-Fluid text-white bg-dark text-center">
       <p>&copy; 2021 Mecili, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> 

@@ -24,9 +24,18 @@ class PostController
   
         // Affichage (Show)
         $pageTitle = "Blog Posts";
+        if (isset($_SESSION['user'])) {
+            $user = filter_var($_SESSION['user']);
+            $role = filter_var($_SESSION['role']);
+            $user_id = filter_var($_SESSION['user_id']);
+        } else {
+            $user = '';
+            $role = '';
+            $user_id = '';
+        }
 
         $rendu = new renderer;
-        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments'));
+        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments', 'user', 'role', 'user_id'));
     }
 
     // Ajouter un Blog post
