@@ -34,7 +34,7 @@ if (isset($_SESSION['user'])) {
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/"){print_r('active');} ?>" aria-current="page" href="/">Acceuil</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/"){print_r('active');} ?>" aria-current="page" href="/">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=MainController&task=showPosts"){print_r('active');} ?>" href="index.php?controller=MainController&task=showPosts">Blog</a>

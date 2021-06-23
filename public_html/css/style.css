@@ -38,8 +38,14 @@ main {
   width: 16rem;
   padding: 0;
   margin: 1em;
+
 }
 
+.card-header {
+  color: goldenrod;
+  background: #e2e2e2ea;
+  font-weight: bold;
+}
 .card-body {
   font-family: "Lato", sans-serif;
   height: 6.6rem;
@@ -47,18 +53,15 @@ main {
   padding: 0 0.2em 0 0.8em;
 }
 
-.card-title {
-  margin: 0;
-}
-
 .card-footer {
   height: 3.4rem;
+  background: #e2e2e2ea;
 }
 
 .present {
   display: flex;
   justify-content: space-between;
-  border: dashed rgb(236, 202, 7);
+  /* border: dashed rgb(236, 202, 7); */
   margin: 0.5em 1.4em;
   padding: 5px;
 }
