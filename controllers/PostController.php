@@ -47,9 +47,6 @@ class PostController
         $erreur= $postManager->insert();
 
         if (empty($erreur)) {
-            
-            // Get all posts
-            $posts = $postManager->findAllPosts("date_modify DESC");
     
             // Affichage (Show)
             $pageTitle = "Blog Posts";
@@ -95,10 +92,6 @@ class PostController
             $rendu = new renderer;
             $rendu->render('posts/posts', compact('pageTitle', 'posts'));
         }
-
-        if (!empty($erreur)) {
-            // echo ('<script>alert(\"Enregistrement non trouver")</script>');
-        }
     }
 
     // Liste des posts non validé
@@ -119,7 +112,6 @@ class PostController
 
         $rendu = new renderer;
         $rendu->render('users/indexuser', compact('comments', 'edit','title', 'chapo', 'content', 'author', 'post_id' ));
-
     }
 
     // Editer un posts
