@@ -27,7 +27,12 @@ class MainController
     {
         $pageTitle = "Contact Us" ;
         $rendu = new renderer;
-        $rendu->render('users/contact', compact('pageTitle'));
+        $nom = '';
+        $prenom = '';
+        $email = '';
+        $sujet = '';
+        $msg = '';
+        $rendu->render('users/contact', compact('pageTitle', 'nom','prenom', 'email', 'sujet', 'msg'));
     }
 
     // Montrer la page de tous les Posts trier par date'

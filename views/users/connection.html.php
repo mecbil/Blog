@@ -5,17 +5,17 @@
         <div class="login-form">
             <?php if (!empty($erreur)): ?>
             <div class="alert alert-danger">
-            <?php print_r($erreur) ?>
+            <?= $erreur ?>
             </div>
             <?php endif; ?>
            
             <form action="index.php?controller=UserController&task=connect" method="post">
                 <h2 class="text-center">Connexion</h2>
                 <div class="form-group">
-                    <input type="email" name="emailconnect" value="<?php $gemailconnect = filter_input(INPUT_POST, 'emailconnect') ; if (isset($gemailconnect)){print_r($gemailconnect) ;} ?>" class="form-control" placeholder="Adresse mail"  autocomplete="off">
+                    <input type="email" name="gemailconnect" value="<?= $gemailconnect ?>" class="form-control" placeholder="Adresse mail"  autocomplete="off">
                 </div>
                 <div class=" form-group ">
-                    <input type="password" name="passwordconnect" value="<?php $passwordconnect = filter_input(INPUT_POST, 'password'); if (isset($passwordconnect)){print_r($passwordconnect);} ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
+                    <input type="password" name="gpasswordconnect" value="<?= $gpasswordconnect ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <button type="submit" class="btn btn-dark btn-outline-light btn-block mt-2">Connexion</button>
@@ -30,7 +30,7 @@
 
             <?php if (!empty($erreurAdd)): ?>
             <div class="alert alert-danger">
-            <?php print_r($erreurAdd) ?>
+            <?= $erreurAdd ?>
             </div>
             <?php endif; ?>
 
@@ -38,13 +38,13 @@
                 <h2 class=" text-center "> Enregistrement </h2>
 
                 <div class=" form-group ">
-                    <input type="text" name="pseudo" value="<?php $pseudo = filter_input(INPUT_POST, 'pseudo'); if (isset($pseudo)) {print_r($pseudo) ;} ?>" class="form-control" placeholder="Pseudo" autocomplete="off">
+                    <input type="text" name="gpseudo" value="<?= $gpseudo ?>" class="form-control" placeholder="Pseudo" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="email" value="<?php $email = filter_input(INPUT_POST, 'email'); if (isset($email)) {print_r($email) ;} ?>" class="form-control" placeholder="Adresse mail" autocomplete="off">
+                    <input type="text" name="gmail" value="<?= $gmail ?>" class="form-control" placeholder="Adresse mail" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" value="<?php $password = filter_input(INPUT_POST, 'password'); if (isset($password)){print_r($password) ;} ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
+                    <input type="password" name="gpassword" value="<?= $gpassword ?>" class="form-control" placeholder="Mot de passe" title="Minimum 8 caractères avec au moin une lettre Majuscule et une miniscule et un caractère special " autocomplete="off">
                 </div>
                 <div class=" form-group ">
                     <button type=" submit " class="btn btn-dark btn-outline-light btn-block mt-2"> Enregistrer </button>
