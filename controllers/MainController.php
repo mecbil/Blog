@@ -11,9 +11,8 @@ class MainController
     // Montrer la page index avec 3 Posts
     public function showIndex()
     {
-        $postManager= new PostManager();
-
         // Get all posts
+        $postManager= new PostManager();
         $posts = $postManager->findAllposts("date_modify DESC", "3");
 
         // Affichage (Show)
@@ -25,14 +24,8 @@ class MainController
     // Montrer la page contact
     public function showContact()
     {
-        $pageTitle = "Contact Us" ;
         $rendu = new renderer;
-        $nom = '';
-        $prenom = '';
-        $email = '';
-        $sujet = '';
-        $msg = '';
-        $rendu->render('users/contact', array('pageTitle'=>$pageTitle, 'nom'=>$nom,'prenom'=>$prenom, 'email'=>$email, 'sujet'=>$sujet, 'msg'=>$msg));
+        $rendu->render('users/contact', array('pageTitle'=>'Contact Us', 'nom'=>'','prenom'=>'', 'email'=>'', 'sujet'=>'', 'msg'=>''));
     }
 
     // Montrer la page de tous les Posts trier par date'

@@ -19,6 +19,10 @@ class PostController
         $guuid = filter_input(INPUT_GET, 'uuid');
         $uuid = isset($guuid) ? filter_var($guuid, FILTER_SANITIZE_STRING):"";
         $post = $postManager->findPost('uuid', $uuid);
+        if (!$post) {
+            $rendu = new renderer;
+            $rendu->render('404', array('pageTitle'=>"Page d'erreur"));            
+        }
         $post_id = $post->getPost_id();
         $comments = $commentManager->searchcomments('post_id', $post_id);
   
@@ -153,7 +157,7 @@ class PostController
                 $pageTitle = $_SESSION['user'];
                 
                 $rendu = new renderer;
-                $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'comments'=>$commentManager, 'edit'=>true ));
+                $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'comments'=>$comments, 'edit'=>true ));
             }
         }          
     }

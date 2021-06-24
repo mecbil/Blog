@@ -4,14 +4,14 @@ namespace Application;
 
 class Renderer
 {
-    public function render(string $path, array $variables = []):void
+    public function render(string $page, array $variables = []):void
     {
+        $path = '../views' ;
+
         extract($variables);// a enlever
-        if (is_file("../views/{$path}.html.php")) {
-            ob_start();
-            require "../views/{$path}.html.php";    
-                $pageContent = ob_get_clean();
-            require '../views/layout.html.php';
-        }
+        ob_start();
+        require "{$path}/{$page}.html.php";    
+            $pageContent = ob_get_clean();
+        require "{$path}/layout.html.php";
     }
 }
