@@ -30,7 +30,7 @@ class ContactController
         
         if ($erreur) {
             $rendu = new renderer;
-            $rendu->render('users/contact', compact('pageTitle', 'erreur', 'nom', 'prenom', 'email', 'sujet', 'msg'));
+            $rendu->render('users/contact', array('pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'nom'=>$nom, 'prenom'=>$prenom, 'email'=>$email, 'sujet'=>$sujet, 'msg'=>$msg));
         }
     }
 }

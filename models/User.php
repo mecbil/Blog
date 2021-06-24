@@ -10,7 +10,6 @@ class User
     protected $mail;
     protected $role;
 
-
     // Get the value of id 
     public function getUser_id()
     {

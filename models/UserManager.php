@@ -147,7 +147,6 @@ class UserManager extends Manager
             $user = new User;
     
             return $this->hydrate($user, $item);
-            ;
         }
 
         return $item;
