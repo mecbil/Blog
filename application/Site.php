@@ -7,6 +7,7 @@ class Site
     {
         $gcontroller = filter_input(INPUT_GET, 'controller');
         $gtask = filter_input(INPUT_GET, 'task');
+
         $getcontroller = isset($gcontroller) ? filter_var($gcontroller, FILTER_SANITIZE_STRING) :"";
         $gettask = isset($gtask) ? filter_var($gtask, FILTER_SANITIZE_STRING) :"";
 
@@ -33,11 +34,15 @@ class Site
                 $controller->$task();
             } 
             if (!method_exists($controllerUse, $task)) {
-                header('Location: /404.php');
+                $rendu = new renderer;
+                $rendu->render('404', array('pageTitle'=>"Page d'erreur"));
+                // header('Location: /404.php');
             }
         }
         if (!is_file('..\\'.$controllerUse.'.php')) {
-            header('Location: /404.php');
+            $rendu = new renderer;
+            $rendu->render('404', array('pageTitle'=>"Page d'erreur"));
+            // header('Location: /404.php');
         }
     }
 }
