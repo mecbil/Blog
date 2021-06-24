@@ -35,7 +35,7 @@ class PostController
         }
 
         $rendu = new renderer;
-        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments', 'user', 'role', 'user_id'));
+        $rendu->render('posts/post', array('pageTitle'=>$pageTitle, 'post'=>$post, 'comments'=>$comments, 'user'=>$user, 'role'=>$role, 'user_id'=>$user_id));
     }
 
     // Ajouter un Blog post
@@ -57,7 +57,7 @@ class PostController
             $author = '';
             $post_id = '';
             $rendu = new renderer;
-            $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit', 'erreur', 'title', 'chapo', 'content', 'author', 'post_id' ));
+            $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>$edit, 'erreur'=>$erreur, 'title'=>$title, 'chapo'=>$chapo, 'content'=>$content, 'author'=>$author, 'post_id'=>$post_id ));
         } 
 
         $pageTitle = $_SESSION['user'];
@@ -69,8 +69,7 @@ class PostController
         $post_id = filter_input(INPUT_POST, 'post_id');
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit', 'erreur', 'title', 'chapo', 'content', 'author', 'post_id' ));
-
+        $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>$edit, 'erreur'=>$erreur, 'title'=>$title, 'chapo'=>$chapo, 'content'=>$content, 'author'=>$author, 'post_id'=>$post_id ));
     }
 
     public function deletePost()
@@ -90,7 +89,7 @@ class PostController
             $pageTitle = "Blog Posts";
 
             $rendu = new renderer;
-            $rendu->render('posts/posts', compact('pageTitle', 'posts'));
+            $rendu->render('posts/posts', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
         }
     }
 
@@ -103,15 +102,9 @@ class PostController
         $comments = $commentManager->findAllcomments("date_modify DESC");
 
         // Affichage (Show)
-        $edit = false;
-        $title = '';
-        $chapo = '';
-        $content = '';
-        $author = '';
-        $post_id = '';
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', compact('comments', 'edit','title', 'chapo', 'content', 'author', 'post_id' ));
+        $rendu->render('users/indexuser', array('comments'=>$comments, 'edit'=>false,'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>''));
     }
 
     // Editer un posts
@@ -128,10 +121,9 @@ class PostController
 
         // Affichage (Show)
         $pageTitle = "Admin - ".$_SESSION['user'];
-        $edit = true;
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', compact('pageTitle', 'comments', 'edit', 'post'));
+        $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>true, 'post'=>$post));
     }
 
     public function updatePost()
@@ -150,7 +142,7 @@ class PostController
             $pageTitle = "Blog Posts";
 
             $rendu = new renderer;
-            $rendu->render('posts/posts', compact('pageTitle', 'posts'));
+            $rendu->render('posts/posts', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
         } 
         
         if (!empty($erreur)) {
@@ -159,10 +151,9 @@ class PostController
                 $commentManager= new CommentManager();
                 $comments = $commentManager->findAllcomments("date_modify DESC");
                 $pageTitle = $_SESSION['user'];
-                $edit = true;
                 
                 $rendu = new renderer;
-                $rendu->render('users/indexuser', compact('pageTitle', 'erreur', 'comments', 'edit' ));
+                $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'comments'=>$commentManager, 'edit'=>true ));
             }
         }          
     }

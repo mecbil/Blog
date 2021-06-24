@@ -34,7 +34,7 @@ class CommentController
             $erreur = $erreur[1];
 
             $rendu = new renderer;
-            $rendu->render('posts/post', compact('pageTitle', 'post', 'comments', 'erreur' ));
+            $rendu->render('posts/post', array('pageTitle'=>$pageTitle, 'post'=>$post, 'comments'=>$comments, 'erreur'=>$erreur));
         }
     }
 
@@ -82,6 +82,6 @@ class CommentController
         $pageTitle = "Blog Posts";
 
         $rendu = new renderer;
-        $rendu->render('posts/post', compact('pageTitle', 'post', 'comments', 'erreur'));
+        $rendu->render('posts/post', array('pageTitle'=>$pageTitle, 'post'=>$post, 'comments'=>$comments, 'erreur'=>$erreur));
     }
 }

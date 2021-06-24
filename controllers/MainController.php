@@ -19,7 +19,7 @@ class MainController
         // Affichage (Show)
         $pageTitle = "Home" ;
         $rendu = new renderer;
-        $rendu->render('index', compact('pageTitle', 'posts'));
+        $rendu->render('index', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
     }
 
     // Montrer la page contact
@@ -32,7 +32,7 @@ class MainController
         $email = '';
         $sujet = '';
         $msg = '';
-        $rendu->render('users/contact', compact('pageTitle', 'nom','prenom', 'email', 'sujet', 'msg'));
+        $rendu->render('users/contact', array('pageTitle'=>$pageTitle, 'nom'=>$nom,'prenom'=>$prenom, 'email'=>$email, 'sujet'=>$sujet, 'msg'=>$msg));
     }
 
     // Montrer la page de tous les Posts trier par date'
@@ -46,6 +46,6 @@ class MainController
         // Affichage (Show)
         $pageTitle = "Blog Posts";
         $rendu = new renderer;
-        $rendu->render('posts/posts', compact('pageTitle', 'posts'));
+        $rendu->render('posts/posts', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
     }
 }

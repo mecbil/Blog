@@ -19,7 +19,7 @@ class ContactManager extends Manager
             $adressemail = 'mecbil@yahoo.fr';
             $nom = filter_input(INPUT_POST, 'nom');
             $prenom = filter_input(INPUT_POST, 'prenom');
-               $email = filter_input(INPUT_POST, 'email');
+            $email = filter_input(INPUT_POST, 'email');
             $sujet = filter_input(INPUT_POST, 'sujet');
             $message = nl2br(filter_input(INPUT_POST, 'msg'));
             $content = '<html><head><title> '.htmlspecialchars($sujet) .' </title></head><body>';
@@ -27,8 +27,7 @@ class ContactManager extends Manager
             $content .= '-------------------' .'<br>';
             $content .= 'De: ' .$nom .' ' .$prenom .' (' .$email .')';
             $content .= '<p>' .'Formulaire de contact envoyé depuis le site nabilmecili.fr' .'<p>';
-            $content .= '</body></html>';
-         
+            $content .= '</body></html>';        
             $headers  = 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'From:' .$nom .' ' .$prenom .'  <'.$email.'>' . '\r\n';
             $headers .=	'Content-Type: text/plain; charset="iso-8859-1"';
