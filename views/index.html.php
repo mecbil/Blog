@@ -14,13 +14,7 @@
             <div class="card-header text-center"><?= $article->getTitle() ?></div>
             <p class="text-center"> Modifié le : <?php $datefr= strtotime($article->getDate_modify()); echo(date('d-m-Y H:i:s', $datefr)) ?></p>
             <div class="card-body">
-                <h5><?php
-                  if (strlen($article->getChapo())>=70) {
-                      echo(substr($article->getChapo(), 0, 70). "...") ;
-                  } else {
-                    echo($article->getChapo()) ;
-                  }
-                  ?></h5>
+                <h5><?= strlen($article->getChapo())>=70  ? substr($article->getChapo(), 0, 70). "..." : $article->getChapo() ?></h5>
             </div>
             <div class="card-footer text-center pb-0">
                 <p><a class="btn btn-outline-light btn-dark" href="/?controller=postcontroller&task=showOnePost&uuid=<?php echo($article->getUuid())  ?>">Détails &raquo;</a></p>
