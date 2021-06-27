@@ -27,8 +27,8 @@ SET time_zone = "+00:00";
 -- Structure de la table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
+DROP TABLE IF EXISTS 'comments';
+CREATE TABLE IF NOT EXISTS 'comments' (
   `comment_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` char(13) NOT NULL,
   `post_id` smallint(5) UNSIGNED NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 -- Déchargement des données de la table `comments`
 --
 
-INSERT INTO `comments` (`comment_id`, `uuid`, `post_id`, `date_creat`, `date_modify`, `comment`, `author`, `valide`, `user_id`) VALUES
+INSERT INTO 'comments' (`comment_id`, `uuid`, `post_id`, `date_creat`, `date_modify`, `comment`, `author`, `valide`, `user_id`) VALUES
 (12, '60b4c0dacc512', 11, '2021-05-31 10:56:26', '2021-05-31 12:56:26', 'un autre commentaire qu\'on va essayer de mettre un peut plus long pour tester ce qui va ce passer', 'util1', 1, 3),
 (13, '60b4cc0bf088b', 11, '2021-05-31 11:44:11', '2021-05-31 13:44:11', 'un autre autre nouveau commentaire', 'mecbil', 1, 1),
 (14, '60b4d0b38101d', 11, '2021-05-31 12:04:03', '2021-05-31 14:04:03', 'les oiseaux sont nombreux', 'einstein', 1, 3),
@@ -62,8 +62,8 @@ INSERT INTO `comments` (`comment_id`, `uuid`, `post_id`, `date_creat`, `date_mod
 -- Structure de la table `posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE IF NOT EXISTS `posts` (
+DROP TABLE IF EXISTS 'posts';
+CREATE TABLE IF NOT EXISTS 'posts' (
   `post_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` char(13) NOT NULL,
   `date_creat` timestamp NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
 -- Déchargement des données de la table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `uuid`, `date_creat`, `date_modify`, `chapo`, `content`, `title`, `author`, `user_id`) VALUES
+INSERT INTO 'posts' (`post_id`, `uuid`, `date_creat`, `date_modify`, `chapo`, `content`, `title`, `author`, `user_id`) VALUES
 (1, '608fb4bc9f83d', '2021-04-20 10:32:16', '2021-05-05 21:36:52', 'Le Chapô c\'est quoi au fait? utilisé surtous dans les journaux il serait une sorte de résumé ou pas', 'Le Chapô doit impérativement contenir des informations de base, identifiées grâce à la méthode des QQOQP (ou 5W en anglais) : Qui ? Quoi ? Où ? Quand ? Pourquoi ? et complété éventuellement par Combien ? et Comment ? C’est pourquoi il est plus facile de composer le chapô en dernier, en partant du contenu l’article.', 'Rédiger le chapô en dernier', 'mecbil', 1),
 (3, '608fb4fd2cf69', '2021-04-21 11:07:16', '2021-05-17 21:36:52', 'bloum bloum', 'Le Chapô doit impérativement contenir des informations de base, identifiées grâce à la méthode des QQOQP (ou 5W en anglais) : Qui ? Quoi ? Où ? Quand ? Pourquoi ? et complété éventuellement par Combien ? et Comment ? C’est pourquoi il est plus facile de composer le chapô en dernier, en partant du contenu l’article.', 'les autres', 'mecbil', 1),
 (4, '608fb528c0151', '2021-04-23 15:36:55', '2021-05-17 21:36:52', 'Faudra peut être pas toucher à ce sujet', 'Les echecs c\'est ceci et cela etc..', 'Les echecs', 'Admin', 2),
@@ -97,8 +97,8 @@ INSERT INTO `posts` (`post_id`, `uuid`, `date_creat`, `date_modify`, `chapo`, `c
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
+DROP TABLE IF EXISTS 'users';
+CREATE TABLE IF NOT EXISTS 'users' (
   `user_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` char(13) NOT NULL,
   `nickname` char(20) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`user_id`, `uuid`, `nickname`, `password`, `mail`, `role`) VALUES
+INSERT INTO 'users' (`user_id`, `uuid`, `nickname`, `password`, `mail`, `role`) VALUES
 (1, '608fac92b0b1f', 'mecbil', '$2y$10$vC/S4Aj7msr.UZp.ChPqC.Ta18PwT14X62zSkBCWBnNf9BbhMI0Tq', 'mecbil@moi.fr', 1),
 (2, '608facccba0fc', 'leroi', '$2y$10$3yAnI0xvPKGRgIuE.T8a4uRbZ4ayuLUEy6dTu8dJDe3RHdD4lYbCO', 'leroi@lui.fr', 0),
 (3, '60b26849e18eb', 'util1', '$2y$10$PcFjv32PVGQCnMbwAzanK.A1yMQgi1LEZ9KK7JU6EASAQlNM2uYTm', 'util1@util1.fr', NULL),
@@ -133,14 +133,14 @@ INSERT INTO `users` (`user_id`, `uuid`, `nickname`, `password`, `mail`, `role`) 
 --
 -- Contraintes pour la table `comments`
 --
-ALTER TABLE `comments`
+ALTER TABLE 'comments'
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `posts`
 --
-ALTER TABLE `posts`
+ALTER TABLE 'posts'
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
