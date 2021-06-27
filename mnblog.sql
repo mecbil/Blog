@@ -29,25 +29,25 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS comments ;
 CREATE TABLE IF NOT EXISTS comments (
-  `comment_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` char(13) NOT NULL,
-  `post_id` smallint(5) UNSIGNED NOT NULL,
-  `date_creat` timestamp NOT NULL,
-  `date_modify` datetime NOT NULL,
-  `comment` text NOT NULL,
-  `author` char(20) NOT NULL,
-  `valide` tinyint(1) NOT NULL DEFAULT '0',
-  `user_id` smallint(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`comment_id`),
-  KEY `fk_comments_posts1_idx` (`post_id`),
-  KEY `fk_comments_users1_idx` (`user_id`)
+  comment_id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  uuid char(13) NOT NULL,
+  post_id smallint(5) UNSIGNED NOT NULL,
+  date_creat timestamp NOT NULL,
+  date_modify datetime NOT NULL,
+  comment text NOT NULL,
+  author char(20) NOT NULL,
+  valide tinyint(1) NOT NULL DEFAULT '0',
+  user_id smallint(5) UNSIGNED NOT NULL,
+  PRIMARY KEY (comment_id),
+  KEY fk_comments_posts1_idx (post_id),
+  KEY fk_comments_users1_idx (user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `comments`
+-- Déchargement des données de la table comments
 --
 
-INSERT INTO comments (`comment_id`, `uuid`, `post_id`, `date_creat`, `date_modify`, `comment`, `author`, `valide`, `user_id`) VALUES
+INSERT INTO comments (comment_id, uuid, post_id, date_creat, date_modify, comment, author, valide, user_id) VALUES
 (12, '60b4c0dacc512', 11, '2021-05-31 10:56:26', '2021-05-31 12:56:26', 'un autre commentaire qu\'on va essayer de mettre un peut plus long pour tester ce qui va ce passer', 'util1', 1, 3),
 (13, '60b4cc0bf088b', 11, '2021-05-31 11:44:11', '2021-05-31 13:44:11', 'un autre autre nouveau commentaire', 'mecbil', 1, 1),
 (14, '60b4d0b38101d', 11, '2021-05-31 12:04:03', '2021-05-31 14:04:03', 'les oiseaux sont nombreux', 'einstein', 1, 3),
