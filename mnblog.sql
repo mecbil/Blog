@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS comments ;
-CREATE TABLE IF NOT EXISTS comments (
+CREATE TABLE IF NOT EXISTS comments 
+(
   comment_id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   uuid char(13) NOT NULL,
   post_id smallint(5) UNSIGNED NOT NULL,
@@ -63,7 +64,8 @@ INSERT INTO comments (comment_id, uuid, post_id, date_creat, date_modify, commen
 --
 
 DROP TABLE IF EXISTS posts ;
-CREATE TABLE IF NOT EXISTS posts (
+CREATE TABLE IF NOT EXISTS posts 
+(
   post_id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   uuid char(13) NOT NULL,
   date_creat timestamp NOT NULL,
@@ -98,7 +100,8 @@ INSERT INTO posts (post_id, uuid, date_creat, date_modify, chapo, content, title
 --
 
 DROP TABLE IF EXISTS users ;
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users 
+(
   user_id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   uuid char(13) NOT NULL,
   nickname char(20) NOT NULL,
