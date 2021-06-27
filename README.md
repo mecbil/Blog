@@ -18,7 +18,6 @@ To use this blog, you must follow this steps :
     For the Contact form, enter your email in the file models / ContactManager.php
     Have fun using this blog !
 
-
 Environnement
 
     PHP 7.3
