@@ -5,7 +5,8 @@ Installation
 Pour utiliser ce blog, il faut suivre les étapes suivantes :
 
     Créer une base de données nomée "mnblog" et importer le fichier mnblog.sql situé a la racine du projet
-    Entrez vos identifiants de connexion à la base de données dans le fichier Database.php situé dans le dossier models
+    Entrez vos identifiants de connexion à la base de données dans le fichier Database.php situé 
+    dans le dossier models
 
     Pour le formulaire de Contact, entrez votre email dans le fichier models/ContactManager.php
     Amusez-vous avec ce blog !
