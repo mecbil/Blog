@@ -69,7 +69,7 @@ class UserManager extends Manager
                 $_SESSION['user_id'] = $userExist->getUser_id();
                 $_SESSION['role'] = $userExist->getRole();
 
-                return  null;
+                return  '';
             }
 
             if (!password_verify($gpassword, $userExist->getPassword())) {
@@ -132,7 +132,7 @@ class UserManager extends Manager
             $_SESSION['role'] = $user->getRole();
         }
             
-        return null;
+        return '';
     }
 
     // trouver un user -

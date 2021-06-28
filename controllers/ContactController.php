@@ -22,10 +22,9 @@ class ContactController
         $erreur= $contactmanager->mail();
 
         if (empty($erreur)){
-            $erreur = 'Message envoyé !';
 
             $rendu = new renderer;
-            $rendu->render('users/contact', compact('pageTitle','erreur'));
+            $rendu->render('users/contact', array('pageTitle'=>$pageTitle, 'erreur'=>'Message envoyé !', 'nom'=>'', 'prenom'=>'', 'email'=>'', 'sujet'=>'', 'msg'=>''));
         }
         
         if ($erreur) {

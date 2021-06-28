@@ -56,7 +56,7 @@ class UserController
         $gpasswordconnect = filter_input(INPUT_POST, 'gpasswordconnect');
 
         $rendu = new renderer;
-        $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'erreur'=>$erreur,'gemailconnect'=>$gemailconnect, 'gpasswordconnect'=>$gpasswordconnect));
+        $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'erreur'=>$erreur,'gemailconnect'=>$gemailconnect, 'gpasswordconnect'=>$gpasswordconnect, 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
 
     }
 
@@ -78,7 +78,7 @@ class UserController
 
             $rendu = new renderer;
             $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'erreurAdd'=>'Enregistrement reussi, veuillez vous edentifier dans la zone Connection', 
-            'gemailconnect'=>'', 'gpasswordconnect'=>'', 'erreurAdd'=>'', 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
+            'gemailconnect'=>'', 'gpasswordconnect'=>'', 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
         } 
         // error
         $gpseudo = filter_input(INPUT_POST, 'gpseudo');
