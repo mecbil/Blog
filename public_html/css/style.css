@@ -40,8 +40,12 @@ main {
   margin: 1em;
 }
 
+.changefont {
+  font-family: "Lato", sans-serif;
+}
+
 .card-header {
-  color: goldenrod;
+  color: rgb(170, 126, 14);
   background: #e2e2e2ea;
   font-weight: bold;
 }

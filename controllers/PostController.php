@@ -51,17 +51,13 @@ class PostController
         $erreur= $postManager->insert();
 
         if (empty($erreur)) {
-    
+      
+            // Get all posts
+            $posts = $postManager->findAllPosts("date_modify DESC");
+
             // Affichage (Show)
-            $pageTitle = "Blog Posts";
-            $edit = false;
-            $title = '';
-            $chapo = '';
-            $content = '';
-            $author = '';
-            $post_id = '';
             $rendu = new renderer;
-            $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>$edit, 'erreur'=>$erreur, 'title'=>$title, 'chapo'=>$chapo, 'content'=>$content, 'author'=>$author, 'post_id'=>$post_id ));
+            $rendu->render('posts/posts', array('pageTitle'=>'Blog Posts', 'posts'=>$posts));
         } 
 
         $pageTitle = $_SESSION['user'];
@@ -90,10 +86,8 @@ class PostController
             $posts = $postManager->findAllPosts("date_modify DESC");
     
             // Affichage (Show)
-            $pageTitle = "Blog Posts";
-
             $rendu = new renderer;
-            $rendu->render('posts/posts', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
+            $rendu->render('posts/posts', array('pageTitle'=>'Blog Posts', 'posts'=>$posts));
         }
     }
 

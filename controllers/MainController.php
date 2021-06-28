@@ -37,8 +37,7 @@ class MainController
         $posts = $postManager->findAllPosts("date_modify DESC");
 
         // Affichage (Show)
-        $pageTitle = "Blog Posts";
         $rendu = new renderer;
-        $rendu->render('posts/posts', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
+        $rendu->render('posts/posts', array('pageTitle'=>'Blog Posts', 'posts'=>$posts));
     }
 }
