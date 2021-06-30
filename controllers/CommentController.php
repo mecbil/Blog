@@ -1,8 +1,6 @@
 <?php
 namespace Controllers ;
 
-// require_once '../application/autoload.php';
-
 use Models\CommentManager;
 use Application\Renderer;
 use Models\PostManager;
@@ -35,7 +33,7 @@ class CommentController
             $erreur = $erreur[1];
 
             $rendu = new renderer;
-            $rendu->render('posts/post', array('pageTitle'=>'Blog Posts', 'user'=>$user, 'role'=>$role, 'post'=>$post, 'comments'=>$comments, 'erreur'=>$erreur));
+            $rendu->render(array('page'=>'posts/post', 'pageTitle'=>'Blog Posts', 'user'=>$user, 'role'=>$role, 'post'=>$post, 'comments'=>$comments, 'erreur'=>$erreur));
         }
     }
 
@@ -82,6 +80,6 @@ class CommentController
         // Affichage (Show)
 
         $rendu = new renderer;
-        $rendu->render('posts/post', array('pageTitle'=>'Blog Posts', 'post'=>$post, 'user'=>$user, 'role'=>$role, 'comments'=>$comments, 'erreur'=>$erreur));
+        $rendu->render(array('page'=>'posts/post', 'pageTitle'=>'Blog Posts', 'post'=>$post, 'user'=>$user, 'role'=>$role, 'comments'=>$comments, 'erreur'=>$erreur));
     }
 }

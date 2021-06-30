@@ -1,8 +1,6 @@
 <?php
 namespace Controllers ;
 
-// require_once '../application/autoload.php';
-
 use Models\UserManager;
 use \Application\Renderer;
 use Controllers\MainController;
@@ -21,12 +19,12 @@ class UserController
             $comments = $commentmanager->findAllcomments("date_modify DESC");
 
             $rendu = new renderer;
-            $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>false, 'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>'' ));
+            $rendu->render(array('page'=>'users/indexuser', 'pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>false, 'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>'' ));
         } 
         // Utilisateur Non connecté
         if (!isset($_SESSION['user'])) {
             $rendu = new renderer;
-            $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'gemailconnect'=>'', 'gpasswordconnect'=>'', 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
+            $rendu->render(array('page'=>'users/connection', 'pageTitle'=>'Connexion', 'gemailconnect'=>'', 'gpasswordconnect'=>'', 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
         }
     }
 
@@ -44,7 +42,7 @@ class UserController
                 $comments = $commentmanager->findAllcomments("date_modify DESC");
 
                 $rendu = new renderer;
-                $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>false, 'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>''));
+                $rendu->render(array('page'=>'users/indexuser', 'pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>false, 'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>''));
             } 
 
             $redirect = new MainController;
@@ -56,7 +54,7 @@ class UserController
         $gpasswordconnect = filter_input(INPUT_POST, 'gpasswordconnect');
 
         $rendu = new renderer;
-        $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'erreur'=>$erreur,'gemailconnect'=>$gemailconnect, 'gpasswordconnect'=>$gpasswordconnect, 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
+        $rendu->render(array('page'=>'users/connection', 'pageTitle'=>'Connexion', 'erreur'=>$erreur,'gemailconnect'=>$gemailconnect, 'gpasswordconnect'=>$gpasswordconnect, 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
 
     }
 
@@ -77,7 +75,7 @@ class UserController
         if (empty($erreurAdd)) {
 
             $rendu = new renderer;
-            $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'erreurAdd'=>'Enregistrement reussi, veuillez vous edentifier dans la zone Connection', 
+            $rendu->render(array('page'=>'users/connection', 'pageTitle'=>'Connexion', 'erreurAdd'=>'Enregistrement reussi, veuillez vous edentifier dans la zone Connection', 
             'gemailconnect'=>'', 'gpasswordconnect'=>'', 'gpseudo'=>'', 'gmail'=>'', 'gpassword'=>''));
         } 
         // error
@@ -86,6 +84,6 @@ class UserController
         $gpassword = filter_input(INPUT_POST, 'gpassword');
 
         $rendu = new renderer;
-        $rendu->render('users/connection', array('pageTitle'=>'Connexion', 'gemailconnect'=>'', 'gpasswordconnect'=>'', 'erreurAdd'=>$erreurAdd, 'gpseudo'=>$gpseudo, 'gmail'=>$gmail, 'gpassword'=>$gpassword));
+        $rendu->render(array('page'=>'users/connection', 'pageTitle'=>'Connexion', 'gemailconnect'=>'', 'gpasswordconnect'=>'', 'erreurAdd'=>$erreurAdd, 'gpseudo'=>$gpseudo, 'gmail'=>$gmail, 'gpassword'=>$gpassword));
     }
 }

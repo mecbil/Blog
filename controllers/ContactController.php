@@ -1,8 +1,6 @@
 <?php
 namespace Controllers ;
 
-// require_once '../application/autoload.php';
-
 use application\Renderer;
 use Models\ContactManager;
 
@@ -24,12 +22,12 @@ class ContactController
         if (empty($erreur)){
 
             $rendu = new renderer;
-            $rendu->render('users/contact', array('pageTitle'=>$pageTitle, 'erreur'=>'Message envoyé !', 'nom'=>'', 'prenom'=>'', 'email'=>'', 'sujet'=>'', 'msg'=>''));
+            $rendu->render(array('page'=>'users/contact', 'pageTitle'=>$pageTitle, 'erreur'=>'Message envoyé !', 'nom'=>'', 'prenom'=>'', 'email'=>'', 'sujet'=>'', 'msg'=>''));
         }
         
         if ($erreur) {
             $rendu = new renderer;
-            $rendu->render('users/contact', array('pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'nom'=>$nom, 'prenom'=>$prenom, 'email'=>$email, 'sujet'=>$sujet, 'msg'=>$msg));
+            $rendu->render(array('page'=>'users/contact', 'pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'nom'=>$nom, 'prenom'=>$prenom, 'email'=>$email, 'sujet'=>$sujet, 'msg'=>$msg));
         }
     }
 }
