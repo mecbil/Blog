@@ -98,7 +98,7 @@ class UserManager extends Manager
         }
         // 3- Verification Mot de passe
         if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#', $gpassword)) {
-            return 'Saisissez (8) caractère (1) Majuscule et (1) caractère special';
+            return 'Au moin (08) caractère dont (01) Majuscule et (1) caractère special';
         }
 
         // 3- Verification & initialisation des champs

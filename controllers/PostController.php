@@ -27,19 +27,18 @@ class PostController
         $comments = $commentManager->searchcomments('post_id', $post_id);
   
         // Affichage (Show)
-        $pageTitle = "Blog Posts";
+        $user = '';
+        $role = '';
+        $user_id = '';
+
         if (isset($_SESSION['user'])) {
             $user = filter_var($_SESSION['user']);
             $role = filter_var($_SESSION['role']);
             $user_id = filter_var($_SESSION['user_id']);
-        } else {
-            $user = '';
-            $role = '';
-            $user_id = '';
         }
 
         $rendu = new renderer;
-        $rendu->render('posts/post', array('pageTitle'=>$pageTitle, 'post'=>$post, 'comments'=>$comments, 'user'=>$user, 'role'=>$role, 'user_id'=>$user_id));
+        $rendu->render('posts/post', array('pageTitle'=>'Blog Posts', 'post'=>$post, 'comments'=>$comments, 'user'=>$user, 'role'=>$role, 'user_id'=>$user_id));
     }
 
     // Ajouter un Blog post
@@ -61,15 +60,24 @@ class PostController
         } 
 
         $pageTitle = $_SESSION['user'];
-        $edit = false;
-        $title = filter_input(INPUT_POST, 'title');
+
         $chapo = filter_input(INPUT_POST, 'chapo');
         $content = filter_input(INPUT_POST, 'content');
         $author = filter_input(INPUT_POST, 'author');
         $post_id = filter_input(INPUT_POST, 'post_id');
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>$edit, 'erreur'=>$erreur, 'title'=>$title, 'chapo'=>$chapo, 'content'=>$content, 'author'=>$author, 'post_id'=>$post_id ));
+        $rendu->render('users/indexuser', array(
+            'pageTitle' => $pageTitle,
+            'comments' => $comments, 
+            'edit' => false, 
+            'erreur' => $erreur, 
+            'title'=> filter_input(INPUT_POST, 'title'), 
+            'chapo'=>$chapo, 
+            'content'=>$content, 
+            'author'=>$author, 
+            'post_id'=>$post_id 
+        ));
     }
 
     public function deletePost()

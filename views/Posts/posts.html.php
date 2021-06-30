@@ -1,5 +1,5 @@
 <div class="row" >
-    <?php foreach ($posts as $article) : ?>
+    <?php foreach ($variables['posts'] as $article) : ?>
     <div class="col-lg-4" id="carte">
         <div class="card border-light mb-0">
             <div class="card-header text-center"><?= $article->getTitle() ?></div>
