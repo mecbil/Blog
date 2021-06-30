@@ -1,8 +1,6 @@
 <?php
 namespace Controllers ;
 
-// require_once '../application/autoload.php';
-
 use Models\CommentManager;
 use application\Renderer;
 use Models\PostManager;
@@ -21,7 +19,7 @@ class PostController
         $post = $postManager->findPost('uuid', $uuid);
         if (!$post) {
             $rendu = new renderer;
-            $rendu->render('404', array('pageTitle'=>"Page d'erreur"));            
+            $rendu->render(array('page'=>'404', 'pageTitle'=>"Page d'erreur"));            
         }
         $post_id = $post->getPost_id();
         $comments = $commentManager->searchcomments('post_id', $post_id);
@@ -38,7 +36,7 @@ class PostController
         }
 
         $rendu = new renderer;
-        $rendu->render('posts/post', array('pageTitle'=>'Blog Posts', 'post'=>$post, 'comments'=>$comments, 'user'=>$user, 'role'=>$role, 'user_id'=>$user_id));
+        $rendu->render(array('page'=>'posts/post', 'pageTitle'=>'Blog Posts', 'post'=>$post, 'comments'=>$comments, 'user'=>$user, 'role'=>$role, 'user_id'=>$user_id));
     }
 
     // Ajouter un Blog post
@@ -56,7 +54,7 @@ class PostController
 
             // Affichage (Show)
             $rendu = new renderer;
-            $rendu->render('posts/posts', array('pageTitle'=>'Blog Posts', 'posts'=>$posts));
+            $rendu->render(array('page'=>'posts/posts','pageTitle'=>'Blog Posts', 'posts'=>$posts));
         } 
 
         $pageTitle = $_SESSION['user'];
@@ -67,7 +65,8 @@ class PostController
         $post_id = filter_input(INPUT_POST, 'post_id');
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', array(
+        $rendu->render(array(
+            'page' => 'users/indexuser',
             'pageTitle' => $pageTitle,
             'comments' => $comments, 
             'edit' => false, 
@@ -95,7 +94,7 @@ class PostController
     
             // Affichage (Show)
             $rendu = new renderer;
-            $rendu->render('posts/posts', array('pageTitle'=>'Blog Posts', 'posts'=>$posts));
+            $rendu->render(array('page'=>'posts/posts', 'pageTitle'=>'Blog Posts', 'posts'=>$posts));
         }
     }
 
@@ -110,7 +109,7 @@ class PostController
         // Affichage (Show)
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', array('comments'=>$comments, 'edit'=>false,'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>''));
+        $rendu->render(array('page'=> 'users/indexuser', 'comments'=>$comments, 'edit'=>false,'title'=>'', 'chapo'=>'', 'content'=>'', 'author'=>''));
     }
 
     // Editer un posts
@@ -129,7 +128,7 @@ class PostController
         $pageTitle = "Admin - ".$_SESSION['user'];
 
         $rendu = new renderer;
-        $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>true, 'post'=>$post));
+        $rendu->render(array('page'=> 'users/indexuser', 'pageTitle'=>$pageTitle, 'comments'=>$comments, 'edit'=>true, 'post'=>$post));
     }
 
     public function updatePost()
@@ -148,7 +147,7 @@ class PostController
             $pageTitle = "Blog Posts";
 
             $rendu = new renderer;
-            $rendu->render('posts/posts', array('pageTitle'=>$pageTitle, 'posts'=>$posts));
+            $rendu->render(array('page' => 'posts/posts','pageTitle'=>$pageTitle, 'posts'=>$posts));
         } 
         
         if (!empty($erreur)) {
@@ -159,7 +158,7 @@ class PostController
                 $pageTitle = $_SESSION['user'];
                 
                 $rendu = new renderer;
-                $rendu->render('users/indexuser', array('pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'comments'=>$comments, 'edit'=>true ));
+                $rendu->render(array('page'=>'users/indexuser', 'pageTitle'=>$pageTitle, 'erreur'=>$erreur, 'comments'=>$comments, 'edit'=>true ));
             }
         }          
     }

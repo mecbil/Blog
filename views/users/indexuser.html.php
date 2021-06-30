@@ -54,7 +54,7 @@
             <input type="text" name="chapo" value="<?= $variables['post']->getChapo() ?>" class="form-control" placeholder="Chapo"  autocomplete="off">
           </div>
           <div class=" form-group ">
-            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?= $post->getcontent(); ?></textarea>
+            <textarea name="content" value="" class="form-control" placeholder="Content ..."  autocomplete="off"><?= $variables['post']->getcontent(); ?></textarea>
           </div>
           <div class=" form-group ">
               <input type="text" name="author" value="<?= $variables['post']->getAuthor() ?>" class="form-control" placeholder="Author"  autocomplete="off">
