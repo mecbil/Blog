@@ -8,7 +8,6 @@ class Renderer
     {
         $path = '../views' ;
 
-        extract($variables);// a enlever
         ob_start();
         require "{$path}/{$page}.html.php";    
             $pageContent = ob_get_clean();

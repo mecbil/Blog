@@ -8,7 +8,8 @@
 <div class="row container-fluid">
     <h2>Dernières publications</h2>
 
-    <?php foreach ($posts as $article) : ?>
+    <?php foreach ($variables['posts'] as $article) : ?>
+
     <div class="col-lg-4" id="carte">
         <div class="card border-light">
             <div class="card-header text-center"><?= $article->getTitle() ?></div>
@@ -21,5 +22,6 @@
             </div>
         </div>
     </div>
+    
     <?php endforeach ?>
 </div>

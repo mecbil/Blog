@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $pageTitle ?></title>
+    <title><?= $variables['pageTitle'] ?></title>
     <link rel="shortcut icon" type="image/png" href="images/mn.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Charm&family=Lato&display=swap" rel="stylesheet">
