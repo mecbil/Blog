@@ -21,19 +21,22 @@
         <?= $variables['erreur'] ?>
     </div>
     <?php endif; ?>
-    <?php  if (isset($variables['user'])): ?>
-    <form class="m-2" action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
-        <h3>Réagir ? N'hésitez pas !</h3>
-        <input type="text" name="pseudo" value ="<?= $variables['user'] ?>"" placeholder="Votre pseudo !">
-        <br>
-        <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
-        <br>
-        <input type="hidden" name="post_id" value ="<?= $variables['post']->getPost_id() ?>">
-        <input type="hidden" name="user_id" value ="<?= $_SESSION['user_id'] ?>">
-        <input type="hidden" name="uuid" value ="<?= $variables['post']->getUuid() ?>">
-        <br>
-        <button type="submit" class="btn btn-dark btn-outline-light">Commenter !</button>
-    </form>
+    <?php  if (!$variables['user']): ?>
+        <h3>Connectez-vous pour pouvoir reagir!</h3>    
+    <?php endif; ?>   
+    <?php  if ($variables['user']): ?>
+        <form class="m-2" action="index.php?controller=Commentcontroller&task=insertComment" method="POST">
+            <h3>Réagir ? N'hésitez pas !</h3>
+            <input type="text" name="pseudo" value ="<?= $variables['user'] ?>" placeholder="Votre pseudo !">
+            <br>
+            <textarea name="comment" cols="30" rows="2" placeholder="Votre commentaire ..."></textarea>
+            <br>
+            <input type="hidden" name="post_id" value ="<?= $variables['post']->getPost_id() ?>">
+            <input type="hidden" name="user_id" value ="<?= $_SESSION['user_id'] ?>">
+            <input type="hidden" name="uuid" value ="<?= $variables['post']->getUuid() ?>">
+            <br>
+            <button type="submit" class="btn btn-dark btn-outline-light">Commenter !</button>
+        </form>
     <?php endif; ?>
     <div class="m-2">
         <?php if (!$variables['comments']) : ?>
@@ -52,10 +55,10 @@
                 <div>
                     Auteur : <small class="text-warning"><?= $commentaire->getAuthor() ?></small>
                 </div>
-                <?php if (isset($variables['user']) && $variables['role'] == true): ?> 
+                <?php if (isset($variables['user']) && $variables['role']): ?> 
                     <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $variables['post']->getUuid() ?>&commentid=<?= $commentaire->getComment_id() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                 <?php endif; ?>
-                <?php if (isset($variables['user'])  && $variables['role'] == Null && ($variables['user_id'] === $commentaire->getUser_id() )): ?>
+                <?php if ($variables['user']  && !$variables['role'] && ($variables['user_id'] === $commentaire->getUser_id() )): ?>
                     <a class="btn btn-danger btn-outline-light" href="/?controller=commentcontroller&task=deleteComment&uuid=<?= $commentaire->getUuid() ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                 <?php endif; ?>
             <?php endforeach ?>

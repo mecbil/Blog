@@ -26,14 +26,20 @@ class CommentController
             $post = $postManager->findPost('post_id', $post);
             $post_id = $post->getpost_id();
             $comments = $commentManager->searchcomments('post_id', $post_id);
-            $user = filter_var($_SESSION['user']);
-            $role = filter_var($_SESSION['role']);
 
             // Affichage (Show)
             $erreur = $erreur[1];
 
             $rendu = new renderer;
-            $rendu->render(array('page'=>'posts/post', 'pageTitle'=>'Blog Posts', 'user'=>$user, 'role'=>$role, 'post'=>$post, 'comments'=>$comments, 'erreur'=>$erreur));
+            $rendu->render(array(
+                'page' => 'posts/post', 
+                'pageTitle' => 'Blog Posts', 
+                'user' => filter_var($_SESSION['user']), 
+                'role' => filter_var($_SESSION['role']), 
+                'post' => $post, 
+                'comments' => $comments, 
+                'erreur' => $erreur
+            ));
         }
     }
 
@@ -75,11 +81,18 @@ class CommentController
         $post = $postManager->findPost('uuid', $uuid);
         $post_id = $post->getPost_id();
         $comments = $commentManager->searchcomments('post_id', $post_id);
-        $user = filter_var($_SESSION['user']);
-        $role = filter_var($_SESSION['role']);
+
         // Affichage (Show)
 
         $rendu = new renderer;
-        $rendu->render(array('page'=>'posts/post', 'pageTitle'=>'Blog Posts', 'post'=>$post, 'user'=>$user, 'role'=>$role, 'comments'=>$comments, 'erreur'=>$erreur));
+        $rendu->render(array(
+            'page' => 'posts/post', 
+            'pageTitle' => 'Blog Posts', 
+            'post' => $post, 
+            'user' => filter_var($_SESSION['user']), 
+            'role' => filter_var($_SESSION['role']), 
+            'comments' => $comments, 
+            'erreur' => $erreur
+        ));
     }
 }
