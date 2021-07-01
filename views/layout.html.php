@@ -57,7 +57,7 @@ if (isset($_SESSION['user'])) {
                         <?php endif; ?>
                         <?php if (!isset($user)): ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){echo('active');} ?>" href="index.php?controller=UserController&task=showConnect">Connect</a>
+                            <a class="nav-link <?php if(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING) == "/index.php?controller=UserController&task=showConnect"){echo('active');} ?>" href="index.php?controller=UserController&task=showConnect">Connexion</a>
                         </li>
                         <?php endif; ?>
                     </ul>

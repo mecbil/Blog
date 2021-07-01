@@ -14,16 +14,27 @@ class MainController
         $posts = $postManager->findAllposts("date_modify DESC", "3");
 
         // Affichage (Show)
-        $pageTitle = "Home" ;
         $rendu = new renderer;
-        $rendu->render(array('page'=>'index','pageTitle'=>$pageTitle, 'posts'=>$posts));
+        $rendu->render(array(
+            'page' => 'index',
+            'pageTitle' => 'Home', 
+            'posts' => $posts
+        ));
     }
 
     // Montrer la page contact
     public function showContact()
     {
         $rendu = new renderer;
-        $rendu->render(array('page'=>'users/contact', 'pageTitle'=>'Contact Us', 'nom'=>'','prenom'=>'', 'email'=>'', 'sujet'=>'', 'msg'=>''));
+        $rendu->render(array(
+            'page' => 'users/contact', 
+            'pageTitle' => 'Contact Us', 
+            'nom' => '',
+            'prenom' => '', 
+            'email' => '', 
+            'sujet' => '', 
+            'msg' => ''
+        ));
     }
 
     // Montrer la page de tous les Posts trier par date'
@@ -36,6 +47,10 @@ class MainController
 
         // Affichage (Show)
         $rendu = new renderer;
-        $rendu->render(array('page'=>'posts/posts', 'pageTitle'=>'Blog Posts', 'posts'=>$posts));
+        $rendu->render(array(
+            'page' => 'posts/posts', 
+            'pageTitle' => 'Blog Posts', 
+            'posts' => $posts
+        ));
     }
 }
