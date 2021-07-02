@@ -1,6 +1,8 @@
 Code source du Projet 3 de la formation PRFE Développeur d'application - PHP d'OpenClassrooms, intitulé "Créez votre premier blog en PHP"
 
-Installation
+image:https://app.codacy.com/project/badge/Grade/035851ac44c5413e944f32649e7f1064["Codacy code quality", link="https://www.codacy.com/gh/mecbil/P3_02_BlogSources/dashboard?utm_source=github.com&utm_medium=referral&utm_content=mecbil/P3_02_BlogSources&utm_campaign=Badge_Grade"]
+
+Installation :
 
 Pour utiliser ce blog, il faut suivre les étapes suivantes :
 
