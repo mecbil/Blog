@@ -61,9 +61,9 @@ if (isset($_SESSION['user'])) {
                         </li>
                         <?php endif; ?>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-dark btn-outline-light" type="submit">Rechercher</button>
+                    <form class="d-flex" action="index.php?controller=MainController&task=recherche" method="post">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="surch">
+                        <button class="btn btn-dark btn-outline-light" type="submit" >Rechercher</button>
                     </form>
                 </div>
             </div>

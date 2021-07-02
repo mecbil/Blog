@@ -10,13 +10,13 @@ class User
     protected $mail;
     protected $role;
 
-    // Get the value of id 
+    // Get the value of id
     public function getUser_id()
     {
         return $this->user_id;
     }
 
-    // Set the value of id 
+    // Set the value of id
     public function setuser_id($user_id)
     {
         $this->user_id = $user_id;
@@ -29,7 +29,7 @@ class User
         return $this->uuid;
     }
 
-    // Set the value of uuid 
+    // Set the value of uuid
     public function setUuid($uuid)
     {
         $this->uuid = $uuid;

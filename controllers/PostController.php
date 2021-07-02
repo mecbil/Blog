@@ -20,9 +20,9 @@ class PostController
         if (!$post) {
             $rendu = new renderer;
             $rendu->render(array(
-                'page' => '404', 
+                'page' => '404',
                 'pageTitle' => "Page d'erreur"
-            ));            
+            ));
         }
         $post_id = $post->getPost_id();
         $comments = $commentManager->searchcomments('post_id', $post_id);
@@ -40,12 +40,12 @@ class PostController
 
         $rendu = new renderer;
         $rendu->render(array(
-            'page' => 'posts/post', 
-            'pageTitle' => 'Blog Posts', 
-            'post' => $post, 
-            'comments' => $comments, 
-            'user' => $user, 
-            'role' => $role, 
+            'page' => 'posts/post',
+            'pageTitle' => 'Blog Posts',
+            'post' => $post,
+            'comments' => $comments,
+            'user' => $user,
+            'role' => $role,
             'user_id' => $user_id
         ));
     }
@@ -67,10 +67,10 @@ class PostController
             $rendu = new renderer;
             $rendu->render(array(
                 'page' => 'posts/posts',
-                'pageTitle' => 'Blog Posts', 
+                'pageTitle' => 'Blog Posts',
                 'posts' => $posts
             ));
-        } 
+        }
 
         $pageTitle = $_SESSION['user'];
 
@@ -83,14 +83,14 @@ class PostController
         $rendu->render(array(
             'page' => 'users/indexuser',
             'pageTitle' => $pageTitle,
-            'comments' => $comments, 
-            'edit' => false, 
-            'erreur' => $erreur, 
-            'title'=> filter_input(INPUT_POST, 'title'), 
-            'chapo' => $chapo, 
-            'content' => $content, 
-            'author' => $author, 
-            'post_id' => $post_id 
+            'comments' => $comments,
+            'edit' => false,
+            'erreur' => $erreur,
+            'title'=> filter_input(INPUT_POST, 'title'),
+            'chapo' => $chapo,
+            'content' => $content,
+            'author' => $author,
+            'post_id' => $post_id
         ));
     }
 
@@ -110,8 +110,8 @@ class PostController
             // Affichage (Show)
             $rendu = new renderer;
             $rendu->render(array(
-                'page' => 'posts/posts', 
-                'pageTitle' => 'Blog Posts', 
+                'page' => 'posts/posts',
+                'pageTitle' => 'Blog Posts',
                 'posts' => $posts
             ));
         }
@@ -129,12 +129,12 @@ class PostController
 
         $rendu = new renderer;
         $rendu->render(array(
-            'page' => 'users/indexuser', 
-            'comments' => $comments, 
+            'page' => 'users/indexuser',
+            'comments' => $comments,
             'edit' => false,
-            'title' => '', 
-            'chapo' => '', 
-            'content' => '', 
+            'title' => '',
+            'chapo' => '',
+            'content' => '',
             'author' => ''
         ));
     }
@@ -156,10 +156,10 @@ class PostController
 
         $rendu = new renderer;
         $rendu->render(array(
-            'page' => 'users/indexuser', 
-            'pageTitle' => $pageTitle, 
-            'comments' => $comments, 
-            'edit' => true, 
+            'page' => 'users/indexuser',
+            'pageTitle' => $pageTitle,
+            'comments' => $comments,
+            'edit' => true,
             'post' => $post
         ));
     }
@@ -182,13 +182,12 @@ class PostController
             $rendu = new renderer;
             $rendu->render(array(
                 'page' => 'posts/posts',
-                'pageTitle' => $pageTitle, 
+                'pageTitle' => $pageTitle,
                 'posts' => $posts
             ));
-        } 
+        }
         
         if (!empty($erreur)) {
-
             if (isset($_SESSION['user'])) {
                 $commentManager= new CommentManager();
                 $comments = $commentManager->findAllcomments("date_modify DESC");
@@ -196,13 +195,13 @@ class PostController
                 
                 $rendu = new renderer;
                 $rendu->render(array(
-                    'page' => 'users/indexuser', 
-                    'pageTitle' => $pageTitle, 
-                    'erreur' => $erreur, 
-                    'comments' => $comments, 
-                    'edit' => true 
+                    'page' => 'users/indexuser',
+                    'pageTitle' => $pageTitle,
+                    'erreur' => $erreur,
+                    'comments' => $comments,
+                    'edit' => true
                 ));
             }
-        }          
+        }
     }
 }

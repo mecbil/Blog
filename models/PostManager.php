@@ -31,6 +31,26 @@ class PostManager extends Manager
         return $itemshydrate;
     }
 
+    // trouver tous les enregistrement ?trier &/ou limiter
+    public function surch(string $word)
+    {
+        $sql= "SELECT * FROM posts WHERE `title` LIKE ".'\'%'.$word.'%\''." or `chapo` LIKE ".'\'%'.$word.'%\''." ORDER BY date_modify DESC";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $items = $query->fetchAll();
+
+        // Hydrate les posts
+        $itemshydrate =array();
+
+        foreach ($items as $item) {
+            $post = new Post;
+
+            array_push($itemshydrate, $this->hydrate($post, $item)) ;
+        }
+
+        return $itemshydrate;
+    }
+
     // trouver un enregistrement par son uuid -a voir -
     public function findPost(string $findword, string $word)
     {
@@ -54,7 +74,6 @@ class PostManager extends Manager
         // tester le formulaire
         // 1- Un des elements du formulaire vide
         if (empty(filter_input(INPUT_POST, 'title')) || empty(filter_input(INPUT_POST, 'chapo'))|| empty(filter_input(INPUT_POST, 'content')) || empty(filter_input(INPUT_POST, 'author'))) {
-
             return 'Veuillez remplir tous les champs';
         }
 
@@ -105,7 +124,6 @@ class PostManager extends Manager
             return null;
         }
         if (empty($post)) {
-
             return 'Veuillez donner un identifiant valable';
         }
     }
@@ -116,7 +134,6 @@ class PostManager extends Manager
         // 1- Un des elements du formulaire vide
 
         if (empty(filter_input(INPUT_POST, 'title')) || empty(filter_input(INPUT_POST, 'chapo'))|| empty(filter_input(INPUT_POST, 'content')) || empty(filter_input(INPUT_POST, 'author'))) {
-
             return 'Veuillez remplir tous les champs';
         }
 

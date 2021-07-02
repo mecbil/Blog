@@ -1,3 +1,8 @@
+<?php if (!empty($variables['erreur'])): ?>
+    <div class="alert alert-danger">
+        <?= $variables['erreur'] ?>
+    </div>
+<?php endif; ?>
 <div class="row" >
     <?php foreach ($variables['posts'] as $article) : ?>
     <div class="col-lg-4" id="carte">

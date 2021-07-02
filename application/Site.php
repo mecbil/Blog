@@ -32,17 +32,21 @@ class Site
 
             if (method_exists($controllerUse, $task)) {
                 $controller->$task();
-            } 
+            }
             if (!method_exists($controllerUse, $task)) {
                 $rendu = new renderer;
-                $rendu->render('404', array('pageTitle'=>"Page d'erreur"));
-                // header('Location: /404.php');
+                $rendu->render(array(
+                    'page' => '404',
+                    'pageTitle' =>"Page d'erreur"
+                ));
             }
         }
         if (!is_file('..\\'.$controllerUse.'.php')) {
             $rendu = new renderer;
-            $rendu->render('404', array('pageTitle'=>"Page d'erreur"));
-            // header('Location: /404.php');
+            $rendu->render(array(
+                'page' => '404',
+                'pageTitle' =>"Page d'erreur"
+            ));
         }
     }
 }
