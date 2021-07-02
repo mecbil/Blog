@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class Comment 
+class Comment
 {
     protected $comment_id;
     protected $uuid;

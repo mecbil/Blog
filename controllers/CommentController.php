@@ -20,8 +20,7 @@ class CommentController
             $post = $postManager->findPost('post_id', $post);
             $uuid = $post->getUuid();
             $this->affiche($uuid, 'Votre commentaire sera afficher après validation!');
-
-        } 
+        }
         if ($erreur[1]) {
             $post = $postManager->findPost('post_id', $post);
             $post_id = $post->getpost_id();
@@ -32,12 +31,12 @@ class CommentController
 
             $rendu = new renderer;
             $rendu->render(array(
-                'page' => 'posts/post', 
-                'pageTitle' => 'Blog Posts', 
-                'user' => filter_var($_SESSION['user']), 
-                'role' => filter_var($_SESSION['role']), 
-                'post' => $post, 
-                'comments' => $comments, 
+                'page' => 'posts/post',
+                'pageTitle' => 'Blog Posts',
+                'user' => filter_var($_SESSION['user']),
+                'role' => filter_var($_SESSION['role']),
+                'post' => $post,
+                'comments' => $comments,
                 'erreur' => $erreur
             ));
         }
@@ -57,7 +56,7 @@ class CommentController
 
         if (empty($erreur)) {
             $this->affiche($uuid, 'Commentaire supprimer avec succès!');
-        }      
+        }
     }
 
     public function valideComment()
@@ -71,7 +70,7 @@ class CommentController
             $UserController = new UserController;
             $UserController->showConnect();
             return;
-        } 
+        }
     }
 
     public function affiche($uuid, $erreur)
@@ -86,12 +85,12 @@ class CommentController
 
         $rendu = new renderer;
         $rendu->render(array(
-            'page' => 'posts/post', 
-            'pageTitle' => 'Blog Posts', 
-            'post' => $post, 
-            'user' => filter_var($_SESSION['user']), 
-            'role' => filter_var($_SESSION['role']), 
-            'comments' => $comments, 
+            'page' => 'posts/post',
+            'pageTitle' => 'Blog Posts',
+            'post' => $post,
+            'user' => filter_var($_SESSION['user']),
+            'role' => filter_var($_SESSION['role']),
+            'comments' => $comments,
             'erreur' => $erreur
         ));
     }

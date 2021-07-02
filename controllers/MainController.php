@@ -17,7 +17,7 @@ class MainController
         $rendu = new renderer;
         $rendu->render(array(
             'page' => 'index',
-            'pageTitle' => 'Home', 
+            'pageTitle' => 'Home',
             'posts' => $posts
         ));
     }
@@ -27,12 +27,12 @@ class MainController
     {
         $rendu = new renderer;
         $rendu->render(array(
-            'page' => 'users/contact', 
-            'pageTitle' => 'Contact Us', 
+            'page' => 'users/contact',
+            'pageTitle' => 'Contact Us',
             'nom' => '',
-            'prenom' => '', 
-            'email' => '', 
-            'sujet' => '', 
+            'prenom' => '',
+            'email' => '',
+            'sujet' => '',
             'msg' => ''
         ));
     }
@@ -48,8 +48,49 @@ class MainController
         // Affichage (Show)
         $rendu = new renderer;
         $rendu->render(array(
-            'page' => 'posts/posts', 
-            'pageTitle' => 'Blog Posts', 
+            'page' => 'posts/posts',
+            'pageTitle' => 'Blog Posts',
+            'posts' => $posts
+        ));
+    }
+
+    // Montrer la page de tous les Posts trouver par une recherche'
+    public function recherche()
+    {
+        $word = filter_input(INPUT_POST, 'surch');
+
+        $postManager = new PostManager();
+        // tester le formulaire
+        // 1- Un des elements du formulaire vide
+        if (empty($word)) {
+            $posts = $postManager->findAllPosts("date_modify DESC");
+
+            $rendu = new renderer;
+            $rendu->render(array(
+                'page' => 'posts/posts',
+                'pageTitle' => 'Blog Posts',
+                'posts' => $posts
+            ));
+        }
+
+        // Get all posts
+        $posts = $postManager->surch($word);
+
+        if ($posts) {
+            // Affichage (Show)
+            $rendu = new renderer;
+            $rendu->render(array(
+                'page' => 'posts/posts',
+                'pageTitle' => 'Blog Posts',
+                'posts' => $posts
+            ));
+        }
+        // Affichage (Show)
+        $rendu = new renderer;
+        $rendu->render(array(
+            'page' => 'posts/posts',
+            'pageTitle' => 'Blog Posts',
+            'erreur' => 'Aucun enregistrement trouver',
             'posts' => $posts
         ));
     }

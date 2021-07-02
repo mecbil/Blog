@@ -20,10 +20,9 @@ abstract class Manager
         $query->execute(['uuid' => $uuid]);
     }
 
-    // Hydrater un enregistrement 
+    // Hydrater un enregistrement
     public function hydrate($objet, $donnees)
     {
-
         foreach ($donnees as $key => $value) {
             // On récupère le nom du setter correspondant à la clé (key)
             // titre -> setTitre
@@ -37,5 +36,5 @@ abstract class Manager
         }
 
         return $objet;
-    }    
+    }
 }

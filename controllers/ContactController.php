@@ -12,17 +12,16 @@ class ContactController
         $contactmanager = new ContactManager;
         $erreur= $contactmanager->mail();
 
-        if (empty($erreur)){
-
+        if (empty($erreur)) {
             $rendu = new renderer;
             $rendu->render(array(
-                'page' => 'users/contact', 
-                'pageTitle' => 'Nous contacter', 
-                'erreur' => 'Message envoyé !', 
-                'nom' => '', 
-                'prenom' => '', 
-                'email' => '', 
-                'sujet' => '', 
+                'page' => 'users/contact',
+                'pageTitle' => 'Nous contacter',
+                'erreur' => 'Message envoyé !',
+                'nom' => '',
+                'prenom' => '',
+                'email' => '',
+                'sujet' => '',
                 'msg' => ''
             ));
         }
@@ -30,13 +29,13 @@ class ContactController
         if ($erreur) {
             $rendu = new renderer;
             $rendu->render(array(
-                'page' =>'users/contact', 
-                'pageTitle' => 'Nous contacter', 
-                'erreur' =>$erreur, 
-                'nom' => filter_input(INPUT_POST, 'nom'), 
-                'prenom' => filter_input(INPUT_POST, 'prenom'), 
-                'email' => filter_input(INPUT_POST, 'email'), 
-                'sujet' => filter_input(INPUT_POST, 'sujet'), 
+                'page' =>'users/contact',
+                'pageTitle' => 'Nous contacter',
+                'erreur' =>$erreur,
+                'nom' => filter_input(INPUT_POST, 'nom'),
+                'prenom' => filter_input(INPUT_POST, 'prenom'),
+                'email' => filter_input(INPUT_POST, 'email'),
+                'sujet' => filter_input(INPUT_POST, 'sujet'),
                 'msg' => filter_input(INPUT_POST, 'msg')
             ));
         }

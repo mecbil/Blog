@@ -6,7 +6,7 @@ class CommentManager extends Manager
     protected $table = "comments";
 
     // trouver tous les enregistrement ?trier &/ou limiter
-    public function findAllComments( ?string $order="",?string $limit="")
+    public function findAllComments(?string $order="", ?string $limit="")
     {
         $sql= "SELECT * FROM comments  WHERE valide = false ";
       
@@ -40,7 +40,7 @@ class CommentManager extends Manager
         if ($item) {
             $comment = new Comment;
 
-            return $this->hydrate($comment, $item);    
+            return $this->hydrate($comment, $item);
         }
 
         return $item;
@@ -113,7 +113,7 @@ class CommentManager extends Manager
     public function validecomment($uuid)
     {
         // On enregistre
-        $sql = $this->pdo->prepare("UPDATE comments SET valide = true WHERE uuid = '{$uuid}'");    
+        $sql = $this->pdo->prepare("UPDATE comments SET valide = true WHERE uuid = '{$uuid}'");
         $sql->execute();
 
         return '';
@@ -128,10 +128,10 @@ class CommentManager extends Manager
             $uuid = $comment->getUuid();
             $this->delete($uuid);
 
-            return '';            
-        } 
+            return '';
+        }
         if (empty($comment)) {
-            return 'Veuillez donner un identifiant valable'; 
+            return 'Veuillez donner un identifiant valable';
         }
     }
 }
