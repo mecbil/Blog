@@ -34,7 +34,7 @@ class ContactManager extends Manager
         $headers .= '\r\nContent-Transfer-Encoding: 8bit'.'\r\n';
         $headers .=	'X-Mailer:PHP/'. phpversion().'\r\n';
     
-        ini_set('sendmail_from', 'me@domain.com');
+        //ini_set('sendmail_from', 'me@domain.com');
     
         mail($adressemail, $sujet, $content, $headers);
     

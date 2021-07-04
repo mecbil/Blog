@@ -90,7 +90,7 @@ class MainController
         $rendu->render(array(
             'page' => 'posts/posts',
             'pageTitle' => 'Blog Posts',
-            'erreur' => 'Aucun enregistrement trouver',
+            'erreur' => '',
             'posts' => $posts
         ));
     }
